@@ -1,0 +1,39 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+.woc_schedules_container {
+    max-width: 250px;
+}
+
+.woc_schedules_container .woc_day {
+    background: #eee;
+    padding: 10px;
+	cursor:pointer;
+}
+
+.woc_schedules_container .woc_open_now {
+    background: #1CA361;
+	color:#fff;
+}
+
+.woc_schedules_container .woc_close_now {
+    background: #DE5145;
+	color:#fff;
+}
+
+
+.woc_schedules_container .single_schedule {
+    margin-bottom: 5px;
+}
+
+.woc_schedules_container .single_schedule_inside {
+    margin-left: 20px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.woc_schedules_container .single_schedule_inside:last-child {
+    border-bottom: none;
+}
+

@@ -1,0 +1,167 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/*
+Templates: Display Schedules
+Location: /templates/display-schedules.php
+*/
+
+.woc-schedules {
+    font-family: Open Sans, sans-serif;
+    display: inline-block;
+    min-width: 320px;
+    width: 320px;
+    font-size: 18px;
+}
+
+.woc-schedules .woc-schedule {
+    background: rgba(158, 158, 158, 0.17);
+    border-bottom: 1px solid #d2d2d2;
+}
+
+.woc-schedules .woc-schedule.current.shop-close {
+    background: rgba(248, 0, 19, 0.17);
+}
+
+.woc-schedules .woc-schedule.current.shop-open {
+    background: rgba(76, 175, 80, 0.17);
+}
+
+.woc-schedules .woc-schedule:last-child{
+    border-bottom: none;
+}
+
+.woc-schedules .woc-schedule .woc-day-name {
+    cursor: pointer;
+    padding: 8px 0 8px 20px;
+}
+
+.woc-schedules .woc-schedule.current.shop-close .woc-day-name{
+    background: rgba(248, 0, 19, 0.17);
+}
+
+.woc-schedules .woc-schedule.current.shop-open .woc-day-name{
+    background: rgba(76, 175, 80, 0.17);
+}
+
+.woc-schedules .woc-schedule .woc-day-schedules {
+    display: none;
+    padding: 10px 0 10px 30px;
+    width: 100%;
+}
+
+.woc-schedules .woc-schedule.current .woc-day-schedules {
+    display: block;
+}
+
+.woc-schedules .woc-schedule .woc-day-schedules .woc-day-schedule {
+    width: 100%;
+    display: block;
+}
+
+
+/*
+Templates: Close Popup Box
+Location: /templates/close-popup.php
+*/
+
+
+.woc-box-container {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 9999999;
+    font-size: 14px;
+    font-family: Open Sans, sans-serif;
+}
+
+.woc-box-container .woc-box {
+    background: none repeat scroll 0 0 rgb(255, 255, 255);
+    height: auto;
+    display: none;
+    margin: 0 auto;
+    padding: 15px;
+    position: relative;
+    text-align: center;
+    top: 20%;
+    min-width: 320px;
+    width: 30%;
+    border-radius: 3px;
+    box-shadow: 0 10px 8px rgba(100, 100, 100, 0.9);
+}
+
+.woc-box-container .woc-box .box-close{
+    font-size: 15px;
+    line-height: 20px;
+    color: #ffffff;
+    background: #f80013;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    padding: 3px 5px;
+    border-radius: 2px;
+    transition: background 0.2s linear;
+}
+
+.woc-box-container .woc-box .box-close:hover{
+    color: #fff;
+    background: #94000f;
+}
+
+.woc-box-container .woc-box .box-message{
+    padding: 15px;
+    font-size: 20px;
+    color: red;
+}
+
+
+/*
+Templates: Shop Status Bar
+Location: /templates/shop-status-bar.php
+*/
+
+
+.shop-status-bar {
+    background: #e52729;
+    color: #fff;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    display: block;
+    left: 0;
+    z-index: 999;
+    font-size: 14px;
+    font-family: Open Sans, sans-serif;
+    padding: 13px 0;
+}
+
+.shop-status-bar.woc-bar-header {
+    top: 0;
+}
+
+.shop-status-bar.woc-bar-footer {
+    bottom: 0;
+}
+
+.shop-status-bar .shop-status-bar-inline {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.shop-status-bar .shop-status-bar-inline.close-bar {
+    background: rgba(0, 0, 0, .4);
+    margin-left: 20px;
+    padding: 3px 25px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+
+

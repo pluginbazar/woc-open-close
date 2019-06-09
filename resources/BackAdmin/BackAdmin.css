@@ -1,0 +1,339 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/*Admin CSS*/
+
+
+#woc_metabox .hndle.ui-sortable-handle,
+.post-type-woc_hour #submitdiv .hndle.ui-sortable-handle,
+#woc_metabox_message .hndle.ui-sortable-handle,
+#woc_metabox_status .hndle.ui-sortable-handle {
+	background-color:#4285F4 !important;
+}
+
+#woc_metabox .hndle.ui-sortable-handle span,
+.post-type-woc_hour #submitdiv .hndle.ui-sortable-handle,
+#woc_metabox_message .hndle.ui-sortable-handle span,
+#woc_metabox_status .hndle.ui-sortable-handle span{
+	color:#fff !important;
+}
+
+#woc_metabox .toggle-indicator,
+.post-type-woc_hour #submitdiv .hndle.ui-sortable-handle,
+.post-type-woc_hour #submitdiv .toggle-indicator,
+#woc_metabox_message .toggle-indicator,
+#woc_metabox_status .toggle-indicator{
+	color:#fff !important;
+}
+
+
+/* 
+.back-settings {
+	margin: 20px 0;
+}
+
+.back-settings .option-box {
+	padding: 10px;
+	color: #565656;
+}
+
+
+.back-settings .option-box:hover {
+  
+}
+
+
+.back-settings .option-box .option-title {
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.back-settings  .option-info {
+	margin: 15px 0;
+    color: #565656;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.back-settings  .option-box textarea {
+    width:100%;
+}
+
+.back-settings .option-box input[type=text],
+.back-settings .option-box select,
+.ui-timepicker-wrapper {
+	min-width:140px !important;
+	width:220px !important;
+	border: none;
+    box-shadow: 0 0 2px rgba(30,140,190,.8);
+}
+
+ */
+.pb_form {
+	background: #fff;
+    padding: 20px;
+    border-right: 1px solid #f1f1f1;
+}
+.pb_section {
+    padding: 15px;
+    color: #565656;
+}
+.pb_section .pb_section_title {
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+.pb_section  .pb_section_info {
+    margin: 15px 10px;
+    color: #565656;
+    font-size: 14px;
+    font-style: italic;
+}
+.pb_section .pb_section_input{
+	margin-left:10px;
+}
+.pb_section .pb_section_input input[type='text'], 
+.pb_section .pb_section_input input[type='email'], 
+.pb_section .pb_section_input select {
+    border: none;
+    box-shadow: 0 0 2px rgba(30,140,190,.8);
+    width: 220px;
+}
+.pb_form input[type='submit']{
+    margin-top: 18px;
+}
+
+
+
+
+
+
+.pb_form ul.tab-nav {
+  clear: both;
+  margin: 0;
+  padding: 0;
+}
+
+.pb_form ul.tab-nav li {
+  background: rgb(230, 230, 230) none repeat scroll 0 0;
+  border-right: 1px solid #fff;
+  cursor: pointer;
+  display: inline-block;
+  float: left;
+  margin: 0;
+  padding: 15px 17px;
+}
+
+.pb_form ul.tab-nav li:last-child {
+  border-right: 1px solid rgba(0, 0, 0, 0);
+
+}
+
+
+.pb_form ul.tab-nav li.active{
+	background:#ffffff;
+	font-weight: bold;
+	}
+	
+	
+	
+.pb_form ul.box {
+  clear: both;
+  margin: 0;
+  padding: 0;
+}
+
+.pb_form ul.box li.tab-box {
+  background: rgb(255, 255, 255) none repeat scroll 0 0;
+  display: none;
+  margin: 0;
+  width: 100%;
+}
+
+
+
+.pb_form .new_user_profile_social {
+  margin: 15px 5px;
+}
+
+
+
+.back-settings ul.voting-bg-img-list{}
+
+.back-settings ul.voting-bg-img-list li {
+  display: inline-block;
+  margin: 5px;
+}
+.back-settings ul.voting-bg-img-list li.bg-selected {}
+
+.back-settings ul.voting-bg-img-list li img{border: 2px solid #ffffff;}
+
+.back-settings ul.voting-bg-img-list li.bg-selected img{
+  border: 2px solid #ff5a11;
+}
+
+
+.back-settings h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 25px 0;
+}
+
+
+.back-settings .expandable {
+
+}
+
+.back-settings .expandable .items {
+  background: none repeat scroll 0 0 rgb(255, 255, 255);
+  border-bottom: 1px solid rgb(153, 153, 153);
+  margin: 2px 0;
+}
+
+.back-settings .expandable .items.ui-sortable-helper {
+border: 1px dashed rgb(153, 153, 153);
+}
+
+
+
+.back-settings .expandable .header {
+  background: none repeat scroll 0 0 rgb(255, 255, 255);
+  padding: 5px;
+}
+
+.back-settings .expandable .active .options {
+  
+  display: block;
+
+}
+.back-settings .expandable .options {
+	background: none repeat scroll 0 0 rgb(240, 240, 240);
+  display: none;
+  padding: 10px;
+}
+
+
+@media all and (max-width: 799px) {
+
+	
+	.back-settings ul.tab-nav li {
+	  display: block;
+	  float: none;
+	
+	}
+	
+	.back-settings ul.tab-nav li.active{
+		font-weight: bold;
+		}	
+	
+
+
+
+
+	.back-settings .pricing-table .column {
+		display:block;
+		float:none;
+		width:100%;
+		border-right: 1px solid #ff9601;
+		margin: 50px 0;
+	
+	}
+
+
+
+
+
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Admin Panel Time Picker */
+
+.ui-timepicker-wrapper {
+	overflow-y: auto;
+	height: 150px;
+	width: 260px;
+	background: #fff;
+	border: 1px solid #ddd;
+	-webkit-box-shadow:0 5px 10px rgba(0,0,0,0.2);
+	-moz-box-shadow:0 5px 10px rgba(0,0,0,0.2);
+	box-shadow:0 5px 10px rgba(0,0,0,0.2);
+	outline: none;
+	z-index: 10001;
+	margin: 0;
+}
+
+.ui-timepicker-wrapper.ui-timepicker-with-duration {
+	width: 13em;
+}
+
+.ui-timepicker-wrapper.ui-timepicker-with-duration.ui-timepicker-step-30,
+.ui-timepicker-wrapper.ui-timepicker-with-duration.ui-timepicker-step-60 {
+	width: 11em;
+}
+
+.ui-timepicker-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.ui-timepicker-duration {
+	margin-left: 5px; color: #888;
+}
+
+.ui-timepicker-list:hover .ui-timepicker-duration {
+	color: #888;
+}
+
+.ui-timepicker-list li {
+	padding: 3px 0 3px 5px;
+	cursor: pointer;
+	white-space: nowrap;
+	color: #000;
+	list-style: none;
+	margin: 0;
+}
+
+.ui-timepicker-list:hover .ui-timepicker-selected {
+	background: #fff; color: #000;
+}
+
+li.ui-timepicker-selected,
+.ui-timepicker-list li:hover,
+.ui-timepicker-list .ui-timepicker-selected:hover {
+	background: #1980EC; color: #fff;
+}
+
+li.ui-timepicker-selected .ui-timepicker-duration,
+.ui-timepicker-list li:hover .ui-timepicker-duration {
+	color: #ccc;
+}
+
+.ui-timepicker-list li.ui-timepicker-disabled,
+.ui-timepicker-list li.ui-timepicker-disabled:hover,
+.ui-timepicker-list li.ui-timepicker-selected.ui-timepicker-disabled {
+	color: #888;
+	cursor: default;
+}
+
+.ui-timepicker-list li.ui-timepicker-disabled:hover,
+.ui-timepicker-list li.ui-timepicker-selected.ui-timepicker-disabled {
+	background: #f2f2f2;
+}

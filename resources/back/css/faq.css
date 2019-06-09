@@ -1,0 +1,43 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+.woc_wrap_faq {
+	width:98%;
+}
+
+.woc_wrap_faq ul.woc_faq_panel {
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
+	min-height:550px;
+	height:auto;
+}
+
+.woc_wrap_faq ul.woc_faq_panel li {
+    width: 49%;
+    min-width: 320px;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0;
+    margin: 0;
+}
+
+.woc_wrap_faq .woc_block_header {
+    text-align: center;
+    background: #eee;
+    padding: 10px;
+    font-weight: bolder;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.woc_wrap_faq .woc_asked_on_forum {
+	text-align:center;
+	padding:50px 0;
+}
+
+.woc_wrap_faq .woc_asked_on_forum  a{
+
+}
+
+

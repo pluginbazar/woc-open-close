@@ -1,0 +1,136 @@
+@charset "utf-8";
+/* CSS Document */
+
+@import 'meta-box-hour.css';
+
+#woc_metabox {
+    margin-top: -20px;
+}
+
+.post-type-woc_hour .postbox{
+    border-color: #4CAF50;
+}
+
+@import 'meta-box-hour.css';
+#woc_metabox .hndle.ui-sortable-handle,
+.post-type-woc_hour #submitdiv .hndle.ui-sortable-handle,
+#woc_metabox_message .hndle.ui-sortable-handle,
+#woc_metabox_status .hndle.ui-sortable-handle {
+    background-color: #4CAF50 !important;
+    border-bottom: none;
+}
+
+#woc_metabox .hndle.ui-sortable-handle span,
+.post-type-woc_hour #submitdiv .hndle.ui-sortable-handle,
+#woc_metabox_message .hndle.ui-sortable-handle span,
+#woc_metabox_status .hndle.ui-sortable-handle span {
+    color: #fff !important;
+}
+
+#woc_metabox .toggle-indicator,
+.post-type-woc_hour #submitdiv .hndle.ui-sortable-handle,
+.post-type-woc_hour #submitdiv .toggle-indicator,
+#woc_metabox_message .toggle-indicator,
+#woc_metabox_status .toggle-indicator {
+    color: #fff !important;
+}
+
+.woc_switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.woc_switch input {
+    display: none;
+}
+
+.woc_switch_slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.woc_switch_slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.woc_switch_slider {
+    background-color: #2196F3;
+}
+
+input:focus+.woc_switch_slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.woc_switch_slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+
+.woc_switch_slider.woc_switch_round {
+    border-radius: 34px;
+}
+
+.woc_switch_slider.woc_switch_round:before {
+    border-radius: 50%;
+}
+
+a.woc-plugin-meta-buy {
+    background: #F44336;
+    color: #fff !important;
+    padding: 5px 15px;
+    font-size: 12px;
+    border-radius: 3px;
+    transition: all 0.3s linear;
+}
+
+.woc-plugin-meta-buy:hover{
+    background: #bd281d;
+}
+
+
+
+#wp-admin-bar-woc-shop-close,
+#wp-admin-bar-woc-shop-close:hover,
+#wp-admin-bar-woc-shop-close:active,
+#wp-admin-bar-woc-shop-close:focus,
+#wp-admin-bar-woc-shop-close .ab-item ,
+#wp-admin-bar-woc-shop-close:hover .ab-item ,
+#wp-admin-bar-woc-shop-close:active .ab-item ,
+#wp-admin-bar-woc-shop-close:focus .ab-item  {
+    background: #bf1315 !important;
+    color: #fff !important;
+}
+
+#wp-admin-bar-woc-shop-open,
+#wp-admin-bar-woc-shop-open:hover,
+#wp-admin-bar-woc-shop-open:active,
+#wp-admin-bar-woc-shop-open:focus,
+#wp-admin-bar-woc-shop-open .ab-item ,
+#wp-admin-bar-woc-shop-open:hover .ab-item ,
+#wp-admin-bar-woc-shop-open:active .ab-item ,
+#wp-admin-bar-woc-shop-open:focus .ab-item  {
+    background: #1d9085 !important;
+    color: #fff !important;
+    cursor: pointer;
+}
+

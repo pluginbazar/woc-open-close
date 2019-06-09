@@ -1,0 +1,350 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Open Close - Bengali\n"
+"POT-Creation-Date: 2017-03-03 14:14+0600\n"
+"PO-Revision-Date: 2017-03-03 14:26+0600\n"
+"Last-Translator: \n"
+"Language-Team: Pluginbazar <pluginbazar@gmail.com>\n"
+"Language: bn_BD\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.12\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-SearchPath-0: templates\n"
+"X-Poedit-SearchPath-1: themes\n"
+"X-Poedit-SearchPath-2: includes\n"
+"X-Poedit-SearchPath-3: includes/menu\n"
+
+#: includes/class-column.php:63
+#, php-format
+msgid "%s ago"
+msgstr "%s এর আগে"
+
+#: includes/class-functions.php:22
+msgid "Monday"
+msgstr "সোমবার"
+
+#: includes/class-functions.php:26
+msgid "Tuesday"
+msgstr "মঙ্গলবার"
+
+#: includes/class-functions.php:30
+msgid "Wednesday"
+msgstr "বুধবার"
+
+#: includes/class-functions.php:34
+msgid "Thursday"
+msgstr "বৃহঃবার"
+
+#: includes/class-functions.php:38
+msgid "Friday"
+msgstr "শুক্রবার"
+
+#: includes/class-functions.php:42
+msgid "Saturday"
+msgstr "শনিবার "
+
+#: includes/class-functions.php:46
+msgid "Sunday"
+msgstr "রবিবার"
+
+#: includes/class-post-meta.php:22
+msgid "Data Box"
+msgstr "তথ্য কেন্দ্র"
+
+#: includes/class-post-meta.php:26
+msgid "Store Close Mssage"
+msgstr "দোকান বন্ধের নোটিশ"
+
+#: includes/class-post-meta.php:47
+msgid "Shop is now Open"
+msgstr "দোকান এখন খোলা আছে"
+
+#: includes/class-post-meta.php:48
+msgid "Shop is now Close"
+msgstr "দোকান এখন বন্ধ আছে "
+
+#: includes/class-post-meta.php:59
+msgid "Write message for your offline visitors"
+msgstr "আপনার ভিজিটরের জন্য বন্ধের নোটিশ লিখুন"
+
+#: includes/class-post-meta.php:93
+msgid "Add New Row"
+msgstr "নতুন সারি যোগ করুন "
+
+#: includes/class-post-meta.php:95
+msgid "Maximum Order"
+msgstr "সর্বোচ্চ অর্ডার"
+
+#: includes/class-post-meta.php:99
+msgid "Schedule"
+msgstr "শিডিউল"
+
+#: includes/class-post-meta.php:100
+msgid "You can add more slacks"
+msgstr "আপনি আরও নতুন সারি যোগ করতে পারেন"
+
+#: includes/class-post-meta.php:109
+msgid "Opening Time"
+msgstr "দোকান খোলার সময়"
+
+#: includes/class-post-meta.php:110 includes/class-post-meta.php:113
+msgid "Click to set time"
+msgstr "নতুন সময় যোগ করুন"
+
+#: includes/class-post-types.php:20
+msgid "WOC Hour"
+msgstr "ঘন্টা সেট"
+
+#: includes/class-post-types.php:21
+msgid "WOC Hours"
+msgstr "ঘন্টা সেটসমূহ"
+
+#: includes/class-post-types.php:30
+#, php-format
+msgid "All %s"
+msgstr "সকল %s"
+
+#: includes/class-post-types.php:31
+msgid "Add New"
+msgstr ""
+
+#: includes/class-post-types.php:32
+#, php-format
+msgid "Add %s"
+msgstr ""
+
+#: includes/class-post-types.php:33
+msgid "Edit"
+msgstr ""
+
+#: includes/class-post-types.php:34
+#, php-format
+msgid "Edit %s"
+msgstr ""
+
+#: includes/class-post-types.php:35
+#, php-format
+msgid "New %s"
+msgstr ""
+
+#: includes/class-post-types.php:36 includes/class-post-types.php:37
+#, php-format
+msgid "View %s"
+msgstr ""
+
+#: includes/class-post-types.php:38
+#, php-format
+msgid "Search %s"
+msgstr ""
+
+#: includes/class-post-types.php:39
+#, php-format
+msgid "No %s found"
+msgstr ""
+
+#: includes/class-post-types.php:40
+#, php-format
+msgid "No %s found in trash"
+msgstr ""
+
+#: includes/class-post-types.php:41
+#, php-format
+msgid "Parent %s"
+msgstr ""
+
+#: includes/class-post-types.php:43
+#, php-format
+msgid "This is where you can create and manage %s."
+msgstr ""
+
+#: includes/class-settings.php:26 includes/menu/settings.php:21
+#: includes/menu/settings.php:292
+msgid "Settings"
+msgstr ""
+
+#: includes/class-settings.php:27
+msgid "FAQ"
+msgstr ""
+
+#: includes/class-widget-schedule.php:19
+msgid "WooCommerce Open Close - Schedule"
+msgstr ""
+
+#: includes/class-widget-schedule.php:20
+msgid "Display your store business hours or schedule."
+msgstr ""
+
+#: includes/class-widget-schedule.php:39
+msgid "Our Business Hour"
+msgstr ""
+
+#: includes/class-widget-schedule.php:42
+msgid "Title:"
+msgstr "নামঃ"
+
+#: includes/class-widget-schedule.php:49
+msgid "Hour Set ID:"
+msgstr "ঘন্টা সেট আইডি:"
+
+#: includes/functions.php:15
+msgid "Error: Woocommerce is Not Ready !"
+msgstr "ত্রুটি: কমার্স প্রস্তুত নয়!"
+
+#: includes/functions.php:22
+msgid "Error: No Active Hour Set !"
+msgstr "ত্রুটি: কোন সক্রিয় সেট নেই!"
+
+#: includes/menu/faq.php:14
+msgid "Frequently Asked Question"
+msgstr "স্বাধীনভাবে প্রশ্ন করুন"
+
+#: includes/menu/faq.php:18
+msgid "Video Tutorial"
+msgstr "ভিডিও সাহায্য"
+
+#: includes/menu/faq.php:22
+msgid "Asked a Question"
+msgstr "জিজ্ঞাসা করুন "
+
+#: includes/menu/faq.php:24
+msgid "Ask Here"
+msgstr "এখানে প্রশ্ন করুন "
+
+#: includes/menu/settings.php:25
+msgid "Select the Active Timeset"
+msgstr "একটি সময়ের সেট নির্ধারন করুন"
+
+#: includes/menu/settings.php:27
+msgid ""
+"Select a timeshet what system will follow to maintain. <b>Otherwise Your "
+"shop will not Close</b>"
+msgstr "একটি নির্দিষ্ট সময়ের সেট নির্ধারন করুন, অন্যথায় আপনার দোকান বন্ধ দেখাবে"
+
+#: includes/menu/settings.php:32
+msgid "Enable Order Number Restriction"
+msgstr "অর্ডার নাম্বারের উপর ভিত্তি করে নিশেধাজ্ঞা দিন "
+
+#: includes/menu/settings.php:34
+msgid "Do you want to restrict maximum Order on a Day?"
+msgstr ""
+"আপনি কি একটি নির্দিষ্ট দিনে সর্বোচ্চ অর্ডার এর ভিত্তিতে নিশেধাজ্ঞা দিতে চান?"
+
+#: includes/menu/settings.php:36 includes/menu/settings.php:46
+msgid "Yes"
+msgstr "হ্যা "
+
+#: includes/menu/settings.php:37 includes/menu/settings.php:47
+msgid "NO"
+msgstr "না"
+
+#: includes/menu/settings.php:42
+msgid "Empty cart on Shop Close"
+msgstr "ব্যাগ খালি করুন যখন দোকান বন্ধ হয়ে যাবে"
+
+#: includes/menu/settings.php:44
+msgid "Cart will be empty as soon as shop is Closed."
+msgstr "দোকান বন্ধ হওয়া মাত্রই ব্যাগ খালি হয়ে যাবে"
+
+#: includes/menu/settings.php:52
+msgid "Alertbar Options"
+msgstr "এলার্টবার অপশন"
+
+#: includes/menu/settings.php:56
+msgid "Alertbar Position"
+msgstr "এলার্টবার এর যায়গা"
+
+#: includes/menu/settings.php:59
+msgid "Select a position where alertbar will be shown."
+msgstr ""
+
+#: includes/menu/settings.php:61
+msgid "Bottom"
+msgstr ""
+
+#: includes/menu/settings.php:62
+msgid "DO Not Show"
+msgstr ""
+
+#: includes/menu/settings.php:63
+msgid "Top"
+msgstr ""
+
+#: includes/menu/settings.php:64
+msgid "Middle"
+msgstr ""
+
+#: includes/menu/settings.php:70
+msgid "Alertbar Text"
+msgstr ""
+
+#: includes/menu/settings.php:72
+msgid "Set text for the button in Alertbar"
+msgstr ""
+
+#: includes/menu/settings.php:73
+msgid "Hide This"
+msgstr ""
+
+#: includes/menu/settings.php:78
+msgid "Alertbar Font Size"
+msgstr ""
+
+#: includes/menu/settings.php:80
+msgid "Set your prefered font size for Alertbar Text"
+msgstr ""
+
+#: includes/menu/settings.php:85
+msgid "Alertbar Color"
+msgstr ""
+
+#: includes/menu/settings.php:86
+msgid "Set custom color for Alertbar"
+msgstr ""
+
+#: includes/menu/settings.php:91
+msgid "Alertbar Background Color"
+msgstr ""
+
+#: includes/menu/settings.php:92
+msgid "Set custom background color for Alertbar"
+msgstr ""
+
+#: includes/menu/settings.php:97
+msgid "Alertbox Options"
+msgstr ""
+
+#: includes/menu/settings.php:101
+msgid "AlertBox Message Font Size"
+msgstr ""
+
+#: includes/menu/settings.php:103
+msgid "Set your prefered font size for alertbox."
+msgstr ""
+
+#: includes/menu/settings.php:109
+msgid "Alertbox Icon Color"
+msgstr ""
+
+#: includes/menu/settings.php:111
+msgid "Set your custom color for alertbox Icon."
+msgstr ""
+
+#: includes/menu/settings.php:116
+msgid "Alertbox Message Color"
+msgstr ""
+
+#: includes/menu/settings.php:118
+msgid "Set your custom color for alertbox Message."
+msgstr ""
+
+#: includes/menu/settings.php:277
+msgid "Changes Saved."
+msgstr "পরিবর্তন সংরক্ষন করা হয়েছে।"
+
+#: includes/menu/settings.php:301
+msgid "Save Changes"
+msgstr "পরিবর্তন সংরক্ষন করুন"
