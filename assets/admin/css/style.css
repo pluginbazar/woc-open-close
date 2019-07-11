@@ -113,22 +113,23 @@ a.woc-plugin-meta-buy {
 #wp-admin-bar-woc-shop-close:hover,
 #wp-admin-bar-woc-shop-close:active,
 #wp-admin-bar-woc-shop-close:focus,
-#wp-admin-bar-woc-shop-close .ab-item ,
-#wp-admin-bar-woc-shop-close:hover .ab-item ,
-#wp-admin-bar-woc-shop-close:active .ab-item ,
-#wp-admin-bar-woc-shop-close:focus .ab-item  {
-    background: #bf1315 !important;
+#wp-admin-bar-woc-shop-close .ab-empty-item ,
+#wp-admin-bar-woc-shop-close:hover .ab-empty-item ,
+#wp-admin-bar-woc-shop-close:active .ab-empty-item ,
+#wp-admin-bar-woc-shop-close:focus .ab-empty-item  {
+    background: #ff5722 !important;
     color: #fff !important;
+    cursor: pointer;
 }
 
 #wp-admin-bar-woc-shop-open,
 #wp-admin-bar-woc-shop-open:hover,
 #wp-admin-bar-woc-shop-open:active,
 #wp-admin-bar-woc-shop-open:focus,
-#wp-admin-bar-woc-shop-open .ab-item ,
-#wp-admin-bar-woc-shop-open:hover .ab-item ,
-#wp-admin-bar-woc-shop-open:active .ab-item ,
-#wp-admin-bar-woc-shop-open:focus .ab-item  {
+#wp-admin-bar-woc-shop-open .ab-empty-item ,
+#wp-admin-bar-woc-shop-open:hover .ab-empty-item ,
+#wp-admin-bar-woc-shop-open:active .ab-empty-item ,
+#wp-admin-bar-woc-shop-open:focus .ab-empty-item  {
     background: #1d9085 !important;
     color: #fff !important;
     cursor: pointer;

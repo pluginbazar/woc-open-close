@@ -4,110 +4,161 @@
 * Copyright: 	2015 pluginbazar
 */
 
-if ( ! defined('ABSPATH')) exit;  // if direct access 
-
-
-if( ! function_exists( 'woc_status_bar_classes' ) ){
-    function woc_status_bar_classes( $echo = false ){
-
-        $classes        = array();
-        $woc_bar_where  = get_option( 'woc_bar_where', 'woc-bar-footer' );
-        $woc_bar_where  = empty( $woc_bar_where ) ? 'woc-bar-footer' : $woc_bar_where;
-
-        $classes[] = $woc_bar_where;
-
-        if( $echo ) echo implode(' ', apply_filters( 'woc_filters_status_bar_classes', $classes ) );
-        else return apply_filters( 'woc_filters_status_bar_classes', $classes );
-    }
-}
-
-
-if( ! function_exists( 'woc_display_close_popup' ) ){
-    function woc_display_close_popup(){
-        if( ! woc_is_open() ) include WOC_PLUGIN_DIR . '/templates/close-popup.php';
-    }
-}
-add_action( 'wp_footer', 'woc_display_close_popup' );
-
-
-if( ! function_exists( 'woc_display_shop_status_bar' ) ){
-    function woc_display_shop_status_bar(){
-        if( ! woc_is_open() ) include WOC_PLUGIN_DIR . '/templates/shop-status-bar.php';
-    }
-}
-add_action( 'wp_footer', 'woc_display_shop_status_bar' );
-
-
-if( ! function_exists( 'woc_is_open' ) ) {
-    function woc_is_open(){
-        global $wooopenclose;
-        return $wooopenclose->is_open();
-    }
-}
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}  // if direct access
 
 
 
-return;
+add_shortcode( 'test___p', function() {
+
+	ob_start();
+
+	global $wooopenclose;
+
+	echo "<pre>"; print_r( $wooopenclose->get_next_time( 'close') ); echo "</pre>";
 
 
+	return ob_get_clean();
+} );
 
 
-	add_action( 'admin_notices', 'woc_err_notice' );
-	function woc_err_notice() {
-		
-		if( WOC_USER_TYPE == 'free' && isset( $_GET['page'] ) && $_GET['page'] == 'woc_menu_conditional' ) {
-			
-			echo "<div class='error'><p>Error: Please Buy Premium version to use this feature <a href='https://www.pluginbazar.net/product/woocommerce-open-close/?r={$_SERVER['SERVER_NAME']}' target='_blank'>BUY NOW</a></p></div>";
+if ( ! function_exists( 'woc_get_template_part' ) ) {
+	function woc_get_template_part( $slug, $name = '', $args = array() ) {
+
+		global $wooopenclose;
+
+		$template = '';
+
+		// Look in yourtheme/slug-name.php and yourtheme/woocommerce/slug-name.php.
+		if ( $name ) {
+			$template = locate_template( array(
+				"{$slug}-{$name}.php",
+				$wooopenclose->template_path() . "{$slug}-{$name}.php"
+			) );
 		}
-		
-		$woc_license_status = get_option( 'woc_license_status', 'not_validate' );
-		if( WOC_USER_TYPE == 'pro' && ! empty( $woc_license_status ) && $woc_license_status != 'validate' ) {
-			
-			echo "<div class='error'><p>Error: Please activate Your License Key <a href='edit.php?post_type=woc_hour&page=woc_menu_license'>Activate Now</a></p></div>";
-			
-			return;
+
+		// Get default slug-name.php.
+		if ( ! $template && $name && file_exists( $wooopenclose->plugin_path() . "/templates/{$slug}-{$name}.php" ) ) {
+			$template = $wooopenclose->plugin_path() . "/templates/{$slug}-{$name}.php";
 		}
-		
-		if( ! class_exists( 'WooCommerce' ) ) {
-			
-			echo "<div class='error'><p>Error: Woocommerce is required</p></div>";
-			return;
+
+		// If template file doesn't exist, look in yourtheme/slug.php and yourtheme/woocommerce/slug.php.
+		if ( ! $template ) {
+			$template = locate_template( array( "{$slug}.php", $wooopenclose->template_path() . "{$slug}.php" ) );
 		}
-			
-		$woc_active_set = get_option('woc_active_set');
-		if ( empty( $woc_active_set ) ){
-			
-			echo "<div class='error'><p>
-			Error: No active hour set found! 
-			<a href='post-new.php?post_type=woc_hour'>Create Schedule</a> then 
-			<a href='edit.php?post_type=woc_hour&page=woc_menu_settings'>Save Settings</a>
-			</p></div>";
-			return;
+
+		// Allow 3rd party plugins to filter template file from their plugin.
+		$template = apply_filters( 'woc_filters_get_template_part', $template, $slug, $name );
+
+		if ( $template ) {
+			load_template( $template, false );
 		}
 	}
-	
+}
 
-	
-	// Add node topbar
-	add_action( 'admin_bar_menu', 'woc_top_bar_shop_status_display', 9999 );
-	function woc_top_bar_shop_status_display( $wp_admin_bar ) {
-		
-		if( woc_is_open() ) {
-			$id = 'woc-open';
-			$status = __('Shop Open', 'woc-open-close');
+
+if ( ! function_exists( 'woc_get_template' ) ) {
+	function woc_get_template( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
+
+		if ( ! empty( $args ) && is_array( $args ) ) {
+			extract( $args ); // @codingStandardsIgnoreLine
 		}
-		else {
-			$id = 'woc-closed';
-			$status = __('Shop Closed', 'woc-open-close');
+
+		$located = woc_locate_template( $template_name, $template_path, $default_path );
+
+		if ( ! file_exists( $located ) ) {
+			return new WP_Error( 'invalid_data', __( '%s does not exist.', 'woc-open-close' ), '<code>' . $located . '</code>' );
 		}
-		
-		$wp_admin_bar->add_node( 
-			array (
-				'id'     => $id,
-				'title'  => $status,
-				'parent' => false,
+
+		$located = apply_filters( 'woc_filters_get_template', $located, $template_name, $args, $template_path, $default_path );
+
+		do_action( 'woc_before_template_part', $template_name, $template_path, $located, $args );
+
+		include $located;
+
+		do_action( 'woc_after_template_part', $template_name, $template_path, $located, $args );
+	}
+}
+
+
+if ( ! function_exists( 'woc_locate_template' ) ) {
+	function woc_locate_template( $template_name, $template_path = '', $default_path = '' ) {
+
+		global $wooopenclose;
+
+		if ( ! $template_path ) {
+			$template_path = $wooopenclose->template_path();
+		}
+
+		if ( ! $default_path ) {
+			$default_path = $wooopenclose->plugin_path() . '/templates/';
+		}
+
+		// Look within passed path within the theme - this is priority.
+		$template = locate_template(
+			array(
+				trailingslashit( $template_path ) . $template_name,
+				$template_name,
 			)
 		);
+
+		// Get default template/.
+		if ( ! $template ) {
+			$template = $default_path . $template_name;
+		}
+
+		// Return what we found.
+		return apply_filters( 'woc_filters_locate_template', $template, $template_name, $template_path );
 	}
+}
 
 
+if ( ! function_exists( 'woc_status_bar_classes' ) ) {
+	function woc_status_bar_classes( $echo = false ) {
+
+		$classes       = array();
+		$woc_bar_where = get_option( 'woc_bar_where', 'woc-bar-footer' );
+		$woc_bar_where = empty( $woc_bar_where ) ? 'woc-bar-footer' : $woc_bar_where;
+
+		$classes[] = $woc_bar_where;
+
+		if ( $echo ) {
+			echo implode( ' ', apply_filters( 'woc_filters_status_bar_classes', $classes ) );
+		} else {
+			return apply_filters( 'woc_filters_status_bar_classes', $classes );
+		}
+	}
+}
+
+
+if( ! function_exists( 'woc_get_option' ) ) {
+	/**
+	 * Get Option value
+	 *
+	 * @param string $option_key
+	 * @param string $default_val
+	 *
+	 * @return mixed|string|void
+	 */
+	function woc_get_option( $option_key = '', $default_val = '' ) {
+
+		if ( empty( $option_key ) ) {
+			return '';
+		}
+
+		$option_val = get_option( $option_key, $default_val );
+		$option_val = empty( $option_val ) ? $default_val : $option_val;
+
+		return apply_filters( 'woc_filters_option_' . $option_key, $option_val );
+	}
+}
+
+
+if ( ! function_exists( 'woc_is_open' ) ) {
+	function woc_is_open() {
+		global $wooopenclose;
+
+		return $wooopenclose->is_open();
+	}
+}

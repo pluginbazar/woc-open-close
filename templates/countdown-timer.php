@@ -4,74 +4,48 @@
 * Copyright: 	2015 pluginbazar
 */
 
-if (!defined('ABSPATH')) exit;  // if direct access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}  // if direct access
+
+global $wooopenclose;
+
+$unique_id     = uniqid();
+$style         = ( isset( $style ) || ! empty( $style ) ) ? $style : 1;
+$next_time     = $wooopenclose->get_next_time();
+$dynamic_class = woc_is_open() ? 'woc-shop-open' : '';
 
 ?>
 
-<span id="hellobar-countdown-timer" class="d-none d-lg-inline-block">
-
-    <span class="countdown-days">
-        <span>4</span>days
-    </span>
-
-    <span class="countdown-hours">
-        <span>21</span>hours
-    </span>
-
-    <span class="countdown-minutes">
-        <span>50</span>minutes
-    </span>
-
-    <span class="countdown-seconds">
-        <span>41</span>seconds
-    </span>
-
-</span>
+<div id="woc-countdown-timer-<?php echo esc_attr( $unique_id ); ?>"
+     class="woc-countdown-timer-<?php echo esc_attr( $style ); ?> <?php echo esc_attr( $dynamic_class ); ?>"></div>
 
 <script>
-    var cookie_expires = new Date('Jan 02 2019 23:59:59');
-    var expired_on = cookie_expires.toString()
-    var countDownDate = new Date(expired_on).getTime();
+    (function ($, window, document) {
+        "use strict";
 
-    var x = setInterval(function () {
-        var now = new Date().getTime();
-        var distance = countDownDate - now;
+        (function updateTime() {
 
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            var countDownDate = new Date(new Date('<?php echo esc_html( $next_time ); ?>').toString()).getTime(),
+                now = new Date().getTime(),
+                distance = countDownDate - now,
+                days = 0, hours = 0, minutes = 0, seconds = 0;
 
-        document.getElementById("hellobar-countdown-timer").innerHTML = '<span class="countdown-days"><span>' + days + '</span>days</span><span class="countdown-hours"><span>' + hours + '</span>hours</span><span class="countdown-minutes"><span>' + minutes + '</span>minutes</span><span class="countdown-seconds"><span>' + seconds + '</span>seconds</span>';
+            if (distance > 0) {
+                days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60) + days * 24);
+                minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            }
 
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("hellobar-countdown-timer").innerHTML = "EXPIRED";
-        }
-    }, 1000);
+            $("#woc-countdown-timer-<?php echo esc_attr( $unique_id ); ?>").html(
+                '<span class="hours"><span class="count-number">' + hours + '</span><span class="count-text">Hours</span></span>' +
+                '<span class="minutes"><span class="count-number">' + minutes + '</span><span class="count-text">Minutes</span></span>' +
+                '<span class="seconds"><span class="count-number">' + seconds + '</span><span class="count-text">Seconds</span></span>');
+
+            setTimeout(updateTime, 1000);
+        })();
+
+    })(jQuery, window, document);
 
 </script>
-
-
-<style>
-    #hellobar-countdown-timer > span {
-        display: inline-block;
-        font-size: 11px;
-        text-transform: uppercase;
-        font-weight: 600;
-        line-height: 1;
-        margin: 0 5px 0 1px;
-        background: rgba(0, 0, 0, .4);
-        color: #fff;
-        padding: 5px;
-        border-radius: 3px;
-    }
-
-    #hellobar-countdown-timer > span > span {
-        display: block;
-        line-height: 1;
-        font-size: 14px;
-        font-weight: 700;
-        margin-bottom: 5px;
-    }
-</style>

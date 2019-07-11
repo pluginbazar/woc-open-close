@@ -5,7 +5,7 @@ jQuery(document).ready(function ($) {
         is_self = false;
         if( $(this).parent().hasClass('opened') ) is_self = true;
 
-        $('.woc-schedules .woc-schedule').removeClass('opened').find('.woc-day-schedules').slideUp('slow');
+        $(this).parent().parent().find('.woc-schedule').removeClass('opened').find('.woc-day-schedules').slideUp('slow');
 
         if (is_self) return;
 
@@ -16,14 +16,16 @@ jQuery(document).ready(function ($) {
         $(this).parent().slideUp('slow');
     });
 
-    $(document).on('click', '.woc-box-container .woc-box .box-close', function () {
-        $(this).parent().slideUp('fast').parent().fadeOut('slow');
-    });
-
-    $(document).on('click', '.woc-add-to-cart', function (e) {
-
-        $('.woc-box-container').fadeIn().find('.woc-box').slideDown();
-        return false;
+    // Inline popups
+    $('.woc-add-to-cart').magnificPopup({
+        // delegate: 'a',
+        removalDelay: 500,
+        callbacks: {
+            beforeOpen: function() {
+                this.st.mainClass = this.st.el.attr('data-effect');
+            }
+        },
+        midClick: true,
     });
 
 });

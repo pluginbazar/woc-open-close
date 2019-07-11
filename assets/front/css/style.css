@@ -9,16 +9,22 @@ Location: /templates/display-schedules.php
 
 .woc-schedules {
     font-family: Open Sans, sans-serif;
-    display: inline-block;
-    min-width: 320px;
-    width: 320px;
-    font-size: 18px;
+    /*display: inline-block;*/
+    /*min-width: 320px;*/
+    max-width: 360px;
+    font-size: 19px;
 }
 
-.woc-schedules .woc-schedule {
-    background: rgba(158, 158, 158, 0.17);
-    border-bottom: 1px solid #d2d2d2;
+.entry-content .woc-schedules img,
+.woc-schedules img {
+    border-radius: 0;
+    box-shadow: none;
 }
+
+.woc-status-img {
+    text-align: center;
+}
+
 
 .woc-schedules .woc-schedule.current.shop-close {
     background: rgba(248, 0, 19, 0.17);
@@ -33,22 +39,51 @@ Location: /templates/display-schedules.php
 }
 
 .woc-schedules .woc-schedule .woc-day-name {
+    position: relative;
     cursor: pointer;
-    padding: 8px 0 8px 20px;
+    padding: 12px 20px;
+    line-height: normal;
 }
 
-.woc-schedules .woc-schedule.current.shop-close .woc-day-name{
-    background: rgba(248, 0, 19, 0.17);
+.woc-schedules .woc-schedule .woc-arrow-icon {
+    position: absolute;
+    height: 14px;
+    width: 14px;
+    right: 20px;
+    top: 18px;
 }
 
-.woc-schedules .woc-schedule.current.shop-open .woc-day-name{
-    background: rgba(76, 175, 80, 0.17);
+.woc-schedules .woc-schedule .woc-arrow-icon:before,
+.woc-schedules .woc-schedule .woc-arrow-icon:after {
+    content: '';
+    position: absolute;
+    background: #2a2a2a;
+    transition: 0.3s;
 }
+
+.woc-schedules .woc-schedule .woc-arrow-icon:before {
+    width: 2px;
+    height: 14px;
+    right: 7px;
+}
+
+.woc-schedules .woc-schedule .woc-arrow-icon:after {
+    width: 14px;
+    height: 2px;
+    right: 1px;
+    top: 6px;
+}
+
+.woc-schedules .woc-schedule.opened .woc-arrow-icon:before {
+    transform: rotate(90deg);
+}
+
 
 .woc-schedules .woc-schedule .woc-day-schedules {
     display: none;
-    padding: 10px 0 10px 30px;
-    width: 100%;
+    padding: 0 0 10px 40px;
+    font-size: 15px;
+    line-height: normal;
 }
 
 .woc-schedules .woc-schedule.current .woc-day-schedules {
@@ -60,67 +95,241 @@ Location: /templates/display-schedules.php
     display: block;
 }
 
+.woc-day-schedules .woc-day-schedule + .woc-day-schedule {
+    margin-top: 7px;
+}
 
-/*
-Templates: Close Popup Box
-Location: /templates/close-popup.php
+/**
+* Style 2
 */
 
-
-.woc-box-container {
-    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);
-    display: none;
-    height: 100%;
-    left: 0;
-    position: fixed;
-    text-align: center;
-    top: 0;
-    width: 100%;
-    z-index: 9999999;
-    font-size: 14px;
-    font-family: Open Sans, sans-serif;
+.woc-schedules-style-2 .woc-schedules .woc-schedule {
+    border-color: #e5e5e5;
 }
 
-.woc-box-container .woc-box {
-    background: none repeat scroll 0 0 rgb(255, 255, 255);
-    height: auto;
-    display: none;
-    margin: 0 auto;
-    padding: 15px;
-    position: relative;
-    text-align: center;
-    top: 20%;
-    min-width: 320px;
-    width: 30%;
-    border-radius: 3px;
-    box-shadow: 0 10px 8px rgba(100, 100, 100, 0.9);
+.woc-schedules-style-2 .woc-schedules .woc-status-img {
+    border: 0;
+    box-shadow: 0 5px 37px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin-bottom: 15px;
 }
 
-.woc-box-container .woc-box .box-close{
-    font-size: 15px;
-    line-height: 20px;
+.woc-schedules-style-2 .woc-schedules .woc-schedule.current.shop-close {
+    background-color: #e52729;
     color: #ffffff;
-    background: #f80013;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    cursor: pointer;
-    padding: 3px 5px;
-    border-radius: 2px;
-    transition: background 0.2s linear;
 }
 
-.woc-box-container .woc-box .box-close:hover{
+.woc-schedules-style-2 .woc-schedules .woc-schedule.current.shop-open {
+    background: #4caf50;
     color: #fff;
-    background: #94000f;
 }
 
-.woc-box-container .woc-box .box-message{
-    padding: 15px;
+.woc-schedules-style-2 .woc-schedule.current .woc-arrow-icon:before,
+.woc-schedules-style-2 .woc-schedule.current .woc-arrow-icon:after {
+    background: #fff;
+}
+
+
+/**
+* Style 3
+*/
+
+.woc-schedules-style-3 .woc-schedules {
+    box-shadow: 0 5px 37px rgba(0, 0, 0, 0.15);
+}
+
+.woc-schedules-style-3 .woc-schedules .woc-schedule {
+    border-color: #e5e5e5;
+    color: #fff;
+}
+
+.woc-schedules-style-3.woc-shop-schedules-open .woc-schedules {
+    background-color: #4caf50;
+}
+
+.woc-schedules-style-3.woc-shop-schedules-close .woc-schedules {
+    background-color: #e52729;
+}
+
+.woc-schedules-style-3 .woc-schedules .woc-status-img {
+    border: 0;
+    background-color: #fff;
+}
+
+.woc-schedules-style-3 .woc-schedules .woc-schedule.current {
+    background-color: rgba(255, 255, 255, 0.27);
+}
+
+.woc-schedules-style-3 .woc-schedule .woc-arrow-icon:before,
+.woc-schedules-style-3 .woc-schedule .woc-arrow-icon:after {
+    background: #fff;
+}
+
+/**
+* Style 4
+*/
+
+.woc-schedules-style-4 .woc-schedules {
+    border: 1px dashed #dedede;
+}
+
+.woc-schedules-style-4 .woc-schedules > div + div {
+    border-top: 1px dashed #dedede;
+}
+
+/**
+* Style 5
+*/
+
+.woc-schedules-style-5 .woc-schedules .woc-schedule {
+    background: rgba(158, 158, 158, 0.17);
+}
+
+.woc-schedules-style-5 .woc-schedules .woc-schedule + .woc-schedule {
+    border-top: 1px solid #d2d2d2;
+}
+
+.woc-schedules-style-5 .woc-schedules .woc-schedule.current.shop-close .woc-day-name {
+    background: rgba(248, 0, 19, 0.17);
+}
+
+.woc-schedules-style-5 .woc-schedules .woc-schedule.current.shop-open .woc-day-name {
+    background: rgba(76, 175, 80, 0.17);
+}
+
+.woc-schedules-style-5 .woc-schedules .woc-schedule .woc-day-schedules {
+    padding: 20px 0 20px 40px;
+}
+
+/**
+* Countdown Timer
+ */
+
+.woc-countdown-timer-1 > span {
+    display: inline-block;
+    margin-right: 15px;
+    padding-right: 15px;
+    border-right: 1px solid #ccc;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.woc-countdown-timer-1 > span:last-child {
+    border-right: 0;
+    margin-right: 0;
+    padding-right: 0;
+}
+
+.woc-countdown-timer-1 .count-number {
+    margin-right: 5px;
+    font-weight: bold;
     font-size: 20px;
-    color: red;
 }
 
+.woc-countdown-timer-2 > span {
+    display: inline-block;
+    margin-right: 25px;
+    padding-right: 25px;
+    border-right: 1px solid rgba(0,0,0,0.1);
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+}
+
+.woc-countdown-timer-2 > span:last-child {
+    border-right: 0;
+    margin-right: 0;
+    padding-right: 0;
+}
+
+.woc-countdown-timer-2 .count-number {
+    margin-right: 5px;
+    font-weight: bold;
+    font-size: 42px;
+    line-height: 32px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+
+.woc-countdown-timer-3 > span {
+    display: inline-block;
+    margin-right: 25px;
+    border: 1px solid rgba(0,0,0,0.1);
+    font-size: 16px;
+    text-align: center;
+    min-width: 120px;
+    min-height: 120px;
+    border-radius: 50%;
+    margin-bottom: 25px;
+}
+
+.woc-countdown-timer-3 .count-number {
+    margin-right: 5px;
+    font-weight: bold;
+    font-size: 42px;
+    line-height: 32px;
+    margin-top: 30px;
+    margin-bottom: 6px;
+    display: block;
+}
+
+
+.woc-countdown-timer-4 > span {
+    display: inline-block;
+    margin-right: 25px;
+    border-left: 4px solid rgba(248, 0, 19, 0.17);
+    border-right: 4px solid rgba(76, 175, 80, 0.17);
+    font-size: 16px;
+    text-align: center;
+    min-width: 120px;
+    min-height: 120px;
+    border-radius: 50%;
+    margin-bottom: 25px;
+}
+
+.woc-countdown-timer-4 .count-number {
+    margin-right: 5px;
+    font-weight: bold;
+    font-size: 42px;
+    line-height: 32px;
+    margin-top: 30px;
+    margin-bottom: 6px;
+    display: block;
+    color: #4dd7fd;
+}
+
+.woc-countdown-timer-5 > span {
+    display: inline-block;
+    margin-right: 25px;
+    font-size: 16px;
+    text-align: center;
+    min-width: 120px;
+    min-height: 120px;
+    border-radius: 50%;
+    margin-bottom: 25px;
+    color: #fff;
+    background: #c31432;
+    background: -webkit-linear-gradient(to top, #240b36, #c31432);
+    background: linear-gradient(to top, #240b36, #c31432);
+
+}
+
+.woc-countdown-timer-5.woc-shop-open > span {
+    background: #52c234;
+    background: -webkit-linear-gradient(to top, #061700, #52c234);
+    background: linear-gradient(to top, #061700, #52c234);
+}
+
+.woc-countdown-timer-5 .count-number {
+    margin-right: 5px;
+    font-weight: bold;
+    font-size: 42px;
+    line-height: 32px;
+    margin-top: 30px;
+    margin-bottom: 6px;
+    display: block;
+}
 
 /*
 Templates: Shop Status Bar
@@ -146,6 +355,10 @@ Location: /templates/shop-status-bar.php
     top: 0;
 }
 
+.logged-in .shop-status-bar.woc-bar-header {
+    top: 32px;
+}
+
 .shop-status-bar.woc-bar-footer {
     bottom: 0;
 }
@@ -158,10 +371,42 @@ Location: /templates/shop-status-bar.php
 .shop-status-bar .shop-status-bar-inline.close-bar {
     background: rgba(0, 0, 0, .4);
     margin-left: 20px;
-    padding: 3px 25px;
+    padding: 7px 13px;
     border-radius: 3px;
     cursor: pointer;
 }
 
+.shop-status-bar .woc-countdown-timer-1 {
+    display: inline-block;
+    margin: 0 15px;
+}
 
 
+/**
+ * Admin bar Node
+ */
+#wp-admin-bar-woc-shop-close,
+#wp-admin-bar-woc-shop-close:hover,
+#wp-admin-bar-woc-shop-close:active,
+#wp-admin-bar-woc-shop-close:focus,
+#wp-admin-bar-woc-shop-close .ab-empty-item ,
+#wp-admin-bar-woc-shop-close:hover .ab-empty-item ,
+#wp-admin-bar-woc-shop-close:active .ab-empty-item ,
+#wp-admin-bar-woc-shop-close:focus .ab-empty-item  {
+    background: #ff5722 !important;
+    color: #fff !important;
+    cursor: pointer;
+}
+
+#wp-admin-bar-woc-shop-open,
+#wp-admin-bar-woc-shop-open:hover,
+#wp-admin-bar-woc-shop-open:active,
+#wp-admin-bar-woc-shop-open:focus,
+#wp-admin-bar-woc-shop-open .ab-empty-item ,
+#wp-admin-bar-woc-shop-open:hover .ab-empty-item ,
+#wp-admin-bar-woc-shop-open:active .ab-empty-item ,
+#wp-admin-bar-woc-shop-open:focus .ab-empty-item  {
+    background: #1d9085 !important;
+    color: #fff !important;
+    cursor: pointer;
+}

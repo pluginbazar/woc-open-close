@@ -6,13 +6,12 @@
 
 if (!defined('ABSPATH')) exit;  // if direct access
 
-global $wooopenclose;
+global $wooopenclose, $wp_query;
 
 ?>
 
-<div class="woc-box-container">
+<div id="woc-box-container" class="woc-box-container mfp-with-anim mfp-hide">
     <div class="woc-box">
-        <span class="box-close"><i class="icofont-close"></i></span>
         <p class="box-message">
             <?php echo $wooopenclose->get_message(); ?>
         </p>
