@@ -2,15 +2,16 @@
 	Contributors: jaedm97,pluginbazar
 	Donate link: https://www.pluginbazar.net/product/offer-a-cup-of-coffee/
 	Tags: woocommerce, woocommerce open close, opening-closing-time,opening-time,closing-time,wordpress,web-shop-management,restrict-add-to-cart,wordpress-plugin,woc-open-close,maintain scheduling in woocommerce,maintain scheduling in website, maintain scheduling in webshop, opening, closing, opening shop, opening website, opening woocommerce, closing shop, closing website, closing woocommerce, business hour, business time
-	Requires at least: 3.8
-	Tested up to: 5.2.1
-	Stable tag: 3.0.5
+	Requires at least: 4.6
+	Tested up to: 5.2.2
+	Stable tag: 3.2.0
 	Requires PHP: 5.6
+	Requires WooCommerce: 3.0
 	Text Domain: woc-open-close
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Maintain Business hour for your WooCommerce Shop. Let your customers know about business schedules and restrict them from placing new orders while Store is Closed.
+    Maintain Business hour for your WooCommerce Shop. Let your customers know about business schedules and restrict them from placing new orders while Store is Closed.
 
 == Description ==
 
@@ -25,7 +26,9 @@ NO MORE BUSINESS CONFUSION
 WooCommerce Open Close comes with a complete business hour/schedule management, completely hassle free.
 
 
-### [GET WOOCOMMERCE OPEN CLOSE PREMIUM](https://pluginbazar.com/plugin/woocommerce-open-close/?r=wordpress.org)
+### [GET WOOCOMMERCE OPEN CLOSE PREMIUM](https://bit.ly/2S6FyOE)
+
+### [PLUGIN DETAILS](http://bit.ly/2LfnVeZ)
 
 ### [CHECK DEMO](https://demo.pluginbazar.com/woocommerce-open-close/)
 
@@ -39,21 +42,15 @@ WooCommerce Open Close comes with a complete business hour/schedule management, 
 * Multiple Schedules in Same Day
 * Shortcode to View Business Hours
 * Transalation Ready
+* 5+ Business Schedules Display Variations
+* 4+ Countdown Timer Variations
 
 ### PRO Feature
 * No Order when Shop is Closed
 * Empty cart as soon as shop become close
 * Allow add to cart even shop is closed
 * Allow / Disallow Specific Products to Bypass Schedules
-
-
-== Video Help ==
-### GUIDE 1
-<iframe src="https://www.youtube.com/embed/mcRApxc7Eks?rel=0&amp;controls=0&amp;showinfo=0" width="460" height="258" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
-
-### GUIDE 2
-<iframe src="https://www.youtube.com/embed/-JtRwecDPWI?rel=0&amp;controls=0&amp;showinfo=0" width="460" height="258" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
-
+* Multiple popup styles
 
 
 == Installation ==
@@ -66,11 +63,21 @@ WooCommerce Open Close comes with a complete business hour/schedule management, 
 
 == Screenshots ==
 
-1. Popup Notification.png
-2. Schedules Edit Page.png
-3. All Schedules.png
-4. Display Schedule.png
-5. Settings Page.png
+1. Screenshot-1
+2. Screenshot-2
+3. Screenshot-3
+4. Screenshot-4
+5. Screenshot-5
+6. Screenshot-6
+7. Screenshot-7
+8. Screenshot-8
+9. Screenshot-9
+10. Screenshot-10
+11. Screenshot-11
+12. Screenshot-12
+13. Screenshot-13
+14. Screenshot-14
+15. Screenshot-15
 
 
 == Changelog ==
@@ -130,7 +137,11 @@ WooCommerce Open Close comes with a complete business hour/schedule management, 
 	= 3.0.4 =
 	* Bug Fixing
 
+    = 3.2.0 =
+	* New variations and styles
+
+
 == Upgrade Notice ==
 
-    = 3.0.0 =
-    3.0.0 is a major update. Make a full site backup, update Plugin.
+    = 3.2.0 =
+    This is Big update with new variations and styles
