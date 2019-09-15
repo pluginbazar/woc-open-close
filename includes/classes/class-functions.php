@@ -98,8 +98,6 @@ class wooopenclose {
 		$current_day = $this->get_current_day_id();
 		$times       = $this->calculate_times( $this->get_todays_schedule(), $time_for );
 
-		$times = array();
-
 		if ( empty( $times ) ) {
 
 			foreach ( $this->get_all_schedules() as $day_id => $schedules ) {

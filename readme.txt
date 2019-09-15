@@ -3,8 +3,9 @@
 	Donate link: https://www.pluginbazar.net/product/offer-a-cup-of-coffee/
 	Tags: woocommerce, woocommerce open close, opening-closing-time,opening-time,closing-time,wordpress,web-shop-management,restrict-add-to-cart,wordpress-plugin,woc-open-close,maintain scheduling in woocommerce,maintain scheduling in website, maintain scheduling in webshop, opening, closing, opening shop, opening website, opening woocommerce, closing shop, closing website, closing woocommerce, business hour, business time
 	Requires at least: 4.6
-	Tested up to: 5.2.2
-	Stable tag: 3.2.0
+	Tested up to: 5.2.3
+	Tested up to WooCommerce: 3.7
+	Stable tag: 3.2.1
 	Requires PHP: 5.6
 	Requires WooCommerce: 3.0
 	Text Domain: woc-open-close

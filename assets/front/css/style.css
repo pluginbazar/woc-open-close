@@ -236,6 +236,10 @@ Location: /templates/display-schedules.php
     text-align: center;
 }
 
+.woc-countdown-timer-2 > span:first-child {
+    display: none;
+}
+
 .woc-countdown-timer-2 > span:last-child {
     border-right: 0;
     margin-right: 0;
