@@ -57,7 +57,7 @@ $woc_message    = isset( $woc_hours_meta['woc_message'] ) ? $woc_hours_meta['woc
     <div class="woc_section_inline woc_section_hint hint--top" aria-label="<?php echo __('Write your custom message what your visitors will see', 'woc-open-close');?>">?</div>
     <div class='woc_section_inline woc_section_inputs'>
 
-        <textarea name="woc_hours_meta[woc_message]" rows="5" placeholder="<?php _e('We are currently off, Please try on next opening schedule. Thank you', 'woc-open-close' ); ?>"><?php echo $woc_message; ?></textarea>
+        <textarea name="woc_hours_meta[woc_message]" rows="5" placeholder="<?php _e('Offline ! We will start taking orders in %countdown%', 'woc-open-close' ); ?>"><?php echo $woc_message; ?></textarea>
 
     </div>
 </div>

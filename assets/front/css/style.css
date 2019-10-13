@@ -34,7 +34,7 @@ Location: /templates/display-schedules.php
     background: rgba(76, 175, 80, 0.17);
 }
 
-.woc-schedules .woc-schedule:last-child{
+.woc-schedules .woc-schedule:last-child {
     border-bottom: none;
 }
 
@@ -205,10 +205,14 @@ Location: /templates/display-schedules.php
 * Countdown Timer
  */
 
+.woc-countdown-timer-1 {
+    margin-bottom: 20px;
+}
+
 .woc-countdown-timer-1 > span {
     display: inline-block;
-    margin-right: 15px;
-    padding-right: 15px;
+    margin-right: 5px;
+    padding-right: 8px;
     border-right: 1px solid #ccc;
     font-size: 16px;
     line-height: 20px;
@@ -230,7 +234,7 @@ Location: /templates/display-schedules.php
     display: inline-block;
     margin-right: 25px;
     padding-right: 25px;
-    border-right: 1px solid rgba(0,0,0,0.1);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
     font-size: 16px;
     line-height: 24px;
     text-align: center;
@@ -259,7 +263,7 @@ Location: /templates/display-schedules.php
 .woc-countdown-timer-3 > span {
     display: inline-block;
     margin-right: 25px;
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     font-size: 16px;
     text-align: center;
     min-width: 120px;
@@ -382,7 +386,7 @@ Location: /templates/shop-status-bar.php
 
 .shop-status-bar .woc-countdown-timer-1 {
     display: inline-block;
-    margin: 0 15px;
+    margin: 0 15px 0 3px;
 }
 
 
@@ -393,10 +397,10 @@ Location: /templates/shop-status-bar.php
 #wp-admin-bar-woc-shop-close:hover,
 #wp-admin-bar-woc-shop-close:active,
 #wp-admin-bar-woc-shop-close:focus,
-#wp-admin-bar-woc-shop-close .ab-empty-item ,
-#wp-admin-bar-woc-shop-close:hover .ab-empty-item ,
-#wp-admin-bar-woc-shop-close:active .ab-empty-item ,
-#wp-admin-bar-woc-shop-close:focus .ab-empty-item  {
+#wp-admin-bar-woc-shop-close .ab-empty-item,
+#wp-admin-bar-woc-shop-close:hover .ab-empty-item,
+#wp-admin-bar-woc-shop-close:active .ab-empty-item,
+#wp-admin-bar-woc-shop-close:focus .ab-empty-item {
     background: #ff5722 !important;
     color: #fff !important;
     cursor: pointer;
@@ -406,10 +410,10 @@ Location: /templates/shop-status-bar.php
 #wp-admin-bar-woc-shop-open:hover,
 #wp-admin-bar-woc-shop-open:active,
 #wp-admin-bar-woc-shop-open:focus,
-#wp-admin-bar-woc-shop-open .ab-empty-item ,
-#wp-admin-bar-woc-shop-open:hover .ab-empty-item ,
-#wp-admin-bar-woc-shop-open:active .ab-empty-item ,
-#wp-admin-bar-woc-shop-open:focus .ab-empty-item  {
+#wp-admin-bar-woc-shop-open .ab-empty-item,
+#wp-admin-bar-woc-shop-open:hover .ab-empty-item,
+#wp-admin-bar-woc-shop-open:active .ab-empty-item,
+#wp-admin-bar-woc-shop-open:focus .ab-empty-item {
     background: #1d9085 !important;
     color: #fff !important;
     cursor: pointer;

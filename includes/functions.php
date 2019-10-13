@@ -9,24 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }  // if direct access
 
 
-
-add_shortcode( 'test___p', function() {
-
-	ob_start();
-
-	global $wooopenclose;
-
-	echo "<pre>"; print_r( $wooopenclose->get_next_time( 'close') ); echo "</pre>";
-
-
-	return ob_get_clean();
-} );
-
-
 if ( ! function_exists( 'woc_get_template_part' ) ) {
 	function woc_get_template_part( $slug, $name = '', $args = array() ) {
-
-		global $wooopenclose;
 
 		$template = '';
 
@@ -34,18 +18,18 @@ if ( ! function_exists( 'woc_get_template_part' ) ) {
 		if ( $name ) {
 			$template = locate_template( array(
 				"{$slug}-{$name}.php",
-				$wooopenclose->template_path() . "{$slug}-{$name}.php"
+				wooopenclose()->template_path() . "{$slug}-{$name}.php"
 			) );
 		}
 
 		// Get default slug-name.php.
-		if ( ! $template && $name && file_exists( $wooopenclose->plugin_path() . "/templates/{$slug}-{$name}.php" ) ) {
-			$template = $wooopenclose->plugin_path() . "/templates/{$slug}-{$name}.php";
+		if ( ! $template && $name && file_exists( wooopenclose()->plugin_path() . "/templates/{$slug}-{$name}.php" ) ) {
+			$template = wooopenclose()->plugin_path() . "/templates/{$slug}-{$name}.php";
 		}
 
 		// If template file doesn't exist, look in yourtheme/slug.php and yourtheme/woocommerce/slug.php.
 		if ( ! $template ) {
-			$template = locate_template( array( "{$slug}.php", $wooopenclose->template_path() . "{$slug}.php" ) );
+			$template = locate_template( array( "{$slug}.php", wooopenclose()->template_path() . "{$slug}.php" ) );
 		}
 
 		// Allow 3rd party plugins to filter template file from their plugin.
@@ -85,14 +69,12 @@ if ( ! function_exists( 'woc_get_template' ) ) {
 if ( ! function_exists( 'woc_locate_template' ) ) {
 	function woc_locate_template( $template_name, $template_path = '', $default_path = '' ) {
 
-		global $wooopenclose;
-
 		if ( ! $template_path ) {
-			$template_path = $wooopenclose->template_path();
+			$template_path = wooopenclose()->template_path();
 		}
 
 		if ( ! $default_path ) {
-			$default_path = $wooopenclose->plugin_path() . '/templates/';
+			$default_path = wooopenclose()->plugin_path() . '/templates/';
 		}
 
 		// Look within passed path within the theme - this is priority.
@@ -132,7 +114,7 @@ if ( ! function_exists( 'woc_status_bar_classes' ) ) {
 }
 
 
-if( ! function_exists( 'woc_get_option' ) ) {
+if ( ! function_exists( 'woc_get_option' ) ) {
 	/**
 	 * Get Option value
 	 *
@@ -157,8 +139,32 @@ if( ! function_exists( 'woc_get_option' ) ) {
 
 if ( ! function_exists( 'woc_is_open' ) ) {
 	function woc_is_open() {
+		return wooopenclose()->is_open();
+	}
+}
+
+
+if ( ! function_exists( 'wooopenclose' ) ) {
+	function wooopenclose() {
+
 		global $wooopenclose;
 
-		return $wooopenclose->is_open();
+		if ( empty( $wooopenclose ) ) {
+			$wooopenclose = new WOC_Functions();
+		}
+
+		return $wooopenclose;
+	}
+}
+
+
+if ( ! function_exists( 'woc_pro_available' ) ) {
+	function woc_pro_available() {
+
+		if ( defined( 'WOCP_PLUGIN_FILE' ) ) {
+			return true;
+		}
+
+		return false;
 	}
 }

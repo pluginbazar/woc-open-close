@@ -5,7 +5,7 @@
 	Requires at least: 4.6
 	Tested up to: 5.2.3
 	Tested up to WooCommerce: 3.7
-	Stable tag: 3.2.1
+	Stable tag: 4.0.0
 	Requires PHP: 5.6
 	Requires WooCommerce: 3.0
 	Text Domain: woc-open-close
@@ -141,8 +141,13 @@ WooCommerce Open Close comes with a complete business hour/schedule management, 
     = 3.2.0 =
 	* New variations and styles
 
+    = 4.0.0 =
+	* Major Update
 
 == Upgrade Notice ==
 
     = 3.2.0 =
     This is Big update with new variations and styles
+
+    = 4.0.0 =
+    This is a major update separating premium version from free version and changing internal strategy.
