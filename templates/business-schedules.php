@@ -8,7 +8,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }  // if direct access
 
-
 global $wooopenclose;
 
 $template = ( isset( $template ) || ! empty( $template ) ) ? $template : 1;
@@ -19,10 +18,12 @@ $set_id   = ( isset( $set ) || ! empty( $set ) ) ? $set : $wooopenclose->active_
 
     <div class="woc-schedules">
 
-        <div class="woc-status-img">
-            <img src="<?php echo esc_url( $wooopenclose->get_status_image() ); ?>"
-                 alt="<?php woc_is_open() ? esc_attr_e( 'Shop open', 'woc-open-close' ) : esc_attr_e( 'Shop close', 'woc-open-close' ); ?>">
-        </div>
+		<?php if ( ! empty( $status_image = $wooopenclose->get_status_image() ) ) : ?>
+            <div class="woc-status-img">
+                <img src="<?php echo esc_url( $status_image ); ?>"
+                     alt="<?php woc_is_open() ? esc_attr_e( 'Shop open', 'woc-open-close' ) : esc_attr_e( 'Shop close', 'woc-open-close' ); ?>">
+            </div>
+		<?php endif; ?>
 
 		<?php foreach ( $wooopenclose->get_all_schedules( $set_id ) as $day_id => $day_schedules ) :
 
@@ -36,7 +37,7 @@ $set_id   = ( isset( $set ) || ! empty( $set ) ) ? $set : $wooopenclose->active_
                 <div class="woc-day-name">
 					<?php
 					printf( '%s %s <span class="woc-arrow-icon"></span>',
-						in_array( 'yes', woc_get_option( 'woc_bh_check_icon', 'yes' ) ) ? '<i class="icofont-tick-mark"></i>' : '',
+						in_array( 'yes', woc_get_option( 'woc_bh_check_icon', array( 'yes' ) ) ) ? '<i class="icofont-tick-mark"></i>' : '',
 						$wooopenclose->get_day_name( $day_id )
 					);
 					?>

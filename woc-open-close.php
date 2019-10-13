@@ -39,7 +39,6 @@ class WooCommerceOpenClose {
 	}
 
 	function load_widget() {
-
 		register_widget( 'WocWidgetSchedule' );
 	}
 
