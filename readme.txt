@@ -1,7 +1,7 @@
-=== Woocommerce Open Close - WooCommerce Open Close – Best Business Schedules Manager ===
+=== Woocommerce Open Close - Best Business Schedules Manager===
 	Contributors: jaedm97,pluginbazar
-	Donate link: https://www.pluginbazar.net/product/offer-a-cup-of-coffee/
-	Tags: woocommerce, woocommerce open close, opening-closing-time,opening-time,closing-time,wordpress,web-shop-management,restrict-add-to-cart,wordpress-plugin,woc-open-close,maintain scheduling in woocommerce,maintain scheduling in website, maintain scheduling in webshop, opening, closing, opening shop, opening website, opening woocommerce, closing shop, closing website, closing woocommerce, business hour, business time
+	Donate link: https://www.pluginbazar.com/contact/
+	Tags: woocommerce schedules, business hours, schedules manager, restrict-add-to-cart, Dokan
 	Requires at least: 4.6
 	Tested up to: 5.2.3
 	Tested up to WooCommerce: 3.7
@@ -27,7 +27,7 @@ NO MORE BUSINESS CONFUSION
 WooCommerce Open Close comes with a complete business hour/schedule management, completely hassle free.
 
 
-### [GET WOOCOMMERCE OPEN CLOSE PREMIUM](https://bit.ly/2S6FyOE)
+### [GET WOOCOMMERCE OPEN CLOSE PREMIUM](https://pluginbazar.com/?add-to-cart=1190)
 
 ### [PLUGIN DETAILS](http://bit.ly/2LfnVeZ)
 
