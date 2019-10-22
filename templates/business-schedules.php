@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $wooopenclose;
 
 $template = ( isset( $template ) || ! empty( $template ) ) ? $template : 1;
-$set_id   = ( isset( $set ) || ! empty( $set ) ) ? $set : $wooopenclose->active_set_id;
+$set_id   = ( isset( $set ) || ! empty( $set ) ) ? $set : $wooopenclose->get_active_schedule_id();
 
 ?>
 <div class="woc-schedules-wrap woc-schedules-style-<?php echo esc_attr( $template ); ?> <?php echo ( woc_is_open() ) ? 'woc-shop-schedules-open' : 'woc-shop-schedules-close'; ?>">

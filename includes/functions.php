@@ -10,30 +10,70 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 if ( ! function_exists( 'woc_get_template_part' ) ) {
-	function woc_get_template_part( $slug, $name = '', $args = array() ) {
+	/**
+	 * Get Template Part
+	 *
+	 * @param $slug
+	 * @param string $name
+	 * @param array $args
+	 * @param bool $main_template | When you call a template from extensions you can use this param as true to check from main template only
+	 */
+	function woc_get_template_part( $slug, $name = '', $args = array(), $main_template = false ) {
 
-		$template = '';
+		$template   = '';
+		$plugin_dir = WOC_PLUGIN_DIR;
 
-		// Look in yourtheme/slug-name.php and yourtheme/woocommerce/slug-name.php.
+		/**
+		 * Locate template
+		 */
 		if ( $name ) {
 			$template = locate_template( array(
 				"{$slug}-{$name}.php",
-				wooopenclose()->template_path() . "{$slug}-{$name}.php"
+				"woc/{$slug}-{$name}.php"
 			) );
 		}
 
-		// Get default slug-name.php.
-		if ( ! $template && $name && file_exists( wooopenclose()->plugin_path() . "/templates/{$slug}-{$name}.php" ) ) {
-			$template = wooopenclose()->plugin_path() . "/templates/{$slug}-{$name}.php";
+		/**
+		 * Check directory for templates from Addons
+		 */
+		$backtrace      = debug_backtrace( 2, true );
+		$backtrace      = empty( $backtrace ) ? array() : $backtrace;
+		$backtrace      = reset( $backtrace );
+		$backtrace_file = isset( $backtrace['file'] ) ? $backtrace['file'] : '';
+
+		// Search in WOC Pro
+		if ( strpos( $backtrace_file, 'woc-open-close-pro' ) !== false && defined( 'WOCP_PLUGIN_DIR' ) ) {
+			$plugin_dir = $main_template ? WOC_PLUGIN_DIR : WOCP_PLUGIN_DIR;
 		}
 
-		// If template file doesn't exist, look in yourtheme/slug.php and yourtheme/woocommerce/slug.php.
+
+		/**
+		 * Search for Template in Plugin
+		 *
+		 * @in Plugin
+		 */
+		if ( ! $template && $name && file_exists( untrailingslashit( $plugin_dir ) . "/templates/{$slug}-{$name}.php" ) ) {
+			$template = untrailingslashit( $plugin_dir ) . "/templates/{$slug}-{$name}.php";
+		}
+
+
+		/**
+		 * Search for Template in Theme
+		 *
+		 * @in Theme
+		 */
 		if ( ! $template ) {
-			$template = locate_template( array( "{$slug}.php", wooopenclose()->template_path() . "{$slug}.php" ) );
+			$template = locate_template( array( "{$slug}.php", "woc/{$slug}.php" ) );
 		}
 
-		// Allow 3rd party plugins to filter template file from their plugin.
+
+		/**
+		 * Allow 3rd party plugins to filter template file from their plugin.
+		 *
+		 * @filter woc_filters_get_template_part
+		 */
 		$template = apply_filters( 'woc_filters_get_template_part', $template, $slug, $name );
+
 
 		if ( $template ) {
 			load_template( $template, false );
@@ -43,13 +83,33 @@ if ( ! function_exists( 'woc_get_template_part' ) ) {
 
 
 if ( ! function_exists( 'woc_get_template' ) ) {
-	function woc_get_template( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
+	/**
+	 * Get Template
+	 *
+	 * @param $template_name
+	 * @param array $args
+	 * @param string $template_path
+	 * @param string $default_path
+	 * @param bool $main_template | When you call a template from extensions you can use this param as true to check from main template only
+	 *
+	 * @return WP_Error
+	 */
+	function woc_get_template( $template_name, $args = array(), $template_path = '', $default_path = '', $main_template = false ) {
 
 		if ( ! empty( $args ) && is_array( $args ) ) {
 			extract( $args ); // @codingStandardsIgnoreLine
 		}
 
-		$located = woc_locate_template( $template_name, $template_path, $default_path );
+		/**
+		 * Check directory for templates from Addons
+		 */
+		$backtrace      = debug_backtrace( 2, true );
+		$backtrace      = empty( $backtrace ) ? array() : $backtrace;
+		$backtrace      = reset( $backtrace );
+		$backtrace_file = isset( $backtrace['file'] ) ? $backtrace['file'] : '';
+
+		$located = woc_locate_template( $template_name, $template_path, $default_path, $backtrace_file, $main_template );
+
 
 		if ( ! file_exists( $located ) ) {
 			return new WP_Error( 'invalid_data', __( '%s does not exist.', 'woc-open-close' ), '<code>' . $located . '</code>' );
@@ -67,17 +127,44 @@ if ( ! function_exists( 'woc_get_template' ) ) {
 
 
 if ( ! function_exists( 'woc_locate_template' ) ) {
-	function woc_locate_template( $template_name, $template_path = '', $default_path = '' ) {
+	/**
+	 *  Locate template
+	 *
+	 * @param $template_name
+	 * @param string $template_path
+	 * @param string $default_path
+	 * @param string $backtrace_file
+	 * @param bool $main_template | When you call a template from extensions you can use this param as true to check from main template only
+	 *
+	 * @return mixed|void
+	 */
+	function woc_locate_template( $template_name, $template_path = '', $default_path = '', $backtrace_file = '', $main_template = false ) {
 
+		$plugin_dir = WOC_PLUGIN_DIR;
+
+		/**
+		 * Template path in Theme
+		 */
 		if ( ! $template_path ) {
-			$template_path = wooopenclose()->template_path();
+			$template_path = 'woc/';
 		}
 
+		// Check for WOC Pro
+		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'woc-open-close-pro' ) !== false && defined( 'WOCP_PLUGIN_DIR' ) ) {
+			$plugin_dir = $main_template ? WOC_PLUGIN_DIR : WOCP_PLUGIN_DIR;
+		}
+
+
+		/**
+		 * Template default path from Plugin
+		 */
 		if ( ! $default_path ) {
-			$default_path = wooopenclose()->plugin_path() . '/templates/';
+			$default_path = untrailingslashit( $plugin_dir ) . '/templates/';
 		}
 
-		// Look within passed path within the theme - this is priority.
+		/**
+		 * Look within passed path within the theme - this is priority.
+		 */
 		$template = locate_template(
 			array(
 				trailingslashit( $template_path ) . $template_name,
@@ -85,12 +172,18 @@ if ( ! function_exists( 'woc_locate_template' ) ) {
 			)
 		);
 
-		// Get default template/.
+		/**
+		 * Get default template
+		 */
 		if ( ! $template ) {
 			$template = $default_path . $template_name;
 		}
 
-		// Return what we found.
+		/**
+		 * Return what we found with allowing 3rd party to override
+		 *
+		 * @filter woc_filters_locate_template
+		 */
 		return apply_filters( 'woc_filters_locate_template', $template, $template_name, $template_path );
 	}
 }

@@ -8,12 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }  // if direct access
 
-global $wooopenclose;
-
 $unique_id     = uniqid();
 $style         = ( isset( $style ) || ! empty( $style ) ) ? $style : 1;
 $dynamic_class = woc_is_open() ? 'woc-shop-open' : '';
-$time_diff     = date( 'U', strtotime( $wooopenclose->get_next_time() ) ) - date( 'U' );
+$time_diff     = date( 'U', strtotime( wooopenclose()->get_next_time() ) ) - date( 'U' );
 
 ?>
 

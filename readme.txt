@@ -1,11 +1,11 @@
-=== Woocommerce Open Close ===
+=== Woocommerce Open Close - WooCommerce Open Close – Best Business Schedules Manager ===
 	Contributors: jaedm97,pluginbazar
 	Donate link: https://www.pluginbazar.net/product/offer-a-cup-of-coffee/
 	Tags: woocommerce, woocommerce open close, opening-closing-time,opening-time,closing-time,wordpress,web-shop-management,restrict-add-to-cart,wordpress-plugin,woc-open-close,maintain scheduling in woocommerce,maintain scheduling in website, maintain scheduling in webshop, opening, closing, opening shop, opening website, opening woocommerce, closing shop, closing website, closing woocommerce, business hour, business time
 	Requires at least: 4.6
 	Tested up to: 5.2.3
 	Tested up to WooCommerce: 3.7
-	Stable tag: 4.0.0
+	Stable tag: 4.0.2
 	Requires PHP: 5.6
 	Requires WooCommerce: 3.0
 	Text Domain: woc-open-close
@@ -42,7 +42,7 @@ WooCommerce Open Close comes with a complete business hour/schedule management, 
 * Manage Business Schedules
 * Multiple Schedules in Same Day
 * Shortcode to View Business Hours
-* Transalation Ready
+* Translation Ready
 * 5+ Business Schedules Display Variations
 * 4+ Countdown Timer Variations
 
@@ -52,6 +52,15 @@ WooCommerce Open Close comes with a complete business hour/schedule management, 
 * Allow add to cart even shop is closed
 * Allow / Disallow Specific Products to Bypass Schedules
 * Multiple popup styles
+* Frontend Schedules Management
+* Dokan Plugin Support Added
+
+#### Shortcodes
+1. `[woc_open_close set="SCHEDULE_ID"]` FREE
+You can display any schedule by ID using this shortcode. Example: `[woc_open_close set="10"]`
+
+2. `[woc-manage-schedules]` PREMIUM
+You can manage (Create | Delete | Update) your Schedules on Frontend using this shortcode.
 
 
 == Installation ==
@@ -143,6 +152,12 @@ WooCommerce Open Close comes with a complete business hour/schedule management, 
 
     = 4.0.0 =
 	* Major Update
+
+    = 4.0.1 =
+    * Frontend schedules manager added with shortcode in Pro version
+
+    = 4.0.2 =
+    * Dokan plugin support in Pro version
 
 == Upgrade Notice ==
 

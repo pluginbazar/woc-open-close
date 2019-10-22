@@ -27,14 +27,6 @@ class WOC_Functions {
 
 
 	/**
-	 * Today Schedules
-	 *
-	 * @var array
-	 */
-	public $todays_schedules = array();
-
-
-	/**
 	 * wooopenclose constructor.
 	 */
 	public function __construct() {
@@ -43,12 +35,8 @@ class WOC_Functions {
 			require_once( WOC_PLUGIN_DIR . 'includes/functions.php' );
 		}
 
-		$this->is_open       = $this->is_open();
-		$this->active_set_id = woc_get_option( 'woc_active_set' );
-
-		$this->set_todays_schedule();
+		$this->active_set_id = $this->get_option( 'woc_active_set' );
 	}
-
 
 	/**
 	 * Return Whether shop is open or not
@@ -60,12 +48,12 @@ class WOC_Functions {
 		date_default_timezone_set( $this->get_timezone_string() );
 
 		$current_time = date( 'U' );
+		$today_schedules =  $this->get_todays_schedule();
 
-		foreach ( $this->get_todays_schedule() as $schedule_id => $schedule ) {
+		foreach ( $today_schedules as $schedule_id => $schedule ) {
 
 			$open_time  = isset( $schedule['open'] ) ? date( 'U', strtotime( $schedule['open'] ) ) : '';
 			$close_time = isset( $schedule['close'] ) ? date( 'U', strtotime( $schedule['close'] ) ) : '';
-
 
 			if ( empty( $open_time ) || empty( $close_time ) ) {
 				continue;
@@ -75,9 +63,8 @@ class WOC_Functions {
 			}
 		}
 
-		return apply_filters( 'woc_is_open', false );
+		return apply_filters( 'woc_is_open', empty( $today_schedules ) ? true : false );
 	}
-
 
 	/**
 	 * Return TimeZone String
@@ -119,7 +106,6 @@ class WOC_Functions {
 		return 'UTC';
 	}
 
-
 	/**
 	 * Return Todays Schedules
 	 *
@@ -127,23 +113,32 @@ class WOC_Functions {
 	 */
 	function get_todays_schedule() {
 
-		return apply_filters( 'woc_filters_get_todays_schedule', $this->todays_schedules );
-	}
-
-
-	/**
-	 * Set Todays Schedules
-	 *
-	 * @return array|mixed
-	 */
-	function set_todays_schedule() {
-
-		$woc_hours_meta = get_post_meta( $this->active_set_id, 'woc_hours_meta', true );
+		$woc_hours_meta = get_post_meta( $this->get_active_schedule_id(), 'woc_hours_meta', true );
 		$woc_hours_meta = empty( $woc_hours_meta ) ? array() : $woc_hours_meta;
 		$all_schedules  = isset( $woc_hours_meta[ $this->get_current_day_id() ] ) ? $woc_hours_meta[ $this->get_current_day_id() ] : array();
 		$all_schedules  = empty( $all_schedules ) ? array() : $all_schedules;
 
-		$this->todays_schedules = $all_schedules;
+		return apply_filters( 'woc_filters_get_todays_schedule', $all_schedules );
+	}
+
+	/**
+	 * Return option value
+	 *
+	 * @param string $option_key
+	 * @param string $default_val
+	 *
+	 * @return mixed|string|void
+	 */
+	function get_option( $option_key = '', $default_val = '' ) {
+
+		if ( empty( $option_key ) ) {
+			return '';
+		}
+
+		$option_val = get_option( $option_key, $default_val );
+		$option_val = empty( $option_val ) ? $default_val : $option_val;
+
+		return apply_filters( 'woc_filters_option_' . $option_key, $option_val );
 	}
 
 
@@ -173,6 +168,37 @@ class WOC_Functions {
 		}
 	}
 
+
+	/**
+	 * Return active schedule id
+	 *
+	 * @return mixed|void
+	 */
+	public function get_active_schedule_id() {
+		return apply_filters( 'woc_filters_get_active_schedule_id', $this->active_set_id );
+	}
+
+	/**
+	 * Return User Meta Value
+	 *
+	 * @param bool $meta_key
+	 * @param bool $user_id
+	 * @param string $default
+	 *
+	 * @return mixed|string|void
+	 */
+	function get_user_meta( $meta_key = false, $user_id = false, $default = '' ) {
+
+		if ( ! $meta_key ) {
+			return '';
+		}
+
+		$user_id    = ! $user_id ? get_current_user_id() : $user_id;
+		$meta_value = get_user_meta( $user_id, $meta_key, true );
+		$meta_value = empty( $meta_value ) ? $default : $meta_value;
+
+		return apply_filters( 'woc_filters_get_user_meta', $meta_value, $meta_key, $user_id, $default );
+	}
 
 	/**
 	 * Return settings page as Array
@@ -261,12 +287,6 @@ class WOC_Functions {
 								'before_cart_single'   => __( 'Before cart button on Single Product Page', 'woc-open-close' ),
 								'top_on_myaccount'     => __( 'Top on My-Account Page', 'woc-open-close' ),
 							),
-							'default' => array(
-								'before_cart_table',
-								'before_order_review',
-								'before_cart_single',
-								'top_on_myaccount'
-							),
 						),
 
 						array(
@@ -296,36 +316,6 @@ class WOC_Functions {
 							'details'     => __( 'For: Status Closed, This text will visible before the countdown timer when shop is closed.', 'woc-open-close' ),
 							'type'        => 'textarea',
 							'placeholder' => __( 'This shop will be open within', 'woc-open-close' ),
-						),
-					)
-				),
-
-				array(
-					'title'   => __( 'Product Options', 'woc-open-close' ),
-					'options' => array(
-						array(
-							'id'            => 'woc_product_allowed',
-							'title'         => __( 'Allow Products', 'woc-open-close' ),
-							'details'       => __( 'Pro: These products can order anytime, Even the store is Closed. You can add multiple products.', 'woc-open-close' ),
-							'type'          => 'select2',
-							'multiple'      => true,
-							'field_options' => array(
-								'placeholder' => __( 'Select products', 'woc-open-close' ),
-							),
-							'args'          => 'POSTS_%product%',
-							'disabled'      => true,
-						),
-						array(
-							'id'            => 'woc_product_disabled',
-							'title'         => __( 'Disable Products', 'woc-open-close' ),
-							'details'       => __( 'Pro: These products will be shown on website but no one can order them, Even the store is Open. You can add multiple products.', 'woc-open-close' ),
-							'type'          => 'select2',
-							'multiple'      => true,
-							'field_options' => array(
-								'placeholder' => __( 'Select products', 'woc-open-close' ),
-							),
-							'args'          => 'POSTS_%product%',
-							'disabled'      => true,
 						),
 					)
 				),
@@ -464,7 +454,6 @@ class WOC_Functions {
 		return apply_filters( 'woc_filters_settings_pages', $pages );
 	}
 
-
 	/**
 	 * Return Image URL dynamically
 	 *
@@ -483,7 +472,6 @@ class WOC_Functions {
 
 		return apply_filters( 'woc_filters_status_image', $image_url, $image_for, $image_id );
 	}
-
 
 	/**
 	 * Return Next Opening Time
@@ -512,7 +500,6 @@ class WOC_Functions {
 
 		return apply_filters( 'woc_filters_next_time', date( $format, $next_time ), $next_time, $format );
 	}
-
 
 	/**
 	 * Calculate times
@@ -548,7 +535,6 @@ class WOC_Functions {
 		return apply_filters( 'woc_filters_calculate_times', $__times, $__time_for, $__day_name );
 	}
 
-
 	/**
 	 * Return Current Day Name
 	 *
@@ -564,7 +550,6 @@ class WOC_Functions {
 
 		return apply_filters( 'woc_filters_day_name', $day_name, $day_id );
 	}
-
 
 	/**
 	 * Return all days
@@ -601,7 +586,6 @@ class WOC_Functions {
 		return apply_filters( 'woc_filters_days_array', $days_array );
 	}
 
-
 	/**
 	 * Return all Schedules
 	 *
@@ -611,13 +595,12 @@ class WOC_Functions {
 	 */
 	function get_all_schedules( $set_id = '' ) {
 
-		$set_to_display = empty( $set_id ) ? $this->active_set_id : $set_id;
+		$set_to_display = empty( $set_id ) ? $this->get_active_schedule_id() : $set_id;
 		$woc_hours_meta = get_post_meta( $set_to_display, 'woc_hours_meta', true );
 		$woc_hours_meta = empty( $woc_hours_meta ) ? array() : $woc_hours_meta;
 
 		return apply_filters( 'woc_all_schedules', $woc_hours_meta );
 	}
-
 
 	/**
 	 * Return Plugin Path
@@ -627,18 +610,6 @@ class WOC_Functions {
 	function plugin_path() {
 		return apply_filters( 'woc_filters_plugin_path', untrailingslashit( WOC_PLUGIN_DIR ) );
 	}
-
-
-	/**
-	 * Return Template path
-	 *
-	 * @return mixed|void
-	 */
-	function template_path() {
-
-		return apply_filters( 'woc_filters_template_path', 'woc/' );
-	}
-
 
 	/**
 	 * PB_Settings Class
@@ -652,7 +623,6 @@ class WOC_Functions {
 		return new PB_Settings( $args );
 	}
 
-
 	/**
 	 * Return Message if Shop is Closed
 	 *
@@ -660,11 +630,11 @@ class WOC_Functions {
 	 */
 	function get_message() {
 
-		if ( ! $this->active_set_id ) {
+		if ( ! $this->get_active_schedule_id() ) {
 			return '';
 		}
 
-		$woc_hours_meta = get_post_meta( $this->active_set_id, 'woc_hours_meta', true );
+		$woc_hours_meta = get_post_meta( $this->get_active_schedule_id(), 'woc_hours_meta', true );
 		if ( empty( $woc_hours_meta ) ) {
 			return apply_filters( 'woc_is_open', true );
 		}
@@ -686,7 +656,6 @@ class WOC_Functions {
 		return apply_filters( 'woc_filters_shop_close_message', $woc_message );
 	}
 
-
 	/**
 	 * Return countdown timer code
 	 *
@@ -703,7 +672,6 @@ class WOC_Functions {
 		return ob_get_clean();
 	}
 
-
 	/**
 	 * Return Button Text on Bar
 	 *
@@ -713,7 +681,6 @@ class WOC_Functions {
 
 		return apply_filters( 'woc_filters_bar_btn_text', woc_get_option( 'woc_bar_hide_text', __( 'Hide Message', 'woc-open-close' ) ) );
 	}
-
 
 	/**
 	 * Return Whether Bar button to display or not
@@ -728,7 +695,6 @@ class WOC_Functions {
 			return false;
 		}
 	}
-
 
 	/**
 	 * Print notice to the admin bar
@@ -749,7 +715,6 @@ class WOC_Functions {
 
 		printf( '<div class="notice notice-%s %s"><p>%s</p></div>', $is_success, $is_dismissible ? 'is-dismissible' : '', $message );
 	}
-
 
 	/**
 	 * Generate and return HTML for Schedule
@@ -783,6 +748,52 @@ class WOC_Functions {
 
 		return ob_get_clean();
 	}
+
+	/**
+	 * Return current URL with HTTP parameters
+	 *
+	 * @param $http_args
+	 * @param $wp_request
+	 *
+	 * @return mixed|void
+	 */
+	function get_current_url( $http_args = array(), $wp_request = '' ) {
+
+		global $wp;
+
+		$current_url = empty( $wp_request ) ? site_url( $wp->request ) : $wp_request;
+		$http_args   = array_merge( $_GET, $http_args );
+
+		if ( ! empty( $http_args ) ) {
+			$current_url .= '?' . http_build_query( $http_args );
+		}
+
+		return apply_filters( 'woc_filters_current_url', $current_url );
+	}
+
+	/**
+	 * Return Post Meta Value
+	 *
+	 * @param bool $meta_key
+	 * @param bool $post_id
+	 * @param string $default
+	 *
+	 * @return mixed|string|void
+	 */
+	function get_meta( $meta_key = false, $post_id = false, $default = '' ) {
+
+		if ( ! $meta_key ) {
+			return '';
+		}
+
+		$post_id    = ! $post_id ? get_the_ID() : $post_id;
+		$meta_value = get_post_meta( $post_id, $meta_key, true );
+		$meta_value = empty( $meta_value ) ? $default : $meta_value;
+
+		return apply_filters( 'woc_filters_get_meta', $meta_value, $meta_key, $post_id, $default );
+	}
+
+
 }
 
 global $wooopenclose;

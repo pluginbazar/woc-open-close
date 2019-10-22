@@ -39,18 +39,18 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			$woc_active = isset( $_POST['woc_active'] ) ? sanitize_text_field( $_POST['woc_active'] ) : 'false';
 
 			if ( empty( $post_id ) || $post_id == 0 ) {
-				die();
+				wp_send_json_error();
 			}
 
 			if ( $woc_active == 'true' ) {
 				update_option( 'woc_active_set', $post_id );
 			}
+
 			if ( $woc_active == 'false' ) {
 				update_option( 'woc_active_set', '' );
 			}
 
-			echo 'success';
-			die();
+			wp_send_json_success();
 		}
 
 
@@ -60,6 +60,8 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			$open   = isset( $_POST['open'] ) ? sanitize_text_field( $_POST['open'] ) : '';
 			$close  = isset( $_POST['close'] ) ? sanitize_text_field( $_POST['close'] ) : '';
 
+			ob_start();
+
 			echo wooopenclose()->generate_woc_schedule(
 				array(
 					'day_id' => $day_id,
@@ -68,7 +70,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 				)
 			);
 
-			die();
+			wp_send_json_success( ob_get_clean() );
 		}
 
 
@@ -289,7 +291,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 
 			// Check Active Schedule
 
-			if ( empty( get_option( 'woc_active_set', '' ) ) ) {
+			if ( empty( wooopenclose()->get_active_schedule_id() ) ) {
 				wooopenclose()->print_notice( sprintf(
 					__( 'No Active Schedule found <a href="%s">Make a Schedule Active</a>', 'woc-open-close' ),
 					admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close' ) ), 'warning' );
@@ -365,7 +367,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 				'singular'  => esc_html__( 'Schedule', 'woc-open-close' ),
 				'plural'    => esc_html__( 'Schedules', 'woc-open-close' ),
 				'labels'    => array(
-					'menu_name' => esc_html__( 'Shop Schedule', 'woc-open-close' ),
+					'menu_name' => esc_html__( 'Schedules', 'woc-open-close' ),
 				),
 				'menu_icon' => 'dashicons-clock',
 				'supports'  => array( '' ),

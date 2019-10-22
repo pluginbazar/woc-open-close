@@ -3,7 +3,7 @@
 	Plugin Name: WooCommerce Open Close
 	Plugin URI: https://pluginbazar.com/plugin/woocommerce-open-close/
 	Description: Maintain Business hour for your WooCommerce Shop. Let your customers know about business schedules and restrict them from placing new orders while Store is Closed.
-	Version: 4.0.0
+	Version: 4.0.2
 	Author: Pluginbazar
 	Author URI: https://pluginbazar.com/
 	License: GPLv2 or later
@@ -85,7 +85,7 @@ if ( ! class_exists( 'wooCommerceOpenClose' ) ) {
 		 */
 		function localize_scripts() {
 			return apply_filters( 'woc_filters_localize_scripts', array(
-				'woc_ajaxurl' => admin_url( 'admin-ajax.php' ),
+				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 			) );
 		}
 
@@ -97,12 +97,22 @@ if ( ! class_exists( 'wooCommerceOpenClose' ) ) {
 
 			wp_enqueue_script( 'magnific-popup', plugins_url( '/assets/front/js/jquery.magnific-popup.min.js', __FILE__ ), array( 'jquery' ), '', true );
 			wp_enqueue_script( 'woc_js', plugins_url( '/assets/front/js/scripts.js', __FILE__ ), array( 'jquery' ), '', true );
-			wp_localize_script( 'woc_js', 'woc_ajax', $this->localize_scripts() );
+			wp_localize_script( 'woc_js', 'wooopenclose', $this->localize_scripts() );
 
 			wp_enqueue_style( 'icofont', WOC_PLUGIN_URL . 'assets/fonts/icofont.min.css' );
 			wp_enqueue_style( 'magnific-popup', WOC_PLUGIN_URL . 'assets/front/css/magnific-popup.css' );
 			wp_enqueue_style( 'woc_style', WOC_PLUGIN_URL . 'assets/front/css/style.css' );
 			wp_enqueue_style( 'hint.min', WOC_PLUGIN_URL . 'assets/hint.min.css' );
+
+			if ( woc_pro_available() ) {
+				wp_enqueue_script( 'jquery-ui-sortable' );
+				wp_enqueue_script( 'jquery-time-picker', WOC_PLUGIN_URL . '/assets/jquery-timepicker.js', array( 'jquery' ) );
+				wp_enqueue_script( 'woc_global_js', plugins_url( '/assets/scripts.js', __FILE__ ), array( 'jquery' ), '', true );
+				wp_localize_script( 'woc_global_js', 'wooopenclose', $this->localize_scripts() );
+
+				wp_enqueue_style( 'woc_schedule_styles', WOC_PLUGIN_URL . 'assets/admin/css/schedule-style.css' );
+				wp_enqueue_style( 'jquery.timepicker', WOC_PLUGIN_URL . 'assets/jquery-timepicker.css' );
+			}
 		}
 
 
@@ -114,9 +124,13 @@ if ( ! class_exists( 'wooCommerceOpenClose' ) ) {
 			wp_enqueue_script( 'jquery-ui-sortable' );
 			wp_enqueue_script( 'jquery-time-picker', WOC_PLUGIN_URL . '/assets/jquery-timepicker.js', array( 'jquery' ) );
 			wp_enqueue_script( 'woc_admin_js', plugins_url( '/assets/admin/js/scripts.js', __FILE__ ), array( 'jquery' ) );
-			wp_localize_script( 'woc_admin_js', 'woc_ajax', $this->localize_scripts() );
+			wp_localize_script( 'woc_admin_js', 'wooopenclose', $this->localize_scripts() );
+
+			wp_enqueue_script( 'woc_global_js', plugins_url( '/assets/scripts.js', __FILE__ ), array( 'jquery' ), '', true );
+			wp_localize_script( 'woc_global_js', 'wooopenclose', $this->localize_scripts() );
 
 			wp_enqueue_style( 'woc_admin_style', WOC_PLUGIN_URL . 'assets/admin/css/style.css' );
+			wp_enqueue_style( 'woc_schedule_styles', WOC_PLUGIN_URL . 'assets/admin/css/schedule-style.css' );
 			wp_enqueue_style( 'icofont', WOC_PLUGIN_URL . 'assets/fonts/icofont.min.css' );
 			wp_enqueue_style( 'hint.min', WOC_PLUGIN_URL . 'assets/hint.min.css' );
 			wp_enqueue_style( 'jquery.timepicker', WOC_PLUGIN_URL . 'assets/jquery-timepicker.css' );
