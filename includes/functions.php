@@ -8,6 +8,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }  // if direct access
 
+if ( ! function_exists( 'woc_product_can_order' ) ) {
+	/**
+	 * Check if a product is ready to order or not
+	 *
+	 * @param bool $product_id
+	 *
+	 * @return bool|mixed|void
+	 */
+	function woc_product_can_order( $product_id = false ) {
+
+		$allowed_products    = wooopenclose()->get_option( 'woc_allowed_products', array() );
+		$disallowed_products = wooopenclose()->get_option( 'woc_disallowed_products', array() );
+
+		if ( in_array( $product_id, $allowed_products ) ) {
+			return true;
+		}
+
+		if ( in_array( $product_id, $disallowed_products ) ) {
+			return false;
+		}
+
+		return woc_is_open();
+	}
+}
+
 
 if ( ! function_exists( 'woc_get_template_part' ) ) {
 	/**

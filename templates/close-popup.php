@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) exit;  // if direct access
 
 global $wooopenclose, $wp_query;
 
+
 ?>
 
 <div id="woc-box-container" class="woc-box-container mfp-with-anim mfp-hide">

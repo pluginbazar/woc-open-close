@@ -3,9 +3,9 @@
 	Donate link: https://www.pluginbazar.com/contact/
 	Tags: woocommerce schedules, business hours, schedules manager, restrict-add-to-cart, Dokan
 	Requires at least: 4.6
-	Tested up to: 5.2.3
-	Tested up to WooCommerce: 3.7
-	Stable tag: 4.0.2
+	Tested up to: 5.3
+	Tested up to WooCommerce: 3.8.0
+	Stable tag: 4.0.3
 	Requires PHP: 5.6
 	Requires WooCommerce: 3.0
 	Text Domain: woc-open-close

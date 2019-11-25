@@ -319,13 +319,13 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 		 */
 		function display_popup_statusbar() {
 
-			if ( woc_is_open() ) {
-				return;
-			}
-
 			global $wp_query;
 
 			woc_get_template( 'close-popup.php' );
+
+			if ( woc_is_open() ) {
+				return;
+			}
 
 			$wp_query->set( 'in_status_bar', true );
 			woc_get_template( 'shop-status-bar.php' );
