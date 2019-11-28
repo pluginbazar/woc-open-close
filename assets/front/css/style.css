@@ -205,6 +205,10 @@ Location: /templates/display-schedules.php
 * Countdown Timer
  */
 
+.woocommerce-account .woc-countdown-wrapper {
+    margin-left: 32%;
+}
+
 .woc-countdown-timer-1 {
     margin-bottom: 20px;
 }
