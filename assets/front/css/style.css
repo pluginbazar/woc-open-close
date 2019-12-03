@@ -18,11 +18,14 @@ Location: /templates/display-schedules.php
 .entry-content .woc-schedules img,
 .woc-schedules img {
     border-radius: 0;
+    max-width: 150px;
     box-shadow: none;
+    margin: 0 auto;
 }
 
 .woc-status-img {
     text-align: center;
+    padding: 30px;
 }
 
 
@@ -154,6 +157,7 @@ Location: /templates/display-schedules.php
 .woc-schedules-style-3 .woc-schedules .woc-status-img {
     border: 0;
     background-color: #fff;
+    padding: 34px;
 }
 
 .woc-schedules-style-3 .woc-schedules .woc-schedule.current {
