@@ -1,11 +1,11 @@
-=== Woocommerce Open Close - Best Business Schedules Manager===
+=== Woocommerce Open Close - Best Business Schedules Manager ===
 	Contributors: jaedm97,pluginbazar
 	Donate link: https://www.pluginbazar.com/contact/
 	Tags: woocommerce schedules, business hours, schedules manager, restrict-add-to-cart, Dokan
 	Requires at least: 4.6
 	Tested up to: 5.3
-	Tested up to WooCommerce: 3.8.0
-	Stable tag: 4.0.3
+	Tested up to WooCommerce: 3.8.1
+	Stable tag: 4.0.4
 	Requires PHP: 5.6
 	Requires WooCommerce: 3.0
 	Text Domain: woc-open-close
@@ -22,23 +22,13 @@ Your customers might be in confusion with your business. Sometimes customer comp
 
 You are also not aware of this situation, what's going on your customer's mind. You may be offline or your shop might be off for that day. Like Ordering for a meal at midnight when your shop is closed. So this is a big trouble for running business with Transparency.
 
-NO MORE BUSINESS CONFUSION
-
-WooCommerce Open Close comes with a complete business hour/schedule management, completely hassle free.
+NO MORE BUSINESS CONFUSION !!! WooCommerce Open Close comes with a complete business hour/schedule management, completely hassle free.
 
 
-### [GET WOOCOMMERCE OPEN CLOSE PREMIUM](https://pluginbazar.com/?add-to-cart=1190)
+[TRY DEMO](https://demo.pluginbazar.com/woc-open-close/) | [BUY PRO](https://pluginbazar.com/?add-to-cart=1190) | [HELP](https://help.pluginbazar.com/forums/forum/woocommerce-open-close/) | [DOCUMENTATION](https://help.pluginbazar.com/docs/woocommerce-open-close/)
 
-### [PLUGIN DETAILS](http://bit.ly/2LfnVeZ)
 
-### [CHECK DEMO](https://demo.pluginbazar.com/woocommerce-open-close/)
-
-`
-	Username: demo-woc
-	Password: pluginbazar
-`
-
-### KEY Features
+## KEY Features
 * Manage Business Schedules
 * Multiple Schedules in Same Day
 * Shortcode to View Business Hours
@@ -46,7 +36,7 @@ WooCommerce Open Close comes with a complete business hour/schedule management, 
 * 5+ Business Schedules Display Variations
 * 4+ Countdown Timer Variations
 
-### PRO Feature
+## PRO Feature
 * No Order when Shop is Closed
 * Empty cart as soon as shop become close
 * Allow add to cart even shop is closed
@@ -55,7 +45,7 @@ WooCommerce Open Close comes with a complete business hour/schedule management, 
 * Frontend Schedules Management
 * Dokan Plugin Support Added
 
-#### Shortcodes
+### Shortcodes
 1. `[woc_open_close set="SCHEDULE_ID"]` FREE
 You can display any schedule by ID using this shortcode. Example: `[woc_open_close set="10"]`
 
