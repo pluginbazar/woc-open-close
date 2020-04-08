@@ -3,9 +3,9 @@
 	Donate link: https://www.pluginbazar.com/contact/
 	Tags: woocommerce schedules, business hours, schedules manager, restrict-add-to-cart, Dokan
 	Requires at least: 4.6
-	Tested up to: 5.3
-	Tested up to WooCommerce: 3.8.1
-	Stable tag: 4.0.5
+	Tested up to: 5.4
+	Tested up to WooCommerce: 4.0
+	Stable tag: 4.0.9
 	Requires PHP: 5.6
 	Requires WooCommerce: 3.0
 	Text Domain: woc-open-close
@@ -18,15 +18,13 @@
 
 Maintain Business hour for your WooCommerce Shop. Let your customers know about business schedules and restrict them from placing new orders while Store is Closed.
 
+[TRY DEMO](https://demo.pluginbazar.com/woc-open-close/) | [BUY PRO](https://pluginbazar.com/?add-to-cart=1190) | [HELP](https://help.pluginbazar.com/forums/forum/woocommerce-open-close/) | [DOCUMENTATION](https://help.pluginbazar.com/docs/woocommerce-open-close/)
+
 Your customers might be in confusion with your business. Sometimes customer complete order and wait for the products cause he/she pay for the shipping too, But times passed on and passing nothing hear from your WooCommerce Store.
 
 You are also not aware of this situation, what's going on your customer's mind. You may be offline or your shop might be off for that day. Like Ordering for a meal at midnight when your shop is closed. So this is a big trouble for running business with Transparency.
 
 NO MORE BUSINESS CONFUSION !!! WooCommerce Open Close comes with a complete business hour/schedule management, completely hassle free.
-
-
-[TRY DEMO](https://demo.pluginbazar.com/woc-open-close/) | [BUY PRO](https://pluginbazar.com/?add-to-cart=1190) | [HELP](https://help.pluginbazar.com/forums/forum/woocommerce-open-close/) | [DOCUMENTATION](https://help.pluginbazar.com/docs/woocommerce-open-close/)
-
 
 ## KEY Features
 * Manage Business Schedules
@@ -38,6 +36,7 @@ NO MORE BUSINESS CONFUSION !!! WooCommerce Open Close comes with a complete busi
 
 ## PRO Feature
 * No Order when Shop is Closed
+* Instantly control opening and closing of WooCommerce Store
 * Empty cart as soon as shop become close
 * Allow add to cart even shop is closed
 * Allow / Disallow Specific Products to Bypass Schedules
@@ -148,6 +147,14 @@ You can manage (Create | Delete | Update) your Schedules on Frontend using this 
 
     = 4.0.2 =
     * Dokan plugin support in Pro version
+
+    = 4.0.7 =
+    * Instant closing feature added in pro version and minor bug fixes
+
+    = 4.0.8 =
+    * Enable option to disable notice bar and fix a bug
+
+
 
 == Upgrade Notice ==
 

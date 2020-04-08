@@ -30,9 +30,33 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 
 			add_action( 'wp_ajax_woc_add_schedule', array( $this, 'ajax_add_schedule' ) );
 			add_action( 'wp_ajax_woc_switch_active', array( $this, 'ajax_switch_active' ) );
+			add_action( 'pb_settings_before_woc_instant_force', array( $this, 'display_instant_controller' ) );
 		}
 
 
+		/**
+		 * Display instant controller
+		 */
+		function display_instant_controller() {
+
+			$shop_status = woc_is_open();
+			$disabled    = woc_pro_available() ? '' : 'disabled';
+
+			printf( '<label class="hint--top-right woc-quick-switch %s" aria-label="%s"><input %s type="checkbox" %s name="woc_instant_force"><span class="woc-quick-switch-bubble"></span></label>',
+				$disabled,
+				sprintf( esc_html__( 'Status: %s, Click here to %s your shop forcefully. It will ignore all other settings', 'woc-open-close' ),
+					$shop_status ? 'Open' : 'Close',
+					$shop_status ? 'Close' : 'Open'
+				),
+				$disabled,
+				$shop_status ? 'checked' : ''
+			);
+		}
+
+
+		/**
+		 * Ajax switch activate
+		 */
 		function ajax_switch_active() {
 
 			$post_id    = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
@@ -93,12 +117,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 		 */
 		function display_countdown_timer_dynamically() {
 
-			$show_timer_on = woc_get_option( 'WOC_timer_display_on', array(
-				'before_cart_table',
-				'before_order_review',
-				'before_cart_single',
-				'top_on_myaccount'
-			) );
+			$show_timer_on = woc_get_option( 'woc_timer_display_on', array() );
 
 			foreach ( $show_timer_on as $timer_place ) {
 

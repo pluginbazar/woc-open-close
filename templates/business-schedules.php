@@ -4,10 +4,7 @@
 * Copyright: 	2015 pluginbazar
 */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}  // if direct access
-
+defined( 'ABSPATH' ) || exit;
 
 $template = ( isset( $template ) || ! empty( $template ) ) ? $template : 1;
 $set_id   = ( isset( $set ) || ! empty( $set ) ) ? $set : wooopenclose()->get_active_schedule_id();
@@ -29,6 +26,7 @@ $set_id   = ( isset( $set ) || ! empty( $set ) ) ? $set : wooopenclose()->get_ac
 			if ( $day_id === 'woc_message' ) {
 				continue;
 			}
+
 			?>
 
             <div class="woc-schedule <?php echo wooopenclose()->get_current_day_id() == $day_id ? 'current opened' : ''; ?> <?php echo woc_is_open() ? 'shop-open' : 'shop-close'; ?> ">
@@ -46,9 +44,13 @@ $set_id   = ( isset( $set ) || ! empty( $set ) ) ? $set : wooopenclose()->get_ac
 					<?php
 					foreach ( $day_schedules as $schedule_id => $schedule ) {
 						if ( isset( $schedule['open'] ) && $schedule['close'] ) {
-							printf( '<div class="woc-day-schedule"><iclass="icofont-wall-clock"></i>%s - %s</div>', $schedule['open'], $schedule['close'] );
+							printf( '<div class="woc-day-schedule"><i class="icofont-wall-clock"></i> %s - %s</div>', $schedule['open'], $schedule['close'] );
 						}
 					}
+
+					if( empty( $day_schedules ) ) {
+						printf( '<div class="woc-day-schedule">%s</div>', esc_html__( 'No schedules found', 'woc-open-close' ) );
+                    }
 					?>
                 </div>
 

@@ -6,6 +6,10 @@
 
     "use strict";
 
+    $(document).on('change', '.woc-quick-switch input[type=checkbox]', function () {
+
+    });
+
     $(document).on('change', '.woc_section .woc_switch_checkbox', function () {
 
         let checkBox = $(this),

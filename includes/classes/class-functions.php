@@ -47,8 +47,9 @@ class WOC_Functions {
 
 		date_default_timezone_set( $this->get_timezone_string() );
 
-		$current_time = date( 'U' );
-		$today_schedules =  $this->get_todays_schedule();
+		$woc_is_open     = false;
+		$current_time    = date( 'U' );
+		$today_schedules = $this->get_todays_schedule();
 
 		foreach ( $today_schedules as $schedule_id => $schedule ) {
 
@@ -59,11 +60,11 @@ class WOC_Functions {
 				continue;
 			}
 			if ( $current_time >= $open_time && $current_time <= $close_time ) {
-				return apply_filters( 'woc_is_open', true );
+				$woc_is_open = true;
 			}
 		}
 
-		return apply_filters( 'woc_is_open', empty( $today_schedules ) ? true : false );
+		return apply_filters( 'woc_is_open', $woc_is_open );
 	}
 
 	/**
@@ -254,7 +255,6 @@ class WOC_Functions {
 							),
 							'disabled' => woc_pro_available() ? false : true,
 						),
-
 						array(
 							'id'    => 'show_admin_status',
 							'title' => __( 'Shop Status Notice', 'woc-open-close' ),
@@ -320,6 +320,78 @@ class WOC_Functions {
 					)
 				),
 			),
+		);
+		$pages['woc_force']   = array(
+			'page_nav'      => '<i class="icofont-bulb-alt"></i> ' . __( 'Force Rules', 'woc-open-close' ),
+			'page_settings' => array(
+				array(
+					'title'       => __( 'Instant Controlling', 'woc-open-close' ),
+					'description' => __( 'Manage opening or closing of your store instantly ignoring all other settings.', 'woc-open-close' ),
+					'options'     => array(
+						array(
+							'id'       => 'woc_instant_controls',
+							'title'    => __( 'Enable instant controlling', 'woc-open-close' ),
+							'details'  => __( 'Leave this if you want to control opening/closing automatically from business schedules.', 'woc-open-close' ),
+							'type'     => 'checkbox',
+							'args'     => array(
+								'yes' => __( 'Enable or Disable instant controlling settings', 'woc-open-close' ),
+							),
+							'disabled' => woc_pro_available() ? false : true,
+						),
+						array(
+							'id'       => 'woc_instant_force',
+							'title'    => __( 'Open or Close Store', 'woc-open-close' ),
+							'type'     => 'custom',
+							'disabled' => woc_pro_available() ? false : true,
+						),
+						array(
+							'id'          => 'woc_instant_force_msg',
+							'title'       => __( 'Custom Message', 'woc-open-close' ),
+							'details'     => __( 'When store is forcefully closed, set a spacial custom message for your customers and users', 'woc-open-close' ),
+							'type'        => 'textarea',
+							'rows'        => 2,
+							'placeholder' => __( 'We are completely off till next update', 'woc-open-close' ),
+							'disabled'    => woc_pro_available() ? false : true,
+						),
+					)
+				),
+				array(
+					'title'       => __( 'When Opened', 'woc-open-close' ),
+					'description' => __( 'These rules will apply when the shop is opened from taking orders.', 'woc-open-close' ),
+					'options'     => array(
+						array(
+							'id'            => 'woc_disallowed_products',
+							'title'         => __( 'Disallow Products', 'woc-open-close' ),
+							'details'       => __( 'Customers will not able to purchase these products even your shop is opened.', 'woc-open-close' ),
+							'type'          => 'select2',
+							'multiple'      => true,
+							'args'          => 'POSTS_%product%',
+							'field_options' => array(
+								'placeholder' => __( 'Select products', 'woc-open-close' ),
+							),
+							'disabled'      => woc_pro_available() ? false : true,
+						),
+					)
+				),
+				array(
+					'title'       => __( 'When Closed', 'woc-open-close' ),
+					'description' => __( 'These rules will apply when the shop is closed from taking orders.', 'woc-open-close' ),
+					'options'     => array(
+						array(
+							'id'            => 'woc_allowed_products',
+							'title'         => __( 'Allow Products', 'woc-open-close' ),
+							'details'       => __( 'Customers will able to purchase these products even your shop is closed.', 'woc-open-close' ),
+							'type'          => 'select2',
+							'multiple'      => true,
+							'args'          => 'POSTS_%product%',
+							'field_options' => array(
+								'placeholder' => __( 'Select products', 'woc-open-close' ),
+							),
+							'disabled'      => woc_pro_available() ? false : true,
+						),
+					)
+				),
+			)
 		);
 		$pages['woc_design']  = array(
 
@@ -396,6 +468,7 @@ class WOC_Functions {
 							'args'    => array(
 								'woc-bar-footer' => __( 'Footer', 'woc-open-close' ),
 								'woc-bar-header' => __( 'Header', 'woc-open-close' ),
+								'woc-bar-none'   => __( 'Disable notice bar', 'woc-open-close' ),
 							),
 						),
 						array(
@@ -595,9 +668,18 @@ class WOC_Functions {
 	 */
 	function get_all_schedules( $set_id = '' ) {
 
-		$set_to_display = empty( $set_id ) ? $this->get_active_schedule_id() : $set_id;
-		$woc_hours_meta = get_post_meta( $set_to_display, 'woc_hours_meta', true );
-		$woc_hours_meta = empty( $woc_hours_meta ) ? array() : $woc_hours_meta;
+		$set_to_display      = empty( $set_id ) ? $this->get_active_schedule_id() : $set_id;
+		$woc_hours_meta      = get_post_meta( $set_to_display, 'woc_hours_meta', true );
+		$woc_hours_meta      = empty( $woc_hours_meta ) ? array() : $woc_hours_meta;
+		$woc_hours_meta_keys = array_keys( $woc_hours_meta );
+
+		foreach ( $this->get_days() as $day_key => $label ) {
+			if ( ! in_array( $day_key, $woc_hours_meta_keys ) ) {
+				$woc_hours_meta[ $day_key ] = array();
+			}
+		}
+
+		ksort( $woc_hours_meta );
 
 		return apply_filters( 'woc_all_schedules', $woc_hours_meta );
 	}
@@ -793,7 +875,29 @@ class WOC_Functions {
 		return apply_filters( 'woc_filters_get_meta', $meta_value, $meta_key, $post_id, $default );
 	}
 
+	/**
+	 * Return Arguments Value
+	 *
+	 * @param string $key
+	 * @param string $default
+	 * @param array $args
+	 *
+	 * @return mixed|string
+	 */
+	function get_args_option( $key = '', $default = '', $args = array() ) {
 
+		global $this_preloader;
+
+		$args    = empty( $args ) ? $this_preloader : $args;
+		$default = empty( $default ) ? '' : $default;
+		$key     = empty( $key ) ? '' : $key;
+
+		if ( isset( $args[ $key ] ) && ! empty( $args[ $key ] ) ) {
+			return $args[ $key ];
+		}
+
+		return $default;
+	}
 }
 
 global $wooopenclose;

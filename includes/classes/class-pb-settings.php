@@ -47,8 +47,8 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 
 
 		/**
-         * Register Taxonomy
-         *
+		 * Register Taxonomy
+		 *
 		 * @param $tax_name
 		 * @param $obj_name
 		 * @param array $args
@@ -925,24 +925,21 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 			$args     = is_array( $args ) ? $args : $this->generate_args_from_string( $args, $option );
 			$value    = isset( $option['value'] ) ? $option['value'] : get_option( $id );
 			$disabled = isset( $option['disabled'] ) && $option['disabled'] ? 'disabled' : '';
+			$cb_items = array();
 
 			if ( empty( $value ) || ! $value ) {
 				$value = isset( $option['default'] ) ? $option['default'] : $value;
 			}
 
-			?>
-            <fieldset>
-				<?php
-				foreach ( $args as $key => $val ) {
+			foreach ( $args as $key => $val ) {
 
-					$checked = is_array( $value ) && in_array( $key, $value ) ? "checked" : "";
-					printf( '<label for="%1$s_%2$s"><input %3$s %4$s type="checkbox" id="%1$s_%2$s" name="%1$s[]" value="%2$s">%5$s</label><br>',
-						$id, $key, $disabled, $checked, $val
-					);
-				}
-				?>
-            </fieldset>
-			<?php
+				$checked    = is_array( $value ) && in_array( $key, $value ) ? "checked" : "";
+				$cb_items[] = sprintf( '<label for="%1$s_%2$s"><input %3$s %4$s type="checkbox" id="%1$s_%2$s" name="%1$s[]" value="%2$s">%5$s</label>',
+					$id, $key, $disabled, $checked, $val
+				);
+			}
+
+			printf( '<fieldset>%s</fieldset>', implode( '<br>', $cb_items ) );
 		}
 
 
@@ -1113,39 +1110,18 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 		 */
 		function display_function() {
 
-			global $pagenow;
-			parse_str( $_SERVER['QUERY_STRING'], $nav_url_args );
-
-			$tab_count = 0;
-
 			?>
             <div class="wrap">
                 <h2><?php echo esc_html( $this->get_menu_page_title() ); ?></h2><br>
 
-				<?php settings_errors(); ?>
-
-                <nav class="nav-tab-wrapper">
-					<?php
-					foreach ( $this->get_pages() as $page_id => $page ) {
-
-						$tab_count ++;
-
-						$active              = $this->get_current_page() == $page_id ? 'nav-tab-active' : '';
-						$nav_url_args['tab'] = $page_id;
-						$nav_menu_url        = http_build_query( $nav_url_args );
-						$page_nav            = isset( $page['page_nav'] ) ? $page['page_nav'] : '';
-
-						printf( '<a href="%s?%s" class="nav-tab %s">%s</a>', $pagenow, $nav_menu_url, $active, $page_nav );
-					}
-					?>
-                </nav>
-
 				<?php
+				settings_errors();
+
 				do_action( 'pb_settings_before_page_' . $this->get_current_page() );
 
 				if ( $this->show_submit_button() ) {
-					printf( '<form class="pb_settings_form" action="options.php" method="post">%s%s</form>',
-						$this->get_settings_fields_html(), get_submit_button()
+					printf( '<form class="pb_settings_form" action="options.php" method="post">%s%s%s</form>',
+						$this->get_settings_nav_tab(), $this->get_settings_fields_html(), get_submit_button()
 					);
 				} else {
 					print( $this->get_settings_fields_html() );
@@ -1157,6 +1133,41 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 				?>
             </div>
 			<?php
+		}
+
+
+		/**
+		 * Return settings navigation tabs
+		 *
+		 * @return false|string
+		 */
+		function get_settings_nav_tab() {
+
+			global $pagenow;
+
+			parse_str( $_SERVER['QUERY_STRING'], $nav_url_args );
+
+			ob_start();
+
+			?>
+            <nav class="nav-tab-wrapper">
+				<?php
+				foreach ( $this->get_pages() as $page_id => $page ) {
+
+					$active              = $this->get_current_page() == $page_id ? 'nav-tab-active' : '';
+					$nav_url_args['tab'] = $page_id;
+					$nav_menu_url        = http_build_query( $nav_url_args );
+					$page_nav            = isset( $page['page_nav'] ) ? $page['page_nav'] : '';
+
+					printf( '<a href="%s?%s" class="nav-tab %s">%s</a>', $pagenow, $nav_menu_url, $active, $page_nav );
+				}
+
+				do_action( 'pb_settings_after_nav_tab' );
+				?>
+            </nav>
+			<?php
+
+			return ob_get_clean();
 		}
 
 
