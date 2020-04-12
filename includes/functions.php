@@ -8,6 +8,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }  // if direct access
 
+
+if ( ! function_exists( 'woc_update_global_arguments' ) ) {
+	/**
+	 * Update global arguments variable
+	 *
+	 * @param array $args_to_add
+	 */
+	function woc_update_global_arguments( $args_to_add = array() ) {
+
+		if( empty( $args_to_add ) ) {
+			return;
+		}
+
+		global $wooopenclose_args;
+
+		$args_to_add       = is_array( $args_to_add ) ? $args_to_add : array();
+		$wooopenclose_args = is_array( $wooopenclose_args ) ? $wooopenclose_args : array();
+		$wooopenclose_args = array_merge( $wooopenclose_args, $args_to_add );
+	}
+}
+
+
 if ( ! function_exists( 'woc_product_can_order' ) ) {
 	/**
 	 * Check if a product is ready to order or not

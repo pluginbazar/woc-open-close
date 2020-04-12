@@ -210,182 +210,182 @@ class WOC_Functions {
 
 		$pages['woc_options'] = array(
 
-			'page_nav'      => '<i class="icofont-ui-settings"></i> ' . __( 'Options', 'woc-open-close' ),
+			'page_nav'      => esc_html__( 'Options', 'woc-open-close' ),
 			'page_settings' => array(
 
 				array(
-					'title'   => __( 'General Settings', 'woc-open-close' ),
+					'title'   => esc_html__( 'General Settings', 'woc-open-close' ),
 					'options' => array(
 						array(
 							'id'      => 'woc_active_set',
-							'title'   => __( 'Make a Schedule Active', 'woc-open-close' ),
-							'details' => __( 'The system will follow this schedule for your WooCommerce Shop', 'woc-open-close' ),
+							'title'   => esc_html__( 'Make a Schedule Active', 'woc-open-close' ),
+							'details' => esc_html__( 'The system will follow this schedule for your WooCommerce Shop', 'woc-open-close' ),
 							'type'    => 'select',
 							'args'    => 'POSTS_%woc_hour%',
 						),
 						array(
 							'id'            => 'timezone_string',
-							'title'         => __( 'Timezone', 'woc-open-close' ),
-							'details'       => __( 'Choose either a city in the same timezone as you or a UTC timezone offset.', 'woc-open-close' ),
+							'title'         => esc_html__( 'Timezone', 'woc-open-close' ),
+							'details'       => esc_html__( 'Choose either a city in the same timezone as you or a UTC timezone offset.', 'woc-open-close' ),
 							'type'          => 'select2',
 							'args'          => 'TIME_ZONES',
 							'field_options' => array(
-								'placeholder' => __( 'Select timezone', 'woc-open-close' ),
+								'placeholder' => esc_html__( 'Select timezone', 'woc-open-close' ),
 							),
 						),
 						array(
 							'id'       => 'woc_empty_cart_on_close',
-							'title'    => __( 'Empty cart when close', 'woc-open-close' ),
-							'details'  => __( 'Pro: Empty cart as soon as shop is closed, so that no more order if customer added before shop was closed', 'woc-open-close' ),
+							'title'    => esc_html__( 'Empty cart when close', 'woc-open-close' ),
+							'details'  => esc_html__( 'Pro: Empty cart as soon as shop is closed, so that no more order if customer added before shop was closed', 'woc-open-close' ),
 							'type'     => 'select',
 							'args'     => array(
-								'yes' => __( 'Yes - Clear cart', 'woc-open-close' ),
-								'no'  => __( 'No - Leave those on cart', 'woc-open-close' ),
+								'yes' => esc_html__( 'Yes - Clear cart', 'woc-open-close' ),
+								'no'  => esc_html__( 'No - Leave those on cart', 'woc-open-close' ),
 							),
 							'disabled' => woc_pro_available() ? false : true,
 						),
 						array(
 							'id'       => 'woc_allow_add_cart_on_close',
-							'title'    => __( 'Allow add to cart', 'woc-open-close' ),
-							'details'  => __( 'Pro: Allow add to cart even the shop is closed. This settings will override <strong>Empty cart when close</strong> setting.', 'woc-open-close' ),
+							'title'    => esc_html__( 'Allow add to cart', 'woc-open-close' ),
+							'details'  => esc_html__( 'Pro: Allow add to cart even the shop is closed. This settings will override <strong>Empty cart when close</strong> setting.', 'woc-open-close' ),
 							'type'     => 'select',
 							'args'     => array(
-								'yes' => __( 'Yes', 'woc-open-close' ),
-								'no'  => __( 'No', 'woc-open-close' ),
+								'yes' => esc_html__( 'Yes', 'woc-open-close' ),
+								'no'  => esc_html__( 'No', 'woc-open-close' ),
 							),
 							'disabled' => woc_pro_available() ? false : true,
 						),
 						array(
 							'id'    => 'show_admin_status',
-							'title' => __( 'Shop Status Notice', 'woc-open-close' ),
+							'title' => esc_html__( 'Shop Status Notice', 'woc-open-close' ),
 							'type'  => 'checkbox',
 							'args'  => array(
-								'no' => __( 'Disable shop status notice inside WP-Admin', 'woc-open-close' ),
+								'no' => esc_html__( 'Disable shop status notice inside WP-Admin', 'woc-open-close' ),
 							),
 						),
 					)
 				),
 
 				array(
-					'title'   => __( 'Countdown Timer Settings', 'woc-open-close' ),
+					'title'   => esc_html__( 'Countdown Timer Settings', 'woc-open-close' ),
 					'options' => array(
 
 						array(
 							'id'      => 'woc_timer_display_on',
-							'title'   => __( 'Display countdown timer', 'woc-open-close' ),
-							'details' => __( 'Select the places where you want to display the countdown timer on your shop. When your shop is closed then it will show how much time left for your shop to open, and vice verse', 'woc-open-close' ),
+							'title'   => esc_html__( 'Display countdown timer', 'woc-open-close' ),
+							'details' => esc_html__( 'Select the places where you want to display the countdown timer on your shop. When your shop is closed then it will show how much time left for your shop to open, and vice verse', 'woc-open-close' ),
 							'type'    => 'checkbox',
 							'args'    => array(
-								'before_cart_table'    => __( 'Before cart table on Cart page', 'woc-open-close' ),
-								'after_cart_table'     => __( 'After cart table on Cart page', 'woc-open-close' ),
-								'before_cart_total'    => __( 'Before cart total on Cart page', 'woc-open-close' ),
-								'after_cart_total'     => __( 'After cart total on Cart page', 'woc-open-close' ),
-								'before_checkout_form' => __( 'Before checkout form on Checkout Page', 'woc-open-close' ),
-								'after_checkout_form'  => __( 'After checkout form on Checkout Page', 'woc-open-close' ),
-								'before_order_review'  => __( 'Before order review on Checkout Page', 'woc-open-close' ),
-								'after_order_review'   => __( 'After order review on Checkout Page', 'woc-open-close' ),
-								'before_cart_single'   => __( 'Before cart button on Single Product Page', 'woc-open-close' ),
-								'top_on_myaccount'     => __( 'Top on My-Account Page', 'woc-open-close' ),
+								'before_cart_table'    => esc_html__( 'Before cart table on Cart page', 'woc-open-close' ),
+								'after_cart_table'     => esc_html__( 'After cart table on Cart page', 'woc-open-close' ),
+								'before_cart_total'    => esc_html__( 'Before cart total on Cart page', 'woc-open-close' ),
+								'after_cart_total'     => esc_html__( 'After cart total on Cart page', 'woc-open-close' ),
+								'before_checkout_form' => esc_html__( 'Before checkout form on Checkout Page', 'woc-open-close' ),
+								'after_checkout_form'  => esc_html__( 'After checkout form on Checkout Page', 'woc-open-close' ),
+								'before_order_review'  => esc_html__( 'Before order review on Checkout Page', 'woc-open-close' ),
+								'after_order_review'   => esc_html__( 'After order review on Checkout Page', 'woc-open-close' ),
+								'before_cart_single'   => esc_html__( 'Before cart button on Single Product Page', 'woc-open-close' ),
+								'top_on_myaccount'     => esc_html__( 'Top on My-Account Page', 'woc-open-close' ),
 							),
 						),
 
 						array(
 							'id'      => 'woc_timer_style',
-							'title'   => __( 'Countdown timer style', 'woc-open-close' ),
-							'details' => __( 'Select the style for the countdown timer', 'woc-open-close' ),
+							'title'   => esc_html__( 'Countdown timer style', 'woc-open-close' ),
+							'details' => esc_html__( 'Select the style for the countdown timer', 'woc-open-close' ),
 							'type'    => 'select',
 							'args'    => array(
-								'1' => __( 'Style - 1', 'woc-open-close' ),
-								'2' => __( 'Style - 2', 'woc-open-close' ),
-								'3' => __( 'Style - 3', 'woc-open-close' ),
-								'4' => __( 'Style - 4', 'woc-open-close' ),
-								'5' => __( 'Style - 5', 'woc-open-close' ),
+								'1' => esc_html__( 'Style - 1', 'woc-open-close' ),
+								'2' => esc_html__( 'Style - 2', 'woc-open-close' ),
+								'3' => esc_html__( 'Style - 3', 'woc-open-close' ),
+								'4' => esc_html__( 'Style - 4', 'woc-open-close' ),
+								'5' => esc_html__( 'Style - 5', 'woc-open-close' ),
 							),
 						),
 
 						array(
 							'id'          => 'woc_timer_text_open',
-							'title'       => __( 'Countdown timer text', 'woc-open-close' ),
-							'details'     => __( 'For: Status Open, This text will visible before the countdown timer when shop is open.', 'woc-open-close' ),
+							'title'       => esc_html__( 'Countdown timer text', 'woc-open-close' ),
+							'details'     => esc_html__( 'For: Status Open, This text will visible before the countdown timer when shop is open.', 'woc-open-close' ),
 							'type'        => 'textarea',
-							'placeholder' => __( 'This shop will be closed within', 'woc-open-close' ),
+							'placeholder' => esc_html__( 'This shop will be closed within', 'woc-open-close' ),
 						),
 
 						array(
 							'id'          => 'woc_timer_text_close',
-							'details'     => __( 'For: Status Closed, This text will visible before the countdown timer when shop is closed.', 'woc-open-close' ),
+							'details'     => esc_html__( 'For: Status Closed, This text will visible before the countdown timer when shop is closed.', 'woc-open-close' ),
 							'type'        => 'textarea',
-							'placeholder' => __( 'This shop will be open within', 'woc-open-close' ),
+							'placeholder' => esc_html__( 'This shop will be open within', 'woc-open-close' ),
 						),
 					)
 				),
 			),
 		);
 		$pages['woc_force']   = array(
-			'page_nav'      => '<i class="icofont-bulb-alt"></i> ' . __( 'Force Rules', 'woc-open-close' ),
+			'page_nav'      => esc_html__( 'Force Rules', 'woc-open-close' ),
 			'page_settings' => array(
 				array(
-					'title'       => __( 'Instant Controlling', 'woc-open-close' ),
-					'description' => __( 'Manage opening or closing of your store instantly ignoring all other settings.', 'woc-open-close' ),
+					'title'       => esc_html__( 'Instant Controlling', 'woc-open-close' ),
+					'description' => esc_html__( 'Manage opening or closing of your store instantly ignoring all other settings.', 'woc-open-close' ),
 					'options'     => array(
 						array(
 							'id'       => 'woc_instant_controls',
-							'title'    => __( 'Enable instant controlling', 'woc-open-close' ),
-							'details'  => __( 'Leave this if you want to control opening/closing automatically from business schedules.', 'woc-open-close' ),
+							'title'    => esc_html__( 'Enable instant controlling', 'woc-open-close' ),
+							'details'  => esc_html__( 'Leave this if you want to control opening/closing automatically from business schedules.', 'woc-open-close' ),
 							'type'     => 'checkbox',
 							'args'     => array(
-								'yes' => __( 'Enable or Disable instant controlling settings', 'woc-open-close' ),
+								'yes' => esc_html__( 'Enable or Disable instant controlling settings', 'woc-open-close' ),
 							),
 							'disabled' => woc_pro_available() ? false : true,
 						),
 						array(
 							'id'       => 'woc_instant_force',
-							'title'    => __( 'Open or Close Store', 'woc-open-close' ),
+							'title'    => esc_html__( 'Open or Close Store', 'woc-open-close' ),
 							'type'     => 'custom',
 							'disabled' => woc_pro_available() ? false : true,
 						),
 						array(
 							'id'          => 'woc_instant_force_msg',
-							'title'       => __( 'Custom Message', 'woc-open-close' ),
-							'details'     => __( 'When store is forcefully closed, set a spacial custom message for your customers and users', 'woc-open-close' ),
+							'title'       => esc_html__( 'Custom Message', 'woc-open-close' ),
+							'details'     => esc_html__( 'When store is forcefully closed, set a spacial custom message for your customers and users', 'woc-open-close' ),
 							'type'        => 'textarea',
 							'rows'        => 2,
-							'placeholder' => __( 'We are completely off till next update', 'woc-open-close' ),
+							'placeholder' => esc_html__( 'We are completely off till next update', 'woc-open-close' ),
 							'disabled'    => woc_pro_available() ? false : true,
 						),
 					)
 				),
 				array(
-					'title'       => __( 'When Opened', 'woc-open-close' ),
-					'description' => __( 'These rules will apply when the shop is opened from taking orders.', 'woc-open-close' ),
+					'title'       => esc_html__( 'When Opened', 'woc-open-close' ),
+					'description' => esc_html__( 'These rules will apply when the shop is opened from taking orders.', 'woc-open-close' ),
 					'options'     => array(
 						array(
 							'id'            => 'woc_disallowed_products',
-							'title'         => __( 'Disallow Products', 'woc-open-close' ),
-							'details'       => __( 'Customers will not able to purchase these products even your shop is opened.', 'woc-open-close' ),
+							'title'         => esc_html__( 'Disallow Products', 'woc-open-close' ),
+							'details'       => esc_html__( 'Customers will not able to purchase these products even your shop is opened.', 'woc-open-close' ),
 							'type'          => 'select2',
 							'multiple'      => true,
 							'args'          => 'POSTS_%product%',
 							'field_options' => array(
-								'placeholder' => __( 'Select products', 'woc-open-close' ),
+								'placeholder' => esc_html__( 'Select products', 'woc-open-close' ),
 							),
 							'disabled'      => woc_pro_available() ? false : true,
 						),
 					)
 				),
 				array(
-					'title'       => __( 'When Closed', 'woc-open-close' ),
-					'description' => __( 'These rules will apply when the shop is closed from taking orders.', 'woc-open-close' ),
+					'title'       => esc_html__( 'When Closed', 'woc-open-close' ),
+					'description' => esc_html__( 'These rules will apply when the shop is closed from taking orders.', 'woc-open-close' ),
 					'options'     => array(
 						array(
 							'id'            => 'woc_allowed_products',
-							'title'         => __( 'Allow Products', 'woc-open-close' ),
-							'details'       => __( 'Customers will able to purchase these products even your shop is closed.', 'woc-open-close' ),
+							'title'         => esc_html__( 'Allow Products', 'woc-open-close' ),
+							'details'       => esc_html__( 'Customers will able to purchase these products even your shop is closed.', 'woc-open-close' ),
 							'type'          => 'select2',
 							'multiple'      => true,
 							'args'          => 'POSTS_%product%',
 							'field_options' => array(
-								'placeholder' => __( 'Select products', 'woc-open-close' ),
+								'placeholder' => esc_html__( 'Select products', 'woc-open-close' ),
 							),
 							'disabled'      => woc_pro_available() ? false : true,
 						),
@@ -395,7 +395,7 @@ class WOC_Functions {
 		);
 		$pages['woc_design']  = array(
 
-			'page_nav'      => sprintf( '<i class="icofont-paint-brush"></i> %s', esc_html__( 'Design', 'woc-open-close' ) ),
+			'page_nav'      => esc_html__( 'Design', 'woc-open-close' ),
 			'page_settings' => array(
 
 				array(
@@ -494,28 +494,28 @@ class WOC_Functions {
 			),
 		);
 		$pages['woc_support'] = array(
-			'page_nav'      => '<i class="icofont-live-support"></i> ' . __( 'Support', 'woc-open-close' ),
+			'page_nav'      => esc_html__( 'Support', 'woc-open-close' ),
 			'show_submit'   => false,
 			'page_settings' => array(
 
 				'sec_options' => array(
-					'title'   => __( 'Emergency support from Pluginbazar.com', 'woc-open-close' ),
+					'title'   => esc_html__( 'Emergency support from Pluginbazar.com', 'woc-open-close' ),
 					'options' => array(
 						array(
 							'id'      => '__1',
-							'title'   => __( 'Support Forum', 'woc-open-close' ),
+							'title'   => esc_html__( 'Support Forum', 'woc-open-close' ),
 							'details' => sprintf( '%1$s<br>' . __( '<a href="%1$s" target="_blank">Ask in Forum</a>', 'woc-open-close' ), WOC_FORUM_URL ),
 						),
 
 						array(
 							'id'      => '__2',
-							'title'   => __( 'Can\'t Login..?', 'woc-open-close' ),
+							'title'   => esc_html__( 'Can\'t Login..?', 'woc-open-close' ),
 							'details' => sprintf( __( '<span>Unable to login <strong>Pluginbazar.com</strong></span><br><a href="%1$s" target="_blank">Get Immediate Solution</a>', 'woc-open-close' ), WOC_CONTACT_URL ),
 						),
 
 						array(
 							'id'      => '__3',
-							'title'   => __( 'Like this Plugin?', 'woc-open-close' ),
+							'title'   => esc_html__( 'Like this Plugin?', 'woc-open-close' ),
 							'details' => sprintf( __( '<span>To share feedback about this plugin Please </span><br><a href="%1$s" target="_blank">Rate now</a>', 'woc-open-close' ), WOC_WP_REVIEW_URL ),
 						),
 
@@ -612,17 +612,24 @@ class WOC_Functions {
 	 * Return Current Day Name
 	 *
 	 * @param string $day_id
+	 * @param bool $return_label
 	 *
 	 * @return mixed|void
 	 */
-	function get_day_name( $day_id = '' ) {
+	function get_day_name( $day_id = '', $return_label = false ) {
 
-		$day_id   = empty( $day_id ) ? $this->get_current_day_id() : $day_id;
-		$day      = isset( $this->get_days()[ $day_id ] ) ? $this->get_days()[ $day_id ] : array();
-		$day_name = isset( $day['label'] ) ? $day['label'] : __( 'Not Found!', 'woc-open-close' );
+		$day_id = empty( $day_id ) ? $this->get_current_day_id() : $day_id;
+		$day    = isset( $this->get_days()[ $day_id ] ) ? $this->get_days()[ $day_id ] : array();
+
+		if ( $return_label ) {
+			$day_name = isset( $day['label'] ) ? $day['label'] : __( 'Not Found!', 'woc-open-close' );
+		} else {
+			$day_name = isset( $day['name'] ) ? $day['name'] : __( 'Not Found!', 'woc-open-close' );
+		}
 
 		return apply_filters( 'woc_filters_day_name', $day_name, $day_id );
 	}
+
 
 	/**
 	 * Return all days
@@ -634,24 +641,31 @@ class WOC_Functions {
 		$days_array = array(
 
 			'10001' => array(
+				'name'  => esc_html( 'Saturday' ),
 				'label' => __( 'Saturday', 'woc-open-close' ),
 			),
 			'10002' => array(
+				'name'  => esc_html( 'Sunday' ),
 				'label' => __( 'Sunday', 'woc-open-close' ),
 			),
 			'10003' => array(
+				'name'  => esc_html( 'Monday' ),
 				'label' => __( 'Monday', 'woc-open-close' ),
 			),
 			'10004' => array(
+				'name'  => esc_html( 'Tuesday' ),
 				'label' => __( 'Tuesday', 'woc-open-close' ),
 			),
 			'10005' => array(
+				'name'  => esc_html( 'Wednesday' ),
 				'label' => __( 'Wednesday', 'woc-open-close' ),
 			),
 			'10006' => array(
+				'name'  => esc_html( 'Thursday' ),
 				'label' => __( 'Thursday', 'woc-open-close' ),
 			),
 			'10007' => array(
+				'name'  => esc_html( 'Friday' ),
 				'label' => __( 'Friday', 'woc-open-close' ),
 			),
 		);
@@ -700,7 +714,7 @@ class WOC_Functions {
 	 *
 	 * @return PB_Settings
 	 */
-	function PB( $args = array() ) {
+	function PB_Settings( $args = array() ) {
 
 		return new PB_Settings( $args );
 	}
@@ -807,26 +821,10 @@ class WOC_Functions {
 	 */
 	function generate_woc_schedule( $schedule = array() ) {
 
-		$unique_id = isset( $schedule['unique_id'] ) ? $schedule['unique_id'] : time() . rand( 1, 1000 );
-		$day_id    = isset( $schedule['day_id'] ) ? $schedule['day_id'] : 10001;
-		$open      = isset( $schedule['open'] ) ? $schedule['open'] : '';
-		$close     = isset( $schedule['close'] ) ? $schedule['close'] : '';
+		woc_update_global_arguments( $schedule );
 
 		ob_start();
-
-		echo "<div class='woc_repeat' day-id='$day_id' data-open='$open' data-close='$close' unique-id='$unique_id'>
-            <label for='woc_tp_start_$unique_id'>" . __( 'Start time', 'woc-open-close' ) . "</label>
-            <input name='woc_hours_meta[$day_id][$unique_id][open]' value='$open' type='text' autocomplete='off' id='woc_tp_start_$unique_id' placeholder='08:00 AM' />
-            <label for='woc_tp_end_$unique_id'>" . __( 'End time', 'woc-open-close' ) . "</label>
-            <input name='woc_hours_meta[$day_id][$unique_id][close]' value='$close' type='text' autocomplete='off' id='woc_tp_end_$unique_id' placeholder='12:00 PM' />
-            <span class='woc_repeat_actions woc_repeat_copy hint--top' aria-label='" . __( 'Copy to all other days', 'woc-open-close' ) . "'><i class='icofont-copy'></i></span>
-            <span class='woc_repeat_actions woc_repeat_sort hint--top' aria-label='" . __( 'Sort schedules', 'woc-open-close' ) . "'><i class='icofont-sort'></i></span>
-            <span class='woc_repeat_actions woc_repeat_remove hint--top' aria-label='" . __( 'Remove schedule', 'woc-open-close' ) . "'><i class='icofont-close'></i></span>
-        </div>
-        <script> 
-            jQuery('#woc_tp_start_$unique_id').timepicker({ 'timeFormat': 'h:i A', step: 1 }); 
-            jQuery('#woc_tp_end_$unique_id').timepicker({ 'timeFormat': 'h:i A', step: 1 }); 
-        </script>";
+		woc_get_template( 'admin/single-schedule.php', $schedule );
 
 		return ob_get_clean();
 	}
@@ -886,9 +884,9 @@ class WOC_Functions {
 	 */
 	function get_args_option( $key = '', $default = '', $args = array() ) {
 
-		global $this_preloader;
+		global $wooopenclose_args;
 
-		$args    = empty( $args ) ? $this_preloader : $args;
+		$args    = empty( $args ) ? $wooopenclose_args : $args;
 		$default = empty( $default ) ? '' : $default;
 		$key     = empty( $key ) ? '' : $key;
 

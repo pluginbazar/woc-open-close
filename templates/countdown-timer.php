@@ -4,9 +4,7 @@
 * Copyright: 	2015 pluginbazar
 */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}  // if direct access
+defined( 'ABSPATH' ) || exit;
 
 $unique_id     = uniqid();
 $style         = ( isset( $style ) || ! empty( $style ) ) ? $style : 1;
@@ -18,9 +16,9 @@ $time_diff     = date( 'U', strtotime( wooopenclose()->get_next_time() ) ) - dat
 <div id="woc-countdown-timer-<?php echo esc_attr( $unique_id ); ?>"
      class="woc-countdown-timer-<?php echo esc_attr( $style ); ?> <?php echo esc_attr( $dynamic_class ); ?>">
     <span style="display: none;" class="distance" data-distance="<?php echo esc_attr( $time_diff ); ?>"></span>
-    <span class="hours"><span class="count-number">0</span><span class="count-text">Hours</span></span>
-    <span class="minutes"><span class="count-number">0</span><span class="count-text">Minutes</span></span>
-    <span class="seconds"><span class="count-number">0</span><span class="count-text">Seconds</span></span>
+    <span class="hours"><span class="count-number">0</span><span class="count-text"><?php esc_html_e('Hours', 'woc-open-close' ); ?></span></span>
+    <span class="minutes"><span class="count-number">0</span><span class="count-text"><?php esc_html_e('Minutes', 'woc-open-close' ); ?></span></span>
+    <span class="seconds"><span class="count-number">0</span><span class="count-text"><?php esc_html_e('Seconds', 'woc-open-close' ); ?></span></span>
 </div>
 
 <script>

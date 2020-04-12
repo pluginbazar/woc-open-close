@@ -91,33 +91,36 @@ $woc_switch_checkbox = wooopenclose()->get_active_schedule_id() == $post->ID ? '
     #major-publishing-actions {
         border: none !important;
         background: #fff !important;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     #delete-action a,
     #delete-action a:focus,
-    #delete-action a:active {
-        color: #fff !important;
-        text-decoration: none;
-        background: #E91E63;
-        border-radius: 4px;
-        padding: 8px 20px;
-        outline: none;
-        box-shadow: none;
-        user-select: none;
-    }
-
+    #delete-action a:active,
     input#publish,
     input#publish:focus,
     input#publish:active {
         color: #fff !important;
         text-decoration: none;
-        background: #4f7d79;
         border-radius: 4px;
-        padding: 0px 20px !important;
+        padding: 12px;
+        font-size: 15px;
+        line-height: 18px;
         outline: none;
         box-shadow: none;
+        text-shadow: none !important;
         user-select: none;
         border: none;
-        text-shadow: none !important;
+    }
+
+
+    #delete-action a {
+        background: #E91E63;
+    }
+
+    input#publish {
+        background: #4f7d79;
     }
 </style>

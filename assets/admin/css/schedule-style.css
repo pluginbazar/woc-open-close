@@ -11,7 +11,7 @@
 }
 
 .woc_section .woc_section_title {
-    font-size: 14px;
+    font-size: 16px;
     width: 15%;
     min-width: 120px;
     font-weight: 500;
@@ -87,11 +87,13 @@
     cursor: pointer;
     background: #de792b2e;
     border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .woc_section .woc_days .woc_day.woc_day_active .woc_day_header {
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 .woc_section .woc_days .woc_day .woc_day_content {
@@ -102,6 +104,12 @@
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     background: #f1f1f12e;
+}
+
+.woc_section .woc_days .woc_day .woc_day_content .woc_add_schedule {
+    font-size: 16px;
+    margin-top: 10px;
+    background: #fff;
 }
 
 .woc_section .woc_day_content .woc_repeat {
@@ -125,7 +133,8 @@
 }
 
 .woc_section .woc_day_content .woc_repeat label {
-    width: 60px;
+    width: 75px;
+    min-width: 75px;
 }
 
 .woc_section .woc_day_content .woc_repeat input {
@@ -137,12 +146,12 @@
     display: inline-block;
     vertical-align: middle;
     background: transparent;
-    margin-right: 15px;
+    font-size: 16px;
 }
 
 .woc_section .woc_day_content .woc_repeat_actions {
     color: #fff;
-    padding: 3px 6px;
+    padding: 5px;
     border-radius: 3px;
     margin: 0 5px;
     display: inline-block;
@@ -189,7 +198,6 @@
     line-height: 25px;
     border-radius: 5px;
     color: #e48b07;
-    font-weight: 300;
 }
 
 .woc_note {

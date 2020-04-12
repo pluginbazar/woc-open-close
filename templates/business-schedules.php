@@ -34,8 +34,8 @@ $set_id   = ( isset( $set ) || ! empty( $set ) ) ? $set : wooopenclose()->get_ac
                 <div class="woc-day-name">
 					<?php
 					printf( '%s %s <span class="woc-arrow-icon"></span>',
-						in_array( 'yes', woc_get_option( 'woc_bh_check_icon', array( 'yes' ) ) ) ? '<i class="icofont-tick-mark"></i>' : '',
-						wooopenclose()->get_day_name( $day_id )
+						in_array( 'yes', woc_get_option( 'woc_bh_check_icon', array( 'yes' ) ) ) ? '<span class="dashicons dashicons-yes"></span>' : '',
+						wooopenclose()->get_day_name( $day_id, true )
 					);
 					?>
                 </div>
@@ -44,7 +44,7 @@ $set_id   = ( isset( $set ) || ! empty( $set ) ) ? $set : wooopenclose()->get_ac
 					<?php
 					foreach ( $day_schedules as $schedule_id => $schedule ) {
 						if ( isset( $schedule['open'] ) && $schedule['close'] ) {
-							printf( '<div class="woc-day-schedule"><i class="icofont-wall-clock"></i> %s - %s</div>', $schedule['open'], $schedule['close'] );
+							printf( '<div class="woc-day-schedule"><span class="dashicons dashicons-clock"></span> %s - %s</div>', $schedule['open'], $schedule['close'] );
 						}
 					}
 

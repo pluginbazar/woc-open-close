@@ -43,7 +43,7 @@ $woc_message    = isset( $woc_hours_meta['woc_message'] ) ? $woc_hours_meta['woc
                     }
                 ?>
                 </div>
-                <div class="button woc_add_schedule" day-id="<?php echo $day_id; ?>"><?php _e('Add New', 'woc-open-close'); ?> <i class="icofont icofont-plus"></i></div>
+                <div class="button woc_add_schedule" data-day-id="<?php echo $day_id; ?>"><?php esc_html_e('New Schedule', 'woc-open-close'); ?></div>
             </div>
         </div>
 

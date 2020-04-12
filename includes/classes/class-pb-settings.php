@@ -5,16 +5,13 @@
  * Quick settings page generator for WordPress
  *
  * @package PB_Settings
- * @version 3.0.5
+ * @version 3.1
  * @author Pluginbazar
  * @copyright 2019 Pluginbazar.com
  * @see https://github.com/jaedm97/PB-Settings
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}  // if direct access
-
+defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'PB_Settings' ) ) {
 	class PB_Settings {
@@ -24,6 +21,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 
 		private $options = array();
 		private $checked = array();
+
 
 		/**
 		 * PB_Settings constructor.
@@ -43,6 +41,85 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 
 			add_action( 'admin_init', array( $this, 'display_fields' ), 12 );
 			add_filter( 'whitelist_options', array( $this, 'whitelist_options' ), 99, 1 );
+
+			add_action( 'admin_notices', array( $this, 'required_plugin_check' ) );
+		}
+
+
+		/**
+		 * Check if any plugin require to work the current plugin
+		 *
+		 * Required arguments in the initializer
+		 *
+		 * @arg string plugin_name | Current plugin name
+		 * @arg array required_plugins | array of required plugins with key as the plugin slug and value as the plugin name or label
+		 */
+		function required_plugin_check() {
+
+			$buttons = array();
+			$plugins = array();
+
+			foreach ( $this->get_data( 'required_plugins', array() ) as $plugin_slug => $label ) {
+
+				$this_plugin = sprintf( '%1$s/%1$s.php', $plugin_slug );
+				$plugins[]   = sprintf( '<strong>%s</strong>', $label );
+
+				if ( is_plugin_active( $this_plugin ) ) {
+					continue;
+				}
+
+				if ( $this->is_plugin_installed( $this_plugin ) ) {
+
+					$button_url = wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . $this_plugin . '&amp;plugin_status=all&amp;paged=1&amp;s', 'activate-plugin_' . $this_plugin );
+					$buttons[]  = sprintf( '<a class="button-primary" href="%s">%s</a>', $button_url, sprintf( esc_html( 'Activate %s' ), $label ) );
+				} else {
+					$button_url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $plugin_slug ), 'install-plugin_' . $plugin_slug );
+					$buttons[]  = sprintf( '<a class="button-primary" href="%s">%s</a>', $button_url, sprintf( esc_html( 'Install %s' ), $label ) );
+				}
+			}
+
+			if ( count( $buttons ) > 0 ) {
+				printf( '<div class="notice notice-error is-dismissible"><p>%s</p><p>%s</p></div>',
+					sprintf( __( '<strong>%s</strong> plugin requires plugin(s): %s to be installed and activated. Please continue with installation or activation', 'woc-open-close' ),
+						$this->get_data( 'plugin_name' ), implode( ', ', $plugins ), '<strong>', '</strong>'
+					),
+					implode( ' ', $buttons )
+				);
+			}
+		}
+
+
+		/**
+		 * Check if a plugin installed in the plugins list or not
+		 *
+		 * @param $basename
+		 *
+		 * @return bool
+		 */
+		function is_plugin_installed( $basename ) {
+			if ( ! function_exists( 'get_plugins' ) ) {
+				include_once ABSPATH . '/wp-admin/includes/plugin.php';
+			}
+
+			$installed_plugins = get_plugins();
+
+			return isset( $installed_plugins[ $basename ] );
+		}
+
+
+		/**
+		 * Register Shortcode
+		 *
+		 * @param string $shortcode
+		 * @param string $callable_func
+		 */
+		function register_shortcode( $shortcode = '', $callable_func = '' ) {
+
+			if ( empty( $shortcode ) || ! $shortcode || ! $callable_func || empty( $callable_func ) ) {
+				return;
+			}
+
+			add_shortcode( $shortcode, $callable_func );
 		}
 
 
@@ -1119,10 +1196,10 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 
 				do_action( 'pb_settings_before_page_' . $this->get_current_page() );
 
+				$this->get_settings_nav_tab();
+
 				if ( $this->show_submit_button() ) {
-					printf( '<form class="pb_settings_form" action="options.php" method="post">%s%s%s</form>',
-						$this->get_settings_nav_tab(), $this->get_settings_fields_html(), get_submit_button()
-					);
+					printf( '<form class="pb_settings_form" action="options.php" method="post">%s%s</form>', $this->get_settings_fields_html(), get_submit_button() );
 				} else {
 					print( $this->get_settings_fields_html() );
 				}
@@ -1138,16 +1215,12 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 
 		/**
 		 * Return settings navigation tabs
-		 *
-		 * @return false|string
 		 */
 		function get_settings_nav_tab() {
 
 			global $pagenow;
 
 			parse_str( $_SERVER['QUERY_STRING'], $nav_url_args );
-
-			ob_start();
 
 			?>
             <nav class="nav-tab-wrapper">
@@ -1166,8 +1239,6 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 				?>
             </nav>
 			<?php
-
-			return ob_get_clean();
 		}
 
 
@@ -1661,6 +1732,28 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 			}
 
 			return apply_filters( 'pb_settings_option_value', $option_value, $option_id, $option );
+		}
+
+		/**
+		 * Return data using key from args
+		 *
+		 * @param string $key
+		 * @param string $default
+		 * @param array $args
+		 *
+		 * @return mixed|string
+		 */
+		private function get_data( $key = '', $default = '', $args = array() ) {
+
+			$args    = empty( $args ) ? $this->data : $args;
+			$default = empty( $default ) ? is_array( $default ) ? array() : '' : $default;
+			$key     = empty( $key ) ? '' : $key;
+
+			if ( isset( $args[ $key ] ) && ! empty( $args[ $key ] ) ) {
+				return $args[ $key ];
+			}
+
+			return $default;
 		}
 	}
 }

@@ -6,15 +6,25 @@
 }
 
 .post-type-woc_hour .postbox {
-    border-color: #4CAF50;
+    border: none !important;
 }
 
 #woc_metabox .hndle.ui-sortable-handle,
 .post-type-woc_hour #submitdiv .hndle.ui-sortable-handle,
 #woc_metabox_message .hndle.ui-sortable-handle,
 #woc_metabox_status .hndle.ui-sortable-handle {
-    background-color: #4CAF50 !important;
-    border-bottom: none;
+    background-image: linear-gradient(100deg,#f26798 0%,#4131de 100%);
+    font-size: 18px;
+    line-height: 18px;
+    padding: 20px;
+    border: none;
+}
+
+#woc_metabox button.handlediv,
+#submitdiv button.handlediv {
+    position: absolute;
+    right: 5px;
+    top: 10px;
 }
 
 #woc_metabox .hndle.ui-sortable-handle span,
@@ -92,18 +102,9 @@ input:checked + .woc_switch_slider:before {
 }
 
 a.woc-plugin-meta-buy {
-    background: #F44336;
-    color: #fff !important;
-    padding: 5px 15px;
-    font-size: 12px;
-    border-radius: 3px;
-    transition: all 0.3s linear;
+    color: #E91E63 !important;
+    font-weight: 700;
 }
-
-.woc-plugin-meta-buy:hover {
-    background: #bd281d;
-}
-
 
 #wp-admin-bar-woc-shop-close,
 #wp-admin-bar-woc-shop-close:hover,

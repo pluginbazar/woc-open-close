@@ -18,15 +18,15 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 		 */
 		function __construct() {
 
-			add_action( 'init', array( $this, 'register_post_types_settings' ) );
+			add_action( 'init', array( $this, 'register_everything' ) );
 			add_action( 'pb_settings_after_timezone_string', array( $this, 'display_timezone_string' ) );
-
 			add_action( 'wp_footer', array( $this, 'display_popup_statusbar' ) );
 			add_action( 'admin_notices', array( $this, 'manage_admin_notices' ) );
 			add_action( 'admin_bar_menu', array( $this, 'handle_admin_bar_menu' ), 9999, 1 );
 
 			add_filter( 'plugin_row_meta', array( $this, 'add_plugin_meta' ), 10, 2 );
 			add_filter( 'plugin_action_links_' . WOC_PLUGIN_FILE, array( $this, 'add_plugin_actions' ), 10, 2 );
+			add_filter( 'post_updated_messages', array( $this, 'filter_update_messages' ), 10, 1 );
 
 			add_action( 'wp_ajax_woc_add_schedule', array( $this, 'ajax_add_schedule' ) );
 			add_action( 'wp_ajax_woc_switch_active', array( $this, 'ajax_switch_active' ) );
@@ -78,6 +78,9 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 		}
 
 
+		/**
+		 * Ajax add schedule
+		 */
 		function ajax_add_schedule() {
 
 			$day_id = isset( $_POST['day_id'] ) ? sanitize_text_field( $_POST['day_id'] ) : '';
@@ -165,6 +168,28 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 
 
 		/**
+		 * Update messages for this post type
+		 *
+		 * @param array $messages
+		 *
+		 * @return array
+		 */
+		function filter_update_messages( $messages = array() ) {
+
+			if ( get_post_type() === 'woc_hour' ) {
+				$messages['post'][1] = esc_html__( 'Business schedule has been updated successfully', 'woc-open-close' );
+				$messages['post'][6] = esc_html__( 'Business schedule has been published successfully', 'woc-open-close' );
+
+				echo '<pre>';
+				print_r( $messages );
+				echo '</pre>';
+			}
+
+			return $messages;
+		}
+
+
+		/**
 		 * Add custom links to Plugin actions
 		 *
 		 * @param $links
@@ -173,11 +198,15 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 		 */
 		function add_plugin_actions( $links ) {
 
-			$action_links = array(
-				'settings' => sprintf( __( '<a href="%s">Settings</a>', 'woc-open-close' ), admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close' ) ),
-			);
+			$action_links = array_merge( array(
+				'settings' => sprintf( '<a href="%s">%s</a>', admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close' ), esc_html__( 'Settings', 'woc-open-close' ) ),
+			), $links );
 
-			return array_merge( $action_links, $links );
+			if ( ! woc_pro_available() ) {
+				$action_links['go-pro'] = sprintf( '<a class="woc-plugin-meta-buy" href="%s">%s</a>', esc_url( WOC_PLUGIN_LINK ), esc_html__( 'Go Pro', 'woc-open-close' ) );
+			}
+
+			return $action_links;
 		}
 
 
@@ -194,9 +223,8 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			if ( WOC_PLUGIN_FILE === $file ) {
 
 				$row_meta = array(
-					'docs'    => sprintf( __( '<a href="%s"><i class="icofont-search-document"></i> Docs</a>', 'woc-open-close' ), esc_url( WOC_DOCS_URL ) ),
-					'support' => sprintf( __( '<a href="%s"><i class="icofont-live-support"></i> Forum Supports</a>', 'woc-open-close' ), esc_url( WOC_FORUM_URL ) ),
-					'buypro'  => sprintf( __( '<a class="woc-plugin-meta-buy" href="%s"><i class="icofont-cart-alt"></i> Get Pro</a>', 'woc-open-close' ), esc_url( WOC_PLUGIN_LINK ) ),
+					'documentation' => sprintf( '<a href="%s">%s</a>', esc_url( WOC_DOCS_URL ), esc_html__( 'Documentation', 'woc-open-close' ) ),
+					'support'       => sprintf( '<a href="%s">%s</a>', esc_url( WOC_FORUM_URL ), esc_html__( 'Support', 'woc-open-close' ) ),
 				);
 
 				return array_merge( $links, $row_meta );
@@ -283,21 +311,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 		 */
 		function manage_admin_notices() {
 
-			// Check WooCommerce
-
-			if ( ! class_exists( 'WooCommerce' ) ) {
-				wooopenclose()->print_notice( sprintf(
-					__( 'WooCommerce plugin required for <strong>WooCommerce Open Close</strong>. This plugin will be deactivated automatically. <a href="%s" target="_blank">Get WooCommerce</a>', 'woc-open-close' ),
-					esc_url( 'https://wordpress.org/plugins/woocommerce/' ) ), false );
-
-				deactivate_plugins( WOC_PLUGIN_FILE );
-
-				return;
-			}
-
-
 			// Check any Schedule available or not
-
 			if ( count( get_posts( 'post_type=woc_hour' ) ) == 0 ) {
 				wooopenclose()->print_notice( sprintf(
 					__( 'No Schedules Found for this WooCommerce Shop. <a href="%s">Create Schedule</a> or <a href="%s">Import</a>', 'woc-open-close' ),
@@ -307,9 +321,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 				return;
 			}
 
-
 			// Check Active Schedule
-
 			if ( empty( wooopenclose()->get_active_schedule_id() ) ) {
 				wooopenclose()->print_notice( sprintf(
 					__( 'No Active Schedule found <a href="%s">Make a Schedule Active</a>', 'woc-open-close' ),
@@ -317,7 +329,6 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 
 				return;
 			}
-
 
 			// Check is_open()
 			if ( ! in_array( 'no', woc_get_option( 'show_admin_status', array( 'yes' ) ) ) ) {
@@ -377,12 +388,12 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 		/**
 		 * Register Post Types and Settings
 		 */
-		function register_post_types_settings() {
+		function register_everything() {
 
 			/**
 			 * Register Post Types
 			 */
-			wooopenclose()->PB()->register_post_type( 'woc_hour', array(
+			wooopenclose()->PB_Settings()->register_post_type( 'woc_hour', array(
 				'singular'  => esc_html__( 'Schedule', 'woc-open-close' ),
 				'plural'    => esc_html__( 'Schedules', 'woc-open-close' ),
 				'labels'    => array(
@@ -396,17 +407,21 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			/**
 			 * Register Settings Nav Menu
 			 */
-			wooopenclose()->PB( array(
-				'add_in_menu'     => true,
-				'menu_type'       => 'submenu',
-				'menu_title'      => __( 'Settings', 'woc-open-close' ),
-				'page_title'      => __( 'Settings', 'woc-open-close' ),
-				'menu_page_title' => 'WooCommerce Open Close - ' . __( 'Control Panel', 'woc-open-close' ),
-				'capability'      => "manage_woocommerce",
-				'menu_slug'       => "woc-open-close",
-				'parent_slug'     => "edit.php?post_type=woc_hour",
-				'disabled_notice' => sprintf( esc_html__( 'This feature is locked.', 'woc-open-close' ) . ' <a href="%s">%s</a>', WOC_PLUGIN_LINK, esc_html__( 'Get pro', 'woc-open-close' ) ),
-				'pages'           => wooopenclose()->get_settings_pages(),
+			wooopenclose()->PB_Settings( array(
+				'add_in_menu'      => true,
+				'menu_type'        => 'submenu',
+				'menu_title'       => __( 'Settings', 'woc-open-close' ),
+				'page_title'       => __( 'Settings', 'woc-open-close' ),
+				'menu_page_title'  => 'WooCommerce Open Close - ' . __( 'Control Panel', 'woc-open-close' ),
+				'capability'       => "manage_woocommerce",
+				'menu_slug'        => "woc-open-close",
+				'parent_slug'      => "edit.php?post_type=woc_hour",
+				'disabled_notice'  => sprintf( esc_html__( 'This feature is locked.', 'woc-open-close' ) . ' <a href="%s">%s</a>', WOC_PLUGIN_LINK, esc_html__( 'Get pro', 'woc-open-close' ) ),
+				'pages'            => wooopenclose()->get_settings_pages(),
+				'plugin_name'      => esc_html( 'WooCommerce Open Close' ),
+				'required_plugins' => array(
+					'woocommerce' => esc_html( 'WooCommerce' ),
+				),
 			) );
 
 			$this->display_countdown_timer_dynamically();

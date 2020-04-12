@@ -29,7 +29,7 @@ class class_qa_woc_hour_column {
 
 			$new[ $col_id ] = $col_label;
 
-			$new['title']         = '<i class="icofont-wall-clock"></i> ' . esc_html__( 'Schedule Title', 'woc-open-close' );
+			$new['title']         = esc_html__( 'Schedule Title', 'woc-open-close' );
 			$new['woc_shortcode'] = '';
 			$new['woc_author']    = esc_html__( 'Author', 'woc-open-close' );
 			$new['woc_status']    = '';
