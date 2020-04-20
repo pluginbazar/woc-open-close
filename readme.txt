@@ -4,8 +4,8 @@
 	Tags: woocommerce schedules, business hours, schedules manager, restrict-add-to-cart, Dokan
 	Requires at least: 4.6
 	Tested up to: 5.4
-	Tested up to WooCommerce: 4.0
-	Stable tag: 4.1.0
+	Tested up to WooCommerce: 4.0.1
+	Stable tag: 4.1.2
 	Requires PHP: 5.6
 	Requires WooCommerce: 3.0
 	Text Domain: woc-open-close
@@ -22,7 +22,7 @@ Maintain Business hour for your WooCommerce Shop. Let your customers know about 
 
 Your customers might be in confusion with your business. Sometimes customer complete order and wait for the products cause he/she pay for the shipping too, But times passed on and passing nothing hear from your WooCommerce Store.
 
-You are also not aware of this situation, what's going on your customer's mind. You may be offline or your shop might be off for that day. Like Ordering for a meal at midnight when your shop is closed. So this is a big trouble for running business with Transparency.
+You are also not aware of this situation, what's going on your customer's mind. You may be of fline or your shop might be off for that day. Like Ordering for a meal at midnight when your shop is closed. So this is a big trouble for running business with Transparency.
 
 NO MORE BUSINESS CONFUSION !!! WooCommerce Open Close comes with a complete business hour/schedule management, completely hassle free.
 

@@ -179,10 +179,6 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			if ( get_post_type() === 'woc_hour' ) {
 				$messages['post'][1] = esc_html__( 'Business schedule has been updated successfully', 'woc-open-close' );
 				$messages['post'][6] = esc_html__( 'Business schedule has been published successfully', 'woc-open-close' );
-
-				echo '<pre>';
-				print_r( $messages );
-				echo '</pre>';
 			}
 
 			return $messages;
@@ -413,12 +409,14 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 				'menu_title'       => __( 'Settings', 'woc-open-close' ),
 				'page_title'       => __( 'Settings', 'woc-open-close' ),
 				'menu_page_title'  => 'WooCommerce Open Close - ' . __( 'Control Panel', 'woc-open-close' ),
-				'capability'       => "manage_woocommerce",
-				'menu_slug'        => "woc-open-close",
-				'parent_slug'      => "edit.php?post_type=woc_hour",
+				'capability'       => 'manage_options',
+				'menu_slug'        => 'woc-open-close',
+				'parent_slug'      => 'edit.php?post_type=woc_hour',
 				'disabled_notice'  => sprintf( esc_html__( 'This feature is locked.', 'woc-open-close' ) . ' <a href="%s">%s</a>', WOC_PLUGIN_LINK, esc_html__( 'Get pro', 'woc-open-close' ) ),
 				'pages'            => wooopenclose()->get_settings_pages(),
 				'plugin_name'      => esc_html( 'WooCommerce Open Close' ),
+				'plugin_slug'      => 'woc-open-close',
+				'enable_feedback'  => true,
 				'required_plugins' => array(
 					'woocommerce' => esc_html( 'WooCommerce' ),
 				),

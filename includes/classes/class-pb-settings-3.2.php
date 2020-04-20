@@ -5,7 +5,7 @@
  * Quick settings page generator for WordPress
  *
  * @package PB_Settings
- * @version 3.1
+ * @version 3.2
  * @author Pluginbazar
  * @copyright 2019 Pluginbazar.com
  * @see https://github.com/jaedm97/PB-Settings
@@ -17,7 +17,6 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 	class PB_Settings {
 
 		public $data = array();
-		public $disabled_notice = null;
 
 		private $options = array();
 		private $checked = array();
@@ -36,13 +35,297 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 				add_action( 'admin_menu', array( $this, 'add_menu_in_admin_menu' ), 12 );
 			}
 
-			$this->disabled_notice = $this->get_disabled_notice();
 			$this->set_options();
 
 			add_action( 'admin_init', array( $this, 'display_fields' ), 12 );
-			add_filter( 'whitelist_options', array( $this, 'whitelist_options' ), 99, 1 );
-
 			add_action( 'admin_notices', array( $this, 'required_plugin_check' ) );
+			add_action( 'after_plugin_row', array( $this, 'deactivation_feedback' ), 10, 2 );
+			add_action( 'wp_ajax_pbfb_feedback_new', array( $this, 'pbfb_feedback_new' ) );
+
+			add_filter( 'whitelist_options', array( $this, 'whitelist_options' ), 99, 1 );
+		}
+
+
+		/**
+		 * Handle Ajax submission of feedback form
+		 */
+		function pbfb_feedback_new() {
+
+			$curl = curl_init();
+			curl_setopt_array( $curl, array(
+				CURLOPT_URL            => "https://pluginbazar.com/feedback_new",
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_ENCODING       => "",
+				CURLOPT_MAXREDIRS      => 10,
+				CURLOPT_TIMEOUT        => 0,
+				CURLOPT_FOLLOWLOCATION => true,
+				CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+				CURLOPT_CUSTOMREQUEST  => "POST",
+				CURLOPT_POSTFIELDS     => $_POST,
+				CURLOPT_HTTPHEADER     => array(
+					"Cookie: pb_offer_time=Apr%2018%202020%200%3A38%3A54"
+				),
+			) );
+			$response = curl_exec( $curl );
+			curl_close( $curl );
+
+			wp_send_json_success( $response );
+		}
+
+
+		/**
+		 * Render quick feedback form
+		 *
+		 * @param $plugin_file
+		 * @param $plugin_data
+		 */
+		function deactivation_feedback( $plugin_file, $plugin_data ) {
+
+			$plugin_slug = $this->get_data( 'plugin_slug' );
+			$this_plugin = sprintf( '%1$s/%1$s.php', $plugin_slug );
+			$plugin_name = $this->get_data( 'Title', '', $plugin_data );
+
+			if ( $plugin_file !== $this_plugin || ! $this->get_data( 'enable_feedback', false ) ) {
+				return;
+			}
+
+			?>
+            <div class="pbfb-container">
+                <div class="pbfb-box">
+                    <div class="pbfb-header"><?php esc_html_e( 'quick feedback', 'pb-settings' ); ?></div>
+                    <div class="pbfb-content">
+                        <p><?php printf( esc_html__( 'If you have a moment, please share why you are deactivating %s', 'pb-settings' ), $plugin_name ); ?></p>
+                        <div class="pbfb-reasons">
+                            <div>
+                                <input id="no_longer_needed" type="radio" name="reason_key" value="no_longer_needed">
+                                <label for="no_longer_needed"><?php esc_html_e( 'I no longer need the plugin', 'pb-settings' ); ?></label>
+                            </div>
+                            <div>
+                                <input id="found_a_better_plugin" type="radio" name="reason_key"
+                                       value="found_a_better_plugin">
+                                <label for="found_a_better_plugin"><?php esc_html_e( 'I found a better plugin', 'pb-settings' ); ?></label>
+                                <div class="pbfb-extra-text">
+                                    <input type="text" name="reason_better_plugin"
+                                           placeholder="Please share which plugin">
+                                </div>
+                            </div>
+                            <div>
+                                <input id="couldnt_get_the_plugin_to_work" type="radio" name="reason_key"
+                                       value="couldnt_get_the_plugin_to_work">
+                                <label for="couldnt_get_the_plugin_to_work"><?php esc_html_e( 'I couldn\'t get the plugin to work', 'pb-settings' ); ?></label>
+                            </div>
+                            <div>
+                                <input id="temporary_deactivation" type="radio" name="reason_key"
+                                       value="temporary_deactivation">
+                                <label for="temporary_deactivation"><?php esc_html_e( 'It\'s a temporary deactivation', 'pb-settings' ); ?></label>
+                            </div>
+                            <div>
+                                <input id="using_pro" type="radio" name="reason_key" value="using_pro">
+                                <label for="using_pro"><?php esc_html_e( 'I have the Pro Version', 'pb-settings' ); ?></label>
+                                <div class="pbfb-extra-text">
+									<?php printf( esc_html__( 'Wait! Dont deactivate %s. You have to activate both Free and Pro version in order for the plugin to work.', 'pb-settings' ), $plugin_name ); ?>
+                                </div>
+                            </div>
+                            <div>
+                                <input id="other" type="radio" name="reason_key" value="other">
+                                <label for="other"><?php esc_html_e( 'Other', 'pb-settings' ); ?></label>
+                                <div class="pbfb-extra-text">
+                                    <input type="text" name="reason_other"
+                                           placeholder="Please share the reason">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pbfb-buttons">
+                            <div class="pbfb-button-submit"
+                                 data-loading_text="<?php esc_attr_e( 'Sending...', 'pb-settings' ); ?>"
+                                 data-ajax_url="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>"
+                                 data-plugin_slug="<?php echo esc_attr( $plugin_slug ); ?>"
+                                 data-website="<?php echo esc_url( get_bloginfo( 'url' ) ); ?>"
+                                 data-admin_email="<?php echo esc_attr( get_bloginfo( 'admin_email' ) ); ?>">
+								<?php esc_html_e( 'Submit & Deactivate', 'pb-settings' ); ?>
+                            </div>
+                            <a class="pbfb-button-skip" href="#"><?php esc_html_e( 'Skip & Deactivate', 'pb-settings' ); ?></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                (function ($, window, document) {
+
+                    $(document).on('click', '.pbfb-button-submit', function () {
+
+                        let submitButton = $(this),
+                            reasonKey = $('input[name="reason_key"]:checked'),
+                            reasonBetterPlugin = $('input[name="reason_better_plugin"]'),
+                            reasonOther = $('input[name="reason_other"]');
+
+                        submitButton.html(submitButton.data('loading_text'));
+
+                        $.ajax({
+                            type: 'POST',
+                            url: submitButton.data('ajax_url'),
+                            context: this,
+                            data: {
+                                'action': 'pbfb_feedback_new',
+                                'plugin_slug': submitButton.data('plugin_slug'),
+                                'reason_key': reasonKey.val(),
+                                'reason_better_plugin': reasonBetterPlugin.val(),
+                                'reason_other': reasonOther.val(),
+                                'website': submitButton.data('website'),
+                                'admin_email': submitButton.data('admin_email'),
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.href = $('.pbfb-button-skip').attr('href');
+                                }
+                            }
+                        });
+                    });
+
+                    $(document).on('change', '.pbfb-container input[name="reason_key"]', function () {
+
+                        let allExtraTexts = $('.pbfb-extra-text'),
+                            submitButton = $('.pbfb-button-submit'),
+                            checkBox = $(this),
+                            checkBoxValue = checkBox.val(),
+                            thisReason = checkBox.parent();
+
+                        allExtraTexts.slideUp();
+
+                        if (checkBoxValue === 'found_a_better_plugin' || checkBoxValue === 'using_pro' || checkBoxValue === 'other') {
+                            thisReason.find('.pbfb-extra-text').slideDown();
+                        }
+
+                        checkBoxValue === 'using_pro' ? submitButton.addClass('disabled') : submitButton.removeClass('disabled');
+                    });
+
+                    $(document).on('click', '.wp-list-table.plugins .row-actions .deactivate > a', function () {
+
+                        let deactivateButton = $(this),
+                            deactivateURL = deactivateButton.attr('href'),
+                            pluginTR = deactivateButton.parent().parent().parent().parent(),
+                            pbfbContainer = $('.pbfb-container'),
+                            pluginSlug = pluginTR.data('slug');
+
+                        if (pluginSlug === '<?php echo esc_attr( $plugin_slug ); ?>') {
+                            pbfbContainer.find('.pbfb-button-skip').attr('href', deactivateURL);
+                            pbfbContainer.fadeIn();
+                            return false;
+                        }
+
+                        return true;
+                    });
+
+                    $(document).mouseup(function (e) {
+                        let container = $('.pbfb-container .pbfb-box');
+                        if (!container.is(e.target) && container.has(e.target).length === 0) {
+                            container.parent().fadeOut();
+                        }
+                    });
+
+                })(jQuery, window, document);
+            </script>
+            <style>
+                .pbfb-container {
+                    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);
+                    display: none;
+                    height: 100%;
+                    left: 0;
+                    position: fixed;
+                    top: 0;
+                    width: 100%;
+                    z-index: 9999999;
+                }
+
+                .pbfb-container .pbfb-box {
+                    background: none repeat scroll 0 0 rgb(255, 255, 255);
+                    height: auto;
+                    margin: 0 auto;
+                    position: relative;
+                    top: 15%;
+                    max-width: 520px;
+                    border-radius: 3px;
+                    box-shadow: 0 10px 8px rgba(100, 100, 100, 0.9);
+                    max-height: 550px;
+                    overflow-y: auto;
+                    user-select: none;
+                }
+
+                .pbfb-container .pbfb-header {
+                    padding: 25px 30px;
+                    text-transform: uppercase;
+                    font-size: 18px;
+                    letter-spacing: 1px;
+                    font-weight: 600;
+                    box-shadow: 0 5px 30px 2px rgba(0, 0, 0, 0.17);
+                    overflow: hidden;
+                }
+
+                .pbfb-container .pbfb-content {
+                    padding: 15px 30px 25px;
+                }
+
+                .pbfb-container .pbfb-content p {
+                    font-size: 16px;
+                    font-weight: 500;
+                }
+
+                .pbfb-container .pbfb-reasons label {
+                    font-size: 16px;
+                    line-height: 35px;
+                    vertical-align: baseline;
+                }
+
+                .pbfb-container .pbfb-reasons .pbfb-extra-text {
+                    display: none;
+                    margin-left: 23px;
+                    width: calc(100% - 20px);
+                    line-height: 1.7;
+                    color: #ab073e;
+                }
+
+                .pbfb-container .pbfb-reasons .pbfb-extra-text > input,
+                .pbfb-container .pbfb-reasons .pbfb-extra-text > input:focus {
+                    min-height: 40px;
+                    width: 100%;
+                    outline: none;
+                    box-shadow: none;
+                    border: 1px solid #ddd;
+                }
+
+
+                .pbfb-container .pbfb-buttons {
+                    margin-top: 30px;
+                }
+
+                .pbfb-container .pbfb-buttons > *,
+                .pbfb-container .pbfb-buttons > *:active,
+                .pbfb-container .pbfb-buttons > *:focus {
+                    cursor: pointer;
+                    display: inline-block;
+                    font-weight: 600;
+                    letter-spacing: 0.8px;
+                    text-decoration: none;
+                    color: #4e4e4e;
+                    outline: none;
+                    box-shadow: none;
+                }
+
+                .pbfb-container .pbfb-button-submit {
+                    background: #E91E63;
+                    color: #fff !important;
+                    padding: 10px 12px;
+                    border-radius: 3px;
+                    margin-right: 10px;
+                    text-transform: uppercase;
+                }
+
+                .pbfb-container .pbfb-button-submit.disabled {
+                    pointer-events: none;
+                    background: #c7c7c7;
+                }
+            </style>
+			<?php
 		}
 
 
@@ -127,10 +410,10 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 		 * Register Taxonomy
 		 *
 		 * @param $tax_name
-		 * @param $obj_name
+		 * @param $obj_type
 		 * @param array $args
 		 */
-		function register_taxonomy( $tax_name, $obj_name, $args = array() ) {
+		function register_taxonomy( $tax_name, $obj_type, $args = array() ) {
 
 			if ( taxonomy_exists( $tax_name ) ) {
 				return;
@@ -141,7 +424,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 			$labels   = isset( $args['labels'] ) ? $args['labels'] : array();
 
 			$args = array_merge( array(
-				'description'         => sprintf( __( 'This is where you can create and manage %s.', 'wp-poll' ), $plural ),
+				'description'         => sprintf( __( 'This is where you can create and manage %s.' ), $plural ),
 				'public'              => true,
 				'show_ui'             => true,
 				'capability_type'     => 'post',
@@ -156,24 +439,24 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 			), $args );
 
 			$args['labels'] = array_merge( array(
-				'name'               => sprintf( __( '%s', 'wp-poll' ), $plural ),
+				'name'               => sprintf( __( '%s' ), $plural ),
 				'singular_name'      => $singular,
-				'menu_name'          => __( $singular, 'wp-poll' ),
-				'all_items'          => sprintf( __( '%s', 'wp-poll' ), $plural ),
-				'add_new'            => sprintf( __( 'Add %s', 'wp-poll' ), $singular ),
-				'add_new_item'       => sprintf( __( 'Add %s', 'wp-poll' ), $singular ),
-				'edit'               => __( 'Edit', 'wp-poll' ),
-				'edit_item'          => sprintf( __( '%s Details', 'wp-poll' ), $singular ),
-				'new_item'           => sprintf( __( 'New %s', 'wp-poll' ), $singular ),
-				'view'               => sprintf( __( 'View %s', 'wp-poll' ), $singular ),
-				'view_item'          => sprintf( __( 'View %s', 'wp-poll' ), $singular ),
-				'search_items'       => sprintf( __( 'Search %s', 'wp-poll' ), $plural ),
-				'not_found'          => sprintf( __( 'No %s found', 'wp-poll' ), $plural ),
-				'not_found_in_trash' => sprintf( __( 'No %s found in trash', 'wp-poll' ), $plural ),
-				'parent'             => sprintf( __( 'Parent %s', 'wp-poll' ), $singular ),
+				'menu_name'          => __( $singular ),
+				'all_items'          => sprintf( __( '%s' ), $plural ),
+				'add_new'            => sprintf( __( 'Add %s' ), $singular ),
+				'add_new_item'       => sprintf( __( 'Add %s' ), $singular ),
+				'edit'               => __( 'Edit' ),
+				'edit_item'          => sprintf( __( '%s Details' ), $singular ),
+				'new_item'           => sprintf( __( 'New %s' ), $singular ),
+				'view'               => sprintf( __( 'View %s' ), $singular ),
+				'view_item'          => sprintf( __( 'View %s' ), $singular ),
+				'search_items'       => sprintf( __( 'Search %s' ), $plural ),
+				'not_found'          => sprintf( __( 'No %s found' ), $plural ),
+				'not_found_in_trash' => sprintf( __( 'No %s found in trash' ), $plural ),
+				'parent'             => sprintf( __( 'Parent %s' ), $singular ),
 			), $labels );
 
-			register_taxonomy( $tax_name, apply_filters( "pb_register_taxonomy_$tax_name", $args, $obj_name ) );
+			register_taxonomy( $tax_name, $obj_type, apply_filters( "pb_register_taxonomy_$tax_name", $args, $obj_type ) );
 		}
 
 
@@ -389,8 +672,8 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 				}
 			}
 
-			if ( isset( $option['disabled'] ) && $option['disabled'] && ! empty( $this->disabled_notice ) ) {
-				printf( '<span class="disabled-notice" style="background: #ffe390eb;margin-left: 10px;padding: 5px 12px;font-size: 12px;border-radius: 3px;color: #717171;">%s</span>', $this->disabled_notice );
+			if ( isset( $option['disabled'] ) && $option['disabled'] && ! empty( $this->get_disabled_notice() ) ) {
+				printf( '<span class="disabled-notice" style="background: #ffe390eb;margin-left: 10px;padding: 5px 12px;font-size: 12px;border-radius: 3px;color: #717171;">%s</span>', $this->get_disabled_notice() );
 			}
 
 			do_action( "pb_settings_before_option", $option );
@@ -1194,7 +1477,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 				<?php
 				settings_errors();
 
-				do_action( 'pb_settings_before_page_' . $this->get_current_page() );
+				do_action( 'pb_settings_before_page_' . $this->get_current_page(), $this );
 
 				$this->get_settings_nav_tab();
 
@@ -1204,9 +1487,9 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 					print( $this->get_settings_fields_html() );
 				}
 
-				do_action( $this->get_current_page() );
+				do_action( $this->get_current_page(), $this );
 
-				do_action( 'pb_settings_after_page_' . $this->get_current_page() );
+				do_action( 'pb_settings_after_page_' . $this->get_current_page(), $this );
 				?>
             </div>
 			<?php
@@ -1702,7 +1985,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 		function get_option_value( $option_id = false, $default = '' ) {
 
 			if ( ! $option_id || empty( $option_id ) ) {
-				return false;
+				returnfalse;
 			}
 
 			$option = array();

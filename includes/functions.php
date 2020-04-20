@@ -4,9 +4,7 @@
 * Copyright: 	2015 pluginbazar
 */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}  // if direct access
+defined( 'ABSPATH' ) || exit;
 
 
 if ( ! function_exists( 'woc_update_global_arguments' ) ) {
