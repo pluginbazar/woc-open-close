@@ -3,9 +3,9 @@
 	Donate link: https://www.pluginbazar.com/contact/
 	Tags: woocommerce schedules, business hours, schedules manager, restrict-add-to-cart, Dokan
 	Requires at least: 4.6
-	Tested up to: 5.4
-	Tested up to WooCommerce: 4.0.1
-	Stable tag: 4.1.2
+	Tested up to: 5.4.2
+	Tested up to WooCommerce: 4.3.0
+	Stable tag: 4.1.4
 	Requires PHP: 5.6
 	Requires WooCommerce: 3.0
 	Text Domain: woc-open-close
@@ -18,7 +18,7 @@
 
 Maintain Business hour for your WooCommerce Shop. Let your customers know about business schedules and restrict them from placing new orders while Store is Closed.
 
-[TRY DEMO](https://demo.pluginbazar.com/woc-open-close/) | [BUY PRO](https://pluginbazar.com/?add-to-cart=1190) | [HELP](https://help.pluginbazar.com/forums/forum/woocommerce-open-close/) | [DOCUMENTATION](https://help.pluginbazar.com/docs/woocommerce-open-close/)
+[TRY DEMO](https://demo.pluginbazar.com/woc-open-close/try-demo/) | [BUY PRO](https://pluginbazar.com/?add-to-cart=3395) | [SUPPORT](https://pluginbazar.com/my-account/tickets/?action=new) | [DOCUMENTATION](https://pluginbazar.com/docs/woocommerce-open-close/)
 
 Your customers might be in confusion with your business. Sometimes customer complete order and wait for the products cause he/she pay for the shipping too, But times passed on and passing nothing hear from your WooCommerce Store.
 
@@ -153,6 +153,9 @@ You can manage (Create | Delete | Update) your Schedules on Frontend using this 
 
     = 4.0.8 =
     * Enable option to disable notice bar and fix a bug
+
+    = 4.1.4 =
+    * Compatibility Test with Latest WordPress and WooCommerce Versions
 
 
 

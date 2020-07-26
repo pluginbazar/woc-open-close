@@ -24,6 +24,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			add_action( 'admin_notices', array( $this, 'manage_admin_notices' ) );
 			add_action( 'admin_bar_menu', array( $this, 'handle_admin_bar_menu' ), 9999, 1 );
 
+			add_filter( 'widget_text', 'do_shortcode', 11 );
 			add_filter( 'plugin_row_meta', array( $this, 'add_plugin_meta' ), 10, 2 );
 			add_filter( 'plugin_action_links_' . WOC_PLUGIN_FILE, array( $this, 'add_plugin_actions' ), 10, 2 );
 			add_filter( 'post_updated_messages', array( $this, 'filter_update_messages' ), 10, 1 );
@@ -199,7 +200,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			), $links );
 
 			if ( ! woc_pro_available() ) {
-				$action_links['go-pro'] = sprintf( '<a class="woc-plugin-meta-buy" href="%s">%s</a>', esc_url( WOC_PLUGIN_LINK ), esc_html__( 'Go Pro', 'woc-open-close' ) );
+				$action_links['go-pro'] = sprintf( '<a target="_blank" class="woc-plugin-meta-buy" href="%s">%s</a>', esc_url( WOC_PLUGIN_LINK ), esc_html__( 'Go Pro', 'woc-open-close' ) );
 			}
 
 			return $action_links;
@@ -219,8 +220,8 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			if ( WOC_PLUGIN_FILE === $file ) {
 
 				$row_meta = array(
-					'documentation' => sprintf( '<a href="%s">%s</a>', esc_url( WOC_DOCS_URL ), esc_html__( 'Documentation', 'woc-open-close' ) ),
-					'support'       => sprintf( '<a href="%s">%s</a>', esc_url( WOC_FORUM_URL ), esc_html__( 'Support', 'woc-open-close' ) ),
+					'documentation' => sprintf( '<a target="_blank" href="%s">%s</a>', esc_url( WOC_DOCS_URL ), esc_html__( 'Documentation', 'woc-open-close' ) ),
+					'support'       => sprintf( '<a target="_blank" href="%s">%s</a>', esc_url( WOC_TICKET_URL ), esc_html__( 'Create Ticket', 'woc-open-close' ) ),
 				);
 
 				return array_merge( $links, $row_meta );
@@ -329,13 +330,14 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			// Check is_open()
 			if ( ! in_array( 'no', woc_get_option( 'show_admin_status', array( 'yes' ) ) ) ) {
 
-				$buy_notice = ! woc_pro_available() ? sprintf( ' <a target="_blank" href="https://pluginbazar.com/plugin/woocommerce-open-close/">%s</a>', __( 'Get Pro to Restrict Order while shop Closed', 'woc-open-close' ) ) : '';
+				$buy_notice    = ! woc_pro_available() ? sprintf( ' <a target="_blank" href="https://pluginbazar.com/plugin/woocommerce-open-close/">%s</a>', __( 'Get Pro to Restrict Order while shop Closed', 'woc-open-close' ) ) : '';
+				$status_notice = woc_is_open() ? __( 'Shop is now accepting order from customers', 'woc-open-close' ) : __( 'Shop is currently closed from taking orders', 'woc-open-close' );
+				$status_notice = sprintf( '%s. %s <a href="%s" class="woc-notice-link">%s</a>', $status_notice, $buy_notice,
+					esc_url( admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close#woc_allow_add_cart_on_close' ) ),
+					esc_html__( 'Disable this Notice', 'woc-open-close' )
+				);
 
-				if ( woc_is_open() ) {
-					wooopenclose()->print_notice( __( 'Shop is now accepting order from Customers', 'woc-open-close' ) . $buy_notice );
-				} else {
-					wooopenclose()->print_notice( __( 'Shop is currently Closed from Taking Order', 'woc-open-close' ) . $buy_notice, 'warning' );
-				}
+				wooopenclose()->print_notice( $status_notice, 'warning', false );
 			}
 		}
 
@@ -382,6 +384,44 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 
 
 		/**
+		 * render shortcode schedule
+		 *
+		 * @param array $atts
+		 *
+		 * @return false|string
+		 */
+		function render_schedule( $atts = array() ) {
+
+			extract( is_array( $atts ) ? $atts : array() );
+
+			ob_start();
+			woc_get_template( 'business-schedules.php', $atts );
+
+			return ob_get_clean();
+		}
+
+
+		/**
+		 * Render countdown timer
+		 *
+		 * @param array $atts
+		 * @param null $content
+		 *
+		 * @return false|string
+		 */
+		function render_countdown_timer( $atts = array(), $content = null ) {
+
+			extract( is_array( $atts ) ? $atts : array() );
+
+			ob_start();
+			woc_get_template( 'countdown-timer.php', $atts );
+
+			return ob_get_clean();
+		}
+
+
+
+		/**
 		 * Register Post Types and Settings
 		 */
 		function register_everything() {
@@ -421,6 +461,10 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 					'woocommerce' => esc_html( 'WooCommerce' ),
 				),
 			) );
+
+			wooopenclose()->PB_Settings()->register_shortcode( 'woc_open_close', array( $this, 'render_schedule' ) );
+			wooopenclose()->PB_Settings()->register_shortcode( 'schedule', array( $this, 'render_schedule' ) );
+			wooopenclose()->PB_Settings()->register_shortcode( 'woc_countdown_timer', array( $this, 'render_countdown_timer' ) );
 
 			$this->display_countdown_timer_dynamically();
 		}

@@ -28,7 +28,6 @@ class WOC_Post_meta {
 		$post_types = array('woc_hour');
         
         if( in_array( $post_type, $post_types ) ) {
-        
             add_meta_box('woc_metabox', 'Woocommerce Open Close ' . __('Data Box','woc-open-close'), array($this, 'woc_meta_box_function'), $post_type,'normal','high');
 		}
 	}

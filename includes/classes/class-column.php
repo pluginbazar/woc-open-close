@@ -16,71 +16,52 @@ class class_qa_woc_hour_column {
 		add_action( 'manage_woc_hour_posts_columns', array( $this, 'add_columns' ), 16, 1 );
 		add_action( 'manage_woc_hour_posts_custom_column', array( $this, 'custom_columns_content' ), 10, 2 );
 		add_filter( 'post_row_actions', array( $this, 'remove_row_actions' ), 10, 2 );
+		add_filter( 'months_dropdown_results', array( $this, 'remove_date_filter' ), 10, 2 );
 	}
 
-	public function add_columns( $columns ) {
 
-		$new = array();
-		foreach ( $columns as $col_id => $col_label ) {
-
-			if ( 'cb' != $col_id ) {
-				continue;
-			}
-
-			$new[ $col_id ] = $col_label;
-
-			$new['title']         = esc_html__( 'Schedule Title', 'woc-open-close' );
-			$new['woc_shortcode'] = '';
-			$new['woc_author']    = esc_html__( 'Author', 'woc-open-close' );
-			$new['woc_status']    = '';
-			$new['woc_date']      = '';
+	function remove_date_filter( $months, $post_type ) {
+		if ( $post_type === 'woc_hour' ) {
+			return array();
 		}
 
-		unset( $new['date'] );
-
-		return $new;
+		return $months;
 	}
 
-	public function custom_columns_content( $column, $post_id ) {
-		switch ( $column ) {
 
-			case 'woc_shortcode':
-				?>
-                <div class="woc_shortcode">
-                    <input type="text" size="30" readonly="readonly" onclick="this.select()"
-                           value='[woc_open_close set="<?php echo $post_id; ?>"]'/>
-                </div>
-				<?php
-				break;
+	function custom_columns_content( $column, $post_id ) {
 
-			case 'woc_author':
+		if ( $column === 'shortcode' ) {
+			printf( '<span class="woc-shortcode hint--top" aria-label="%s">[schedule id="%s"]</span>',
+				esc_html__( 'Click to Copy', 'woc-open-close' ), $post_id
+			);
+		}
 
-				global $authordata;
+		if ( $column === 'is-default' && $post_id == wooopenclose()->get_active_schedule_id() ) {
+			printf( '<div class="woc-schedule-default">%s</div>', esc_html__( 'Active Schedule', 'woc-open-close' ) );
+		}
 
-				if ( $authordata instanceof WP_User ) {
-					printf( '<div class="woc_author"><a href="%s">%s</a></div>', admin_url( "user-edit.php?user_id={$authordata->ID}" ), $authordata->display_name );
-				}
-				break;
-
-			case 'woc_status':
-
-				if ( $post_id == wooopenclose()->get_active_schedule_id() ) {
-					echo '<div class="woc_column_status"><i class="fa fa-check"></i> ' . esc_html__( 'Active Schedule', 'woc-open-close' ) . '</div>';
-				}
-
-				break;
-
-			case 'woc_date':
-
-				$dateago = human_time_diff( get_the_time( 'U', $post_id ), current_time( 'timestamp' ) );
-
-				?>Created <em><?php printf( __( '%s ago', 'woc-open-close' ), $dateago ); ?></em><?php
-
-				break;
-
-
+		if ( $column === 'woc-date' ) {
+			printf( esc_html__( 'Created %s ago', 'woc-open-close' ), human_time_diff( get_the_time( 'U', $post_id ), current_time( 'timestamp' ) ) );
 		}
 	}
+
+
+	/**
+	 * Add columns to poll list page
+	 *
+	 * @return array
+	 */
+	function add_columns() {
+
+		return array(
+			'title'      => '',
+			'shortcode'  => '',
+			'is-default' => '',
+			'woc-date'   => '',
+		);
+	}
+
 
 	public function remove_row_actions( $actions ) {
 		global $post;

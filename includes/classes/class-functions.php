@@ -107,6 +107,7 @@ class WOC_Functions {
 		return 'UTC';
 	}
 
+
 	/**
 	 * Return Todays Schedules
 	 *
@@ -121,6 +122,7 @@ class WOC_Functions {
 
 		return apply_filters( 'woc_filters_get_todays_schedule', $all_schedules );
 	}
+
 
 	/**
 	 * Return option value
@@ -497,14 +499,13 @@ class WOC_Functions {
 			'page_nav'      => esc_html__( 'Support', 'woc-open-close' ),
 			'show_submit'   => false,
 			'page_settings' => array(
-
 				'sec_options' => array(
 					'title'   => esc_html__( 'Emergency support from Pluginbazar.com', 'woc-open-close' ),
 					'options' => array(
 						array(
 							'id'      => '__1',
-							'title'   => esc_html__( 'Support Forum', 'woc-open-close' ),
-							'details' => sprintf( '%1$s<br>' . __( '<a href="%1$s" target="_blank">Ask in Forum</a>', 'woc-open-close' ), WOC_FORUM_URL ),
+							'title'   => esc_html__( 'Support Ticket', 'woc-open-close' ),
+							'details' => sprintf( '%1$s<br>' . __( '<a href="%1$s" target="_blank">Create Support Ticket</a>', 'woc-open-close' ), WOC_TICKET_URL ),
 						),
 
 						array(

@@ -3,7 +3,7 @@
 	Plugin Name: WooCommerce Open Close
 	Plugin URI: https://pluginbazar.com/plugin/woocommerce-open-close/
 	Description: Maintain Business hour for your WooCommerce Shop. Let your customers know about business schedules and restrict them from placing new orders while Store is Closed.
-	Version: 4.1.2
+	Version: 4.1.4
 	Text Domain: woc-open-close
 	Author: Pluginbazar
 	Author URI: https://pluginbazar.com/
@@ -17,8 +17,8 @@ define( 'WOC_PLUGIN_URL', WP_PLUGIN_URL . '/' . plugin_basename( dirname( __FILE
 define( 'WOC_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WOC_PLUGIN_FILE', plugin_basename( __FILE__ ) );
 define( 'WOC_LICENSE_KEY', 'https://pluginbazar.com/license-key/' );
-define( 'WOC_FORUM_URL', 'https://pluginbazar.com/forums/forum/woocommerce-open-close' );
-define( 'WOC_PLUGIN_LINK', 'https://pluginbazar.com/plugin/woocommerce-open-close/?add-to-cart=1190' );
+define( 'WOC_TICKET_URL', 'https://pluginbazar.com/my-account/tickets/?action=new' );
+define( 'WOC_PLUGIN_LINK', 'https://pluginbazar.com/plugin/woocommerce-open-close/?add-to-cart=3395' );
 define( 'WOC_DOCS_URL', 'https://pluginbazar.com/docs/woocommerce-open-close/' );
 define( 'WOC_CONTACT_URL', 'https://pluginbazar.com/contact/' );
 define( 'WOC_WP_REVIEW_URL', 'https://wordpress.org/support/plugin/woc-open-close/reviews/' );
@@ -68,7 +68,6 @@ if ( ! class_exists( 'wooCommerceOpenClose' ) ) {
 			require_once( WOC_PLUGIN_DIR . 'includes/classes/class-functions.php' );
 			require_once( WOC_PLUGIN_DIR . 'includes/classes/class-hooks.php' );
 			require_once( WOC_PLUGIN_DIR . 'includes/classes/class-post-meta.php' );
-			require_once( WOC_PLUGIN_DIR . 'includes/classes/class-shortcodes.php' );
 			require_once( WOC_PLUGIN_DIR . 'includes/classes/class-column.php' );
 			require_once( WOC_PLUGIN_DIR . 'includes/classes/class-widget-schedule.php' );
 
@@ -84,6 +83,7 @@ if ( ! class_exists( 'wooCommerceOpenClose' ) ) {
 		function localize_scripts() {
 			return apply_filters( 'woc_filters_localize_scripts', array(
 				'ajaxurl'    => admin_url( 'admin-ajax.php' ),
+				'copyText'   => esc_html__( 'Copied !', 'woc-open-close' ),
 				'removeConf' => esc_html__( 'Are you really want to remove this schedule?', 'woc-open-close' ),
 			) );
 		}

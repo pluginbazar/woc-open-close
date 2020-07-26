@@ -4,30 +4,28 @@
 * Copyright: 	2015 pluginbazar
 */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}  // if direct access
+defined( 'ABSPATH' ) || exit;
 
-
-$woc_switch_checkbox = wooopenclose()->get_active_schedule_id() == $post->ID ? 'checked' : '';
-
-?>
-
-<div class='woc_section woc_section_mini'>
-    <div class='woc_section_inline woc_section_title'><?php echo __( 'Make Active', 'woc-open-close' ); ?></div>
-    <div class="woc_section_inline woc_section_hint hint--top"
-         aria-label="<?php echo __( 'Make this hour schedule as active for your Shop', 'woc-open-close' ); ?>">?
+if ( $post->post_status === 'publish' ) :
+	?>
+    <div class='woc_section woc_section_mini'>
+        <div class='woc_section_inline woc_section_title'>
+			<?php esc_html_e( 'Default', 'woc-open-close' ); ?>
+        </div>
+        <div class="woc_section_inline woc_section_hint hint--top"
+             aria-label="<?php echo __( 'Make this hour schedule as default for your Shop', 'woc-open-close' ); ?>">?
+        </div>
+        <div class='woc_section_inline woc_section_inputs'>
+            <label class="woc_switch">
+                <input <?php echo wooopenclose()->get_active_schedule_id() == $post->ID ? 'checked' : ''; ?>
+                        type="checkbox"
+                        class="woc_switch_checkbox"
+                        data-id="<?php echo $post->ID; ?>">
+                <span class="woc_switch_slider woc_switch_round"></span>
+            </label>
+        </div>
     </div>
-    <div class='woc_section_inline woc_section_inputs'>
-
-        <label class="woc_switch">
-            <input type="checkbox" class="woc_switch_checkbox" <?php echo $woc_switch_checkbox; ?>
-                   data-id="<?php echo $post->ID; ?>">
-            <span class="woc_switch_slider woc_switch_round"></span>
-        </label>
-
-    </div>
-</div>
+<?php endif; ?>
 
 <div class='woc_section woc_section_mini'>
     <div class='woc_section_inline woc_section_title'><?php echo __( 'Date - Now', 'woc-open-close' ); ?></div>
@@ -65,7 +63,6 @@ $woc_switch_checkbox = wooopenclose()->get_active_schedule_id() == $post->ID ? '
     </div>
 </div>
 
-
 <div class='woc_section woc_section_mini'>
     <div class='woc_section_inline woc_section_title'><?php echo __( 'Timezone', 'woc-open-close' ); ?></div>
     <div class="woc_section_inline woc_section_hint hint--top"
@@ -78,6 +75,17 @@ $woc_switch_checkbox = wooopenclose()->get_active_schedule_id() == $post->ID ? '
         <p><a class='' target='_blank'
               href='edit.php?post_type=woc_hour&page=woc-open-close#timezone_string'><?php _e( 'Update Time Now', 'woc-open-close' ); ?></a>
         </p>
+    </div>
+</div>
+
+<div class='woc_section woc_section_mini'>
+    <div class='woc_section_inline woc_section_title'><?php echo __( 'Shortcode', 'woc-open-close' ); ?></div>
+    <div class="woc_section_inline woc_section_hint hint--top"
+         aria-label="<?php echo __( 'Copy this shortcode to display the schedule anywhere you want!', 'woc-open-close' ); ?>">
+        ?
+    </div>
+    <div class='woc_section_inline woc_section_inputs'>
+        <span class='woc-shortcode hint--top' aria-label='<?php _e( 'Click to Copy', 'woc-open-close' ); ?>'><?php printf( '[schedule id="%s"]', $post->ID ); ?></span>
     </div>
 </div>
 
@@ -114,7 +122,6 @@ $woc_switch_checkbox = wooopenclose()->get_active_schedule_id() == $post->ID ? '
         user-select: none;
         border: none;
     }
-
 
     #delete-action a {
         background: #E91E63;

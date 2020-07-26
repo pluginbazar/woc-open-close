@@ -16,7 +16,7 @@ $woc_message    = isset( $woc_hours_meta['woc_message'] ) ? $woc_hours_meta['woc
 
 
 <div class='woc_section'>
-    <div class='woc_section_inline woc_section_title'><?php echo __('Working hour Label', 'woc-open-close');?></div>
+    <div class='woc_section_inline woc_section_title'><?php echo __('Label', 'woc-open-close');?></div>
     <div class="woc_section_inline woc_section_hint hint--top" aria-label="<?php echo __('Define a title for this working hour', 'woc-open-close');?>">?</div>
     <div class='woc_section_inline woc_section_inputs'>
         <input type="text" name="post_title" value="<?php echo get_the_title(); ?>" placeholder="<?php _e('Business hour', 'woc-open-close' ); ?>" />
@@ -25,7 +25,7 @@ $woc_message    = isset( $woc_hours_meta['woc_message'] ) ? $woc_hours_meta['woc
 
 
 <div class='woc_section'>
-    <div class='woc_section_inline woc_section_title'><?php echo __('Working schedules', 'woc-open-close');?></div>
+    <div class='woc_section_inline woc_section_title'><?php echo __('Schedules', 'woc-open-close');?></div>
     <div class="woc_section_inline woc_section_hint hint--top" aria-label="<?php echo __('Update working schedules data here', 'woc-open-close');?>">?</div>
     <div class='woc_section_inline woc_section_inputs woc_days'>
         
@@ -53,7 +53,7 @@ $woc_message    = isset( $woc_hours_meta['woc_message'] ) ? $woc_hours_meta['woc
 </div>
 
 <div class='woc_section'>
-    <div class='woc_section_inline woc_section_title'><?php echo __('Store close message', 'woc-open-close');?></div>
+    <div class='woc_section_inline woc_section_title'><?php echo __('Message', 'woc-open-close');?></div>
     <div class="woc_section_inline woc_section_hint hint--top" aria-label="<?php echo __('Write your custom message what your visitors will see', 'woc-open-close');?>">?</div>
     <div class='woc_section_inline woc_section_inputs'>
 
