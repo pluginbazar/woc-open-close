@@ -5,7 +5,6 @@
  * @package /assets/scripts.js
  **/
 
-
 (function ($, window, document, pluginObject) {
     "use strict";
 
@@ -16,6 +15,16 @@
         });
     });
 
+    $(window).load(function () {
+        $('.woc-loader-wrap').fadeOut('slow');
+    });
+
+    $(document).on('trigger-woc-loader', function () {
+        $('.woc-loader-wrap').fadeIn();
+        setTimeout(function () {
+            $('.woc-loader-wrap').fadeOut('slow');
+        }, 3000);
+    });
 
     $(document).on('click', '.woc_section .woc_add_schedule', function () {
 

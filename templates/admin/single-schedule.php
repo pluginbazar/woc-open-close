@@ -37,12 +37,12 @@ $close     = wooopenclose()->get_args_option( 'close' );
 
     <span class="woc_repeat_actions woc_repeat_copy hint--top"
           aria-label="<?php esc_html_e( 'Copy to all other days', 'woc-open-close' ); ?>">
-        <span class="dashicons dashicons-sort"></span>
+        <span class="dashicons dashicons-admin-page"></span>
     </span>
 
     <span class="woc_repeat_actions woc_repeat_sort hint--top"
           aria-label="<?php esc_html_e( 'Sort schedule', 'woc-open-close' ); ?>">
-        <span class="dashicons dashicons-admin-page"></span>
+        <span class="dashicons dashicons-sort"></span>
     </span>
 
     <span class="woc_repeat_actions woc_repeat_remove hint--top"

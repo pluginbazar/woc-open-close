@@ -1,30 +1,29 @@
 @charset "utf-8";
 /* CSS Document */
 
-#woc_metabox {
-    margin-top: -20px;
+
+.post-type-woc_hour #submitdiv {
+    margin-top: 20px;
 }
 
 .post-type-woc_hour .postbox {
     border: none !important;
 }
 
+.post-type-woc_hour .postbox-header .handle-actions {
+    display: none !important;
+}
+
 #woc_metabox .hndle.ui-sortable-handle,
 .post-type-woc_hour #submitdiv .hndle.ui-sortable-handle,
 #woc_metabox_message .hndle.ui-sortable-handle,
 #woc_metabox_status .hndle.ui-sortable-handle {
-    background-image: linear-gradient(100deg, #f26798 0%, #777777 100%);
+    background-image: linear-gradient(100deg, #f26798 0%, #6b6b6b 100%);
     font-size: 18px;
     line-height: 18px;
     padding: 20px;
     border: none;
-}
-
-#woc_metabox button.handlediv,
-#submitdiv button.handlediv {
-    position: absolute;
-    right: 5px;
-    top: 10px;
+    color: #fff;
 }
 
 #woc_metabox .hndle.ui-sortable-handle span,
@@ -268,3 +267,40 @@ a.woc-notice-link:visited {
     padding: 16px !important;
 }
 
+/**
+ * Admin Preloader
+ */
+
+.woc-loader-wrap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 9999999999;
+    background: #f3f3f3;
+    top: 0;
+    left: 0;
+}
+
+.woc-loader {
+    background: #f3f3f3;
+    border: 5px solid #cacaca;
+    border-top: 5px solid #f6405f;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 2s linear infinite;
+    box-shadow: 0 0 30px 10px #0000002b;
+    position: fixed;
+    z-index: 9999999;
+    top: calc(50% - 20px);
+    right: 50%;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

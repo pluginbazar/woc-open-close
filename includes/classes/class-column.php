@@ -38,7 +38,7 @@ class class_qa_woc_hour_column {
 		}
 
 		if ( $column === 'is-default' && $post_id == wooopenclose()->get_active_schedule_id() ) {
-			printf( '<div class="woc-schedule-default">%s</div>', esc_html__( 'Active Schedule', 'woc-open-close' ) );
+			printf( '<div class="woc-schedule-default">%s</div>', esc_html__( 'Default Schedule', 'woc-open-close' ) );
 		}
 
 		if ( $column === 'woc-date' ) {

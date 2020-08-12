@@ -18,6 +18,11 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 		 */
 		function __construct() {
 
+			if ( ! is_admin() ) {
+				add_action( 'init', array( $this, 'ob_start' ) );
+				add_action( 'wp_footer', array( $this, 'ob_end' ) );
+			}
+
 			add_action( 'init', array( $this, 'register_everything' ) );
 			add_action( 'pb_settings_after_timezone_string', array( $this, 'display_timezone_string' ) );
 			add_action( 'wp_footer', array( $this, 'display_popup_statusbar' ) );
@@ -32,6 +37,20 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			add_action( 'wp_ajax_woc_add_schedule', array( $this, 'ajax_add_schedule' ) );
 			add_action( 'wp_ajax_woc_switch_active', array( $this, 'ajax_switch_active' ) );
 			add_action( 'pb_settings_before_woc_instant_force', array( $this, 'display_instant_controller' ) );
+			add_action( 'in_admin_header', array( $this, 'render_admin_loader' ), 0 );
+		}
+
+
+		/**
+		 * Render preloader in Admin
+		 */
+		function render_admin_loader() {
+
+			global $current_screen;
+
+			if ( in_array( $current_screen->post_type, array( 'woc_hour' ) ) ) {
+				printf( '<div class="woc-loader-wrap"><div class="woc-loader"></div></div>' );
+			}
 		}
 
 
@@ -467,6 +486,35 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			wooopenclose()->PB_Settings()->register_shortcode( 'woc_countdown_timer', array( $this, 'render_countdown_timer' ) );
 
 			$this->display_countdown_timer_dynamically();
+		}
+
+		/**
+		 * Return Buffered Content
+		 *
+		 * @param $buffer
+		 *
+		 * @return mixed
+		 */
+		function ob_callback( $buffer ) {
+			return $buffer;
+		}
+
+
+		/**
+		 * Start of Output Buffer
+		 */
+		function ob_start() {
+			ob_start( array( $this, 'ob_callback' ) );
+		}
+
+
+		/**
+		 * End of Output Buffer
+		 */
+		function ob_end() {
+			if ( ob_get_length() ) {
+				ob_end_flush();
+			}
 		}
 	}
 
