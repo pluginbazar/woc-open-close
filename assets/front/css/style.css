@@ -2,53 +2,58 @@
 /* CSS Document */
 
 
-/*
-Templates: Display Schedules
-Location: /templates/display-schedules.php
-*/
+.wooopenclose-schedules-layout .wooopenclose-schedules-title {
+    position: relative;
+    z-index: 99;
+    margin-bottom: 40px;
+}
 
-.woc-schedules {
-    font-family: Open Sans, sans-serif;
-    /*display: inline-block;*/
-    /*min-width: 320px;*/
+/* -------------------------------------------
+    Layout 1 Start Here
+------------------------------------------ */
+
+.wooopenclose-layout-1 .wooopenclose-schedules {
     max-width: 360px;
     font-size: 19px;
 }
 
-.entry-content .woc-schedules img,
-.woc-schedules img {
+.wooopenclose-layout-1 .entry-content .wooopenclose-schedules img,
+.wooopenclose-layout-1 .wooopenclose-schedules img {
     border-radius: 0;
     max-width: 150px;
     box-shadow: none;
     margin: 0 auto;
 }
 
-.woc-status-img {
+.wooopenclose-layout-1 .wooopenclose-status-img {
     text-align: center;
     padding: 30px;
 }
 
-
-.woc-schedules .woc-schedule.current.shop-close {
+.wooopenclose-layout-1 .wooopenclose-schedules .wooopenclose-schedule.current.shop-close {
     background: rgba(248, 0, 19, 0.17);
 }
 
-.woc-schedules .woc-schedule.current.shop-open {
+.wooopenclose-layout-1 .wooopenclose-schedules .wooopenclose-schedule.current.shop-open {
     background: rgba(76, 175, 80, 0.17);
 }
 
-.woc-schedules .woc-schedule:last-child {
+.wooopenclose-layout-1 .wooopenclose-schedules .wooopenclose-schedule:last-child {
     border-bottom: none;
 }
 
-.woc-schedules .woc-schedule .woc-day-name {
+.wooopenclose-layout-1 .wooopenclose-schedules .wooopenclose-schedule .wooopenclose-day-name {
     position: relative;
     cursor: pointer;
     padding: 12px 20px;
     line-height: normal;
 }
 
-.woc-schedules .woc-schedule .woc-arrow-icon {
+.wooopenclose-schedules .wooopenclose-schedule .dashicons {
+    vertical-align: middle;
+}
+
+.wooopenclose-layout-1 .wooopenclose-schedules .wooopenclose-schedule .wooopenclose-arrow-icon {
     position: absolute;
     height: 14px;
     width: 14px;
@@ -56,79 +61,80 @@ Location: /templates/display-schedules.php
     top: 18px;
 }
 
-.woc-schedules .woc-schedule .woc-arrow-icon:before,
-.woc-schedules .woc-schedule .woc-arrow-icon:after {
+.wooopenclose-layout-1 .wooopenclose-schedules .wooopenclose-schedule .wooopenclose-arrow-icon:before,
+.wooopenclose-layout-1 .wooopenclose-schedules .wooopenclose-schedule .wooopenclose-arrow-icon:after {
     content: '';
     position: absolute;
     background: #2a2a2a;
     transition: 0.3s;
 }
 
-.woc-schedules .woc-schedule .woc-arrow-icon:before {
+.wooopenclose-layout-1 .wooopenclose-schedules .wooopenclose-schedule .wooopenclose-arrow-icon:before {
     width: 2px;
     height: 14px;
     right: 7px;
 }
 
-.woc-schedules .woc-schedule .woc-arrow-icon:after {
+.wooopenclose-layout-1 .wooopenclose-schedules .wooopenclose-schedule .wooopenclose-arrow-icon:after {
     width: 14px;
     height: 2px;
     right: 1px;
     top: 6px;
 }
 
-.woc-schedules .woc-schedule.opened .woc-arrow-icon:before {
+.wooopenclose-layout-1 .wooopenclose-schedules .wooopenclose-schedule.opened .wooopenclose-arrow-icon:before {
     transform: rotate(90deg);
 }
 
 
-.woc-schedules .woc-schedule .woc-day-schedules {
+.wooopenclose-layout-1 .wooopenclose-schedules .wooopenclose-schedule .wooopenclose-day-schedules {
     display: none;
     padding: 0 0 10px 40px;
     font-size: 15px;
     line-height: normal;
 }
 
-.woc-schedules .woc-schedule.current .woc-day-schedules {
+.wooopenclose-layout-1 .wooopenclose-schedules .wooopenclose-schedule.current .wooopenclose-day-schedules {
     display: block;
 }
 
-.woc-schedules .woc-schedule .woc-day-schedules .woc-day-schedule {
+.wooopenclose-layout-1 .wooopenclose-schedules .wooopenclose-schedule .wooopenclose-day-schedules .wooopenclose-day-schedule {
     width: 100%;
     display: block;
 }
 
-.woc-day-schedules .woc-day-schedule + .woc-day-schedule {
+.wooopenclose-layout-1 .wooopenclose-day-schedules .wooopenclose-day-schedule + .wooopenclose-day-schedule {
     margin-top: 7px;
 }
+
 
 /**
 * Style 2
 */
 
-.woc-schedules-style-2 .woc-schedules .woc-schedule {
+.wooopenclose-layout-1 .wooopenclose-schedules-style-2 .wooopenclose-schedules .wooopenclose-schedule {
     border-color: #e5e5e5;
 }
 
-.woc-schedules-style-2 .woc-schedules .woc-status-img {
+.wooopenclose-layout-1 .wooopenclose-schedules-style-2 .wooopenclose-schedules .wooopenclose-status-img {
     border: 0;
     box-shadow: 0 5px 37px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     margin-bottom: 15px;
 }
 
-.woc-schedules-style-2 .woc-schedules .woc-schedule.current.shop-close {
+.wooopenclose-layout-1 .wooopenclose-schedules-style-2 .wooopenclose-schedules .wooopenclose-schedule.current.shop-close {
     background-color: #e52729;
     color: #ffffff;
 }
 
-.woc-schedules-style-2 .woc-schedules .woc-schedule.current.shop-open {
+.wooopenclose-layout-1 .wooopenclose-schedules-style-2 .wooopenclose-schedules .wooopenclose-schedule.current.shop-open {
     background: #4caf50;
     color: #fff;
 }
 
-.woc-schedules-style-2 .woc-schedule.current .woc-arrow-icon:before,
-.woc-schedules-style-2 .woc-schedule.current .woc-arrow-icon:after {
+.wooopenclose-layout-1 .wooopenclose-schedules-style-2 .wooopenclose-schedule.current .wooopenclose-arrow-icon:before,
+.wooopenclose-layout-1 .wooopenclose-schedules-style-2 .wooopenclose-schedule.current .wooopenclose-arrow-icon:after {
     background: #fff;
 }
 
@@ -137,35 +143,35 @@ Location: /templates/display-schedules.php
 * Style 3
 */
 
-.woc-schedules-style-3 .woc-schedules {
+.wooopenclose-layout-1 .wooopenclose-schedules-style-3 .wooopenclose-schedules {
     box-shadow: 0 5px 37px rgba(0, 0, 0, 0.15);
 }
 
-.woc-schedules-style-3 .woc-schedules .woc-schedule {
+.wooopenclose-layout-1 .wooopenclose-schedules-style-3 .wooopenclose-schedules .wooopenclose-schedule {
     border-color: #e5e5e5;
     color: #fff;
 }
 
-.woc-schedules-style-3.woc-shop-schedules-open .woc-schedules {
+.wooopenclose-layout-1 .wooopenclose-schedules-style-3.wooopenclose-shop-schedules-open .wooopenclose-schedules {
     background-color: #4caf50;
 }
 
-.woc-schedules-style-3.woc-shop-schedules-close .woc-schedules {
+.wooopenclose-layout-1 .wooopenclose-schedules-style-3.wooopenclose-shop-schedules-close .wooopenclose-schedules {
     background-color: #e52729;
 }
 
-.woc-schedules-style-3 .woc-schedules .woc-status-img {
+.wooopenclose-layout-1 .wooopenclose-schedules-style-3 .wooopenclose-schedules .wooopenclose-status-img {
     border: 0;
     background-color: #fff;
     padding: 34px;
 }
 
-.woc-schedules-style-3 .woc-schedules .woc-schedule.current {
+.wooopenclose-layout-1 .wooopenclose-schedules-style-3 .wooopenclose-schedules .wooopenclose-schedule.current {
     background-color: rgba(255, 255, 255, 0.27);
 }
 
-.woc-schedules-style-3 .woc-schedule .woc-arrow-icon:before,
-.woc-schedules-style-3 .woc-schedule .woc-arrow-icon:after {
+.wooopenclose-layout-1 .wooopenclose-schedules-style-3 .wooopenclose-schedule .wooopenclose-arrow-icon:before,
+.wooopenclose-layout-1 .wooopenclose-schedules-style-3 .wooopenclose-schedule .wooopenclose-arrow-icon:after {
     background: #fff;
 }
 
@@ -173,11 +179,11 @@ Location: /templates/display-schedules.php
 * Style 4
 */
 
-.woc-schedules-style-4 .woc-schedules {
+.wooopenclose-layout-1 .wooopenclose-schedules-style-4 .wooopenclose-schedules {
     border: 1px dashed #dedede;
 }
 
-.woc-schedules-style-4 .woc-schedules > div + div {
+.wooopenclose-layout-1 .wooopenclose-schedules-style-4 .wooopenclose-schedules > div + div {
     border-top: 1px dashed #dedede;
 }
 
@@ -185,39 +191,667 @@ Location: /templates/display-schedules.php
 * Style 5
 */
 
-.woc-schedules-style-5 .woc-schedules .woc-schedule {
+.wooopenclose-layout-1 .wooopenclose-schedules-style-5 .wooopenclose-schedule {
     background: rgba(158, 158, 158, 0.17);
 }
 
-.woc-schedules-style-5 .woc-schedules .woc-schedule + .woc-schedule {
+.wooopenclose-layout-1 .wooopenclose-schedules-style-5 .wooopenclose-schedule + .wooopenclose-schedule {
     border-top: 1px solid #d2d2d2;
 }
 
-.woc-schedules-style-5 .woc-schedules .woc-schedule.current.shop-close .woc-day-name {
+.wooopenclose-layout-1 .wooopenclose-schedules-style-5 .wooopenclose-schedule.current.shop-close .wooopenclose-day-name {
     background: rgba(248, 0, 19, 0.17);
 }
 
-.woc-schedules-style-5 .woc-schedules .woc-schedule.current.shop-open .woc-day-name {
+.wooopenclose-layout-1 .wooopenclose-schedules-style-5 .wooopenclose-schedule.current.shop-open .wooopenclose-day-name {
     background: rgba(76, 175, 80, 0.17);
 }
 
-.woc-schedules-style-5 .woc-schedules .woc-schedule .woc-day-schedules {
+.wooopenclose-layout-1 .wooopenclose-schedules-style-5 .wooopenclose-schedule .wooopenclose-day-schedules {
     padding: 20px 0 20px 40px;
 }
+
+.wooopenclose-layout-1 .wooopenclose-schedules-style-5 .wooopenclose-schedule:not(.current) .wooopenclose-day-schedules {
+    padding: 5px 0 20px 40px;
+}
+
+
+/* -------------------------------------------
+    Layout 2 Start Here
+------------------------------------------ */
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-1 {
+    position: relative;
+    z-index: 1;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-1:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -30px;
+    z-index: -1;
+    width: 65%;
+    height: 133%;
+    background-image: url(../../images/layouts/layout-2-style-1.svg);
+    background-size: contain;
+    background-position: bottom left;
+    background-repeat: no-repeat;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-1 .wooopenclose-schedules {
+    max-width: 420px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-1 .wooopenclose-schedule {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 13px;
+    font-size: 17px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-1 .wooopenclose-day-name {
+    font-weight: bold;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-1 .current.shop-open {
+    color: #339e18;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-1 .current.shop-close {
+    color: #f44336;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-1 + .wooopenclose-schedules-note {
+    position: relative;
+    z-index: 9;
+    margin: 40px 0 0 0;
+    padding-left: 30px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-1 + .wooopenclose-schedules-note:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #ff8822;
+}
+
+@media ( max-width: 991px ) {
+    .wooopenclose-layout-2 .wooopenclose-schedules-style-1:before {
+        opacity: 0.1;
+        width: 100%;
+    }
+}
+
+
+/**
+* Style 2
+*/
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-2 {
+    position: relative;
+    z-index: 1;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-2:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -30px;
+    z-index: -1;
+    width: 90%;
+    height: 140%;
+    background-image: url(../../images/layouts/layout-2-style-2.svg);
+    background-size: contain;
+    background-position: bottom left;
+    background-repeat: no-repeat;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-2 .wooopenclose-schedules {
+    max-width: 420px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-2 .wooopenclose-schedule {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 13px;
+    font-size: 17px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-2 .wooopenclose-day-name {
+    font-weight: bold;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-2 .current.shop-open {
+    color: #339e18;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-2 .current.shop-close {
+    color: #f44336;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-2 + .wooopenclose-schedules-note {
+    position: relative;
+    z-index: 9;
+    margin: 40px 0 0 0;
+    padding-left: 30px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-2 + .wooopenclose-schedules-note:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #FF6A6A;
+}
+
+@media ( max-width: 991px ) {
+    .wooopenclose-layout-2 .wooopenclose-schedules-style-2:before {
+        opacity: 0.1;
+        width: 100%;
+    }
+}
+
+
+/**
+* Style 3
+*/
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-3 {
+    position: relative;
+    z-index: 1;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-3 .wooopenclose-schedules-title {
+    margin-bottom: 30px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-3:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -30px;
+    z-index: -1;
+    width: 61%;
+    height: 114%;
+    background-image: url(../../images/layouts/layout-2-style-3.svg);
+    background-size: contain;
+    background-position: center left;
+    background-repeat: no-repeat;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-3 .wooopenclose-schedules {
+    max-width: 460px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-3 .wooopenclose-schedule {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(255, 207, 215, .12);
+    font-size: 17px;
+    padding: 20px 30px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-3 .wooopenclose-schedule:nth-child(odd) {
+    /*border-radius: 8px;*/
+    background: rgba(233, 82, 106, 0.08);
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-3 .wooopenclose-day-name {
+    font-weight: bold;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-3 .current.shop-open {
+    color: #339e18;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-3 .current.shop-close {
+    color: #f44336;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-3 + .wooopenclose-schedules-note {
+    position: relative;
+    z-index: 9;
+    margin: 40px 0 0 0;
+    padding-left: 30px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-3 + .wooopenclose-schedules-note:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #FF6A6A;
+}
+
+@media ( max-width: 991px ) {
+    .wooopenclose-layout-2 .wooopenclose-schedules-style-3:before {
+        opacity: 0.1;
+        width: 100%;
+    }
+}
+
+/**
+* Style 4
+*/
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-4 {
+    position: relative;
+    z-index: 1;
+    padding: 65px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-4 .wooopenclose-schedules-title {
+    margin-bottom: 30px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-4:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background-image: url(../../images/layouts/layout-2-style-4.jpg);
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-4 .wooopenclose-schedules {
+    max-width: 460px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 6px;
+    padding: 38px 35px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-4 .wooopenclose-schedule {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 17px;
+    border-bottom: 2px solid rgba(156, 13, 190, 0.09);
+    padding-bottom: 15px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-4 .wooopenclose-schedule:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-4 .wooopenclose-day-name {
+    font-weight: bold;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-4 .current.shop-open {
+    color: #339e18;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-4 .current.shop-close {
+    color: #f44336;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-4 + .wooopenclose-schedules-note {
+    position: relative;
+    z-index: 9;
+    margin: 40px 0 0 0;
+    padding-left: 30px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-4 + .wooopenclose-schedules-note:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #FF6A6A;
+}
+
+
+/**
+* Style 5
+*/
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-5 {
+    position: relative;
+    z-index: 1;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-5 .wooopenclose-schedules-title {
+    margin-bottom: 30px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-5:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -30px;
+    z-index: -1;
+    width: 63%;
+    height: 112%;
+    background-image: url(../../images/layouts/layout-2-style-5.svg);
+    background-size: contain;
+    background-position: center left;
+    background-repeat: no-repeat;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-5 .wooopenclose-schedules {
+    max-width: 460px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-5 .wooopenclose-schedule {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    font-size: 17px;
+    padding: 20px 30px;
+    border: 1px solid rgba(8, 0, 255, 0.2);
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-5 .wooopenclose-schedule:last-child {
+    margin-bottom: 0;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-5 .wooopenclose-day-name {
+    font-weight: bold;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-5 .current.shop-open {
+    color: #339e18;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-5 .current.shop-close {
+    color: #f44336;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-5 + .wooopenclose-schedules-note {
+    position: relative;
+    z-index: 9;
+    margin: 40px 0 0 0;
+    padding-left: 30px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-5 + .wooopenclose-schedules-note:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #FF6A6A;
+}
+
+
+/**
+* Style 6
+*/
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-6 {
+    position: relative;
+    z-index: 1;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-6 .wooopenclose-schedules-title {
+    margin-bottom: 30px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-6:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 63%;
+    height: 112%;
+    background-image: url(../../images/layouts/layout-2-style-6.svg);
+    background-size: contain;
+    background-position: bottom left;
+    background-repeat: no-repeat;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-6 .wooopenclose-schedules {
+    background-color: #fff;
+    box-shadow: 5px 3px 19px rgba(0, 0, 0, 0.16);
+    max-width: 50%;
+    border-radius: 5px;
+    padding: 30px 40px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-6 .wooopenclose-schedule {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    font-size: 17px;
+    border-bottom: 1px dashed rgba(8, 0, 255, 0.14);
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-6 .wooopenclose-schedule:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-6 .wooopenclose-day-name {
+    font-weight: bold;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-6 .current.shop-open {
+    color: #339e18;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-6 .current.shop-close {
+    color: #f44336;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-6 + .wooopenclose-schedules-note {
+    position: relative;
+    z-index: 9;
+    margin: 40px 0 0 0;
+    padding-left: 30px;
+}
+
+.wooopenclose-layout-2 .wooopenclose-schedules-style-6 + .wooopenclose-schedules-note:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #FF6A6A;
+}
+
+
+/* -------------------------------------------
+    Layout 3 Start Here
+------------------------------------------ */
+
+.wooopenclose-layout-3 .wooopenclose-schedules-style-1 .wooopenclose-schedules {
+    background-color: #fff;
+    padding: 45px 30px;
+    margin: 20% -35% 0 16%;
+    z-index: 99;
+    position: relative;
+    border-radius: 5px;
+}
+
+.wooopenclose-layout-3 .wooopenclose-schedules-style-1 .wooopenclose-schedules:before {
+    content: '';
+    position: absolute;
+    left: -24%;
+    top: -37%;
+    z-index: -1;
+    width: 292px;
+    height: 400px;
+    background-image: url(../../images/layouts/clock.png);
+    background-size: contain;
+    background-position: bottom left;
+    background-repeat: no-repeat;
+    opacity: 0.2;
+}
+
+.wooopenclose-layout-3 .wooopenclose-schedules-style-1 .wooopenclose-schedules:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 10px 3px 25px rgba(0, 0, 0, 0.16);
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.wooopenclose-layout-3 .wooopenclose-schedules-style-1 .wooopenclose-schedule {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 13px;
+    font-size: 17px;
+    border-bottom: 2px solid rgba(156, 13, 190, 0.09);
+    padding-bottom: 15px;
+}
+
+.wooopenclose-layout-3 .wooopenclose-schedules-style-1 .wooopenclose-schedule:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.wooopenclose-layout-3 .wooopenclose-schedules-style-1 .wooopenclose-day-name {
+    font-weight: bold;
+}
+
+.wooopenclose-layout-3 .wooopenclose-schedules-style-1 .current.shop-open {
+    color: #339e18;
+}
+
+.wooopenclose-layout-3 .wooopenclose-schedules-style-1 .current.shop-close {
+    color: #f44336;
+}
+
+
+/* ---------------------------------
+    Layout 4 Start Here
+---------------------------------- */
+
+.wooopenclose-layout-4 .wooopenclose-schedules-style-1 {
+    max-width: 560px;
+    background-color: #fff;
+    box-shadow: 5px 3px 19px rgba(0, 0, 0, 0.16);
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.wooopenclose-layout-4 .wooopenclose-schedules-style-1 .wooopenclose-schedules-title {
+    position: relative;
+    background-color: #FB5353;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 45px;
+    color: #fff;
+}
+
+.wooopenclose-layout-4 .wooopenclose-schedules-style-1 .wooopenclose-schedules-title svg {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -37px;
+}
+
+.wooopenclose-layout-4 .wooopenclose-schedules-style-1 .wooopenclose-schedules {
+    padding: 40px;
+}
+
+.wooopenclose-layout-4 .wooopenclose-schedules-style-1 .wooopenclose-schedule {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    font-size: 17px;
+    border-bottom: 1px dashed rgba(8, 0, 255, 0.14);
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+}
+
+.wooopenclose-layout-4 .wooopenclose-schedules-style-1 .wooopenclose-schedule:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.wooopenclose-layout-4 .wooopenclose-schedules-style-1 .wooopenclose-day-name {
+    font-weight: bold;
+}
+
+.wooopenclose-layout-4 .wooopenclose-schedules-style-1 .current.shop-open {
+    color: #339e18;
+}
+
+.wooopenclose-layout-4 .wooopenclose-schedules-style-1 .current.shop-close {
+    color: #f44336;
+}
+
+.wooopenclose-layout-4 .wooopenclose-schedules-style-1 + .wooopenclose-schedules-note {
+    position: relative;
+    z-index: 9;
+    margin: 40px 0 0 0;
+    padding-left: 30px;
+}
+
+.wooopenclose-layout-4 .wooopenclose-schedules-style-1 + .wooopenclose-schedules-note:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #ff8822;
+}
+
+
+
 
 /**
 * Countdown Timer
  */
 
-.woocommerce-account .woc-countdown-wrapper {
+.woocommerce-account .wooopenclose-countdown-wrapper {
     margin-left: 32%;
 }
 
-.woc-countdown-timer-1 {
+.wooopenclose-countdown-timer-1 {
     margin-bottom: 20px;
 }
 
-.woc-countdown-timer-1 > span {
+.wooopenclose-countdown-timer-1 > span {
     display: inline-block;
     margin-right: 5px;
     padding-right: 8px;
@@ -226,19 +860,19 @@ Location: /templates/display-schedules.php
     line-height: 20px;
 }
 
-.woc-countdown-timer-1 > span:last-child {
+.wooopenclose-countdown-timer-1 > span:last-child {
     border-right: 0;
     margin-right: 0;
     padding-right: 0;
 }
 
-.woc-countdown-timer-1 .count-number {
+.wooopenclose-countdown-timer-1 .count-number {
     margin-right: 5px;
     font-weight: bold;
     font-size: 20px;
 }
 
-.woc-countdown-timer-2 > span {
+.wooopenclose-countdown-timer-2 > span {
     display: inline-block;
     margin-right: 25px;
     padding-right: 25px;
@@ -248,17 +882,17 @@ Location: /templates/display-schedules.php
     text-align: center;
 }
 
-.woc-countdown-timer-2 > span:first-child {
+.wooopenclose-countdown-timer-2 > span:first-child {
     display: none;
 }
 
-.woc-countdown-timer-2 > span:last-child {
+.wooopenclose-countdown-timer-2 > span:last-child {
     border-right: 0;
     margin-right: 0;
     padding-right: 0;
 }
 
-.woc-countdown-timer-2 .count-number {
+.wooopenclose-countdown-timer-2 .count-number {
     margin-right: 5px;
     font-weight: bold;
     font-size: 42px;
@@ -268,7 +902,7 @@ Location: /templates/display-schedules.php
 }
 
 
-.woc-countdown-timer-3 > span {
+.wooopenclose-countdown-timer-3 > span {
     display: inline-block;
     margin-right: 25px;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -280,7 +914,7 @@ Location: /templates/display-schedules.php
     margin-bottom: 25px;
 }
 
-.woc-countdown-timer-3 .count-number {
+.wooopenclose-countdown-timer-3 .count-number {
     margin-right: 5px;
     font-weight: bold;
     font-size: 42px;
@@ -291,7 +925,7 @@ Location: /templates/display-schedules.php
 }
 
 
-.woc-countdown-timer-4 > span {
+.wooopenclose-countdown-timer-4 > span {
     display: inline-block;
     margin-right: 25px;
     border-left: 4px solid rgba(248, 0, 19, 0.17);
@@ -304,7 +938,7 @@ Location: /templates/display-schedules.php
     margin-bottom: 25px;
 }
 
-.woc-countdown-timer-4 .count-number {
+.wooopenclose-countdown-timer-4 .count-number {
     margin-right: 5px;
     font-weight: bold;
     font-size: 42px;
@@ -315,7 +949,7 @@ Location: /templates/display-schedules.php
     color: #4dd7fd;
 }
 
-.woc-countdown-timer-5 > span {
+.wooopenclose-countdown-timer-5 > span {
     display: inline-block;
     margin-right: 25px;
     font-size: 16px;
@@ -331,13 +965,13 @@ Location: /templates/display-schedules.php
 
 }
 
-.woc-countdown-timer-5.woc-shop-open > span {
+.wooopenclose-countdown-timer-5.wooopenclose-shop-open > span {
     background: #52c234;
     background: -webkit-linear-gradient(to top, #061700, #52c234);
     background: linear-gradient(to top, #061700, #52c234);
 }
 
-.woc-countdown-timer-5 .count-number {
+.wooopenclose-countdown-timer-5 .count-number {
     margin-right: 5px;
     font-weight: bold;
     font-size: 42px;
@@ -367,15 +1001,15 @@ Location: /templates/shop-status-bar.php
     padding: 13px 0;
 }
 
-.shop-status-bar.woc-bar-header {
+.shop-status-bar.wooopenclose-bar-header {
     top: 0;
 }
 
-.logged-in .shop-status-bar.woc-bar-header {
+.logged-in .shop-status-bar.wooopenclose-bar-header {
     top: 32px;
 }
 
-.shop-status-bar.woc-bar-footer {
+.shop-status-bar.wooopenclose-bar-footer {
     bottom: 0;
 }
 
@@ -392,7 +1026,7 @@ Location: /templates/shop-status-bar.php
     cursor: pointer;
 }
 
-.shop-status-bar .woc-countdown-timer-1 {
+.shop-status-bar .wooopenclose-countdown-timer-1 {
     display: inline-block;
     margin: 0 15px 0 3px;
 }
@@ -401,27 +1035,27 @@ Location: /templates/shop-status-bar.php
 /**
  * Admin bar Node
  */
-#wp-admin-bar-woc-shop-close,
-#wp-admin-bar-woc-shop-close:hover,
-#wp-admin-bar-woc-shop-close:active,
-#wp-admin-bar-woc-shop-close:focus,
-#wp-admin-bar-woc-shop-close .ab-empty-item,
-#wp-admin-bar-woc-shop-close:hover .ab-empty-item,
-#wp-admin-bar-woc-shop-close:active .ab-empty-item,
-#wp-admin-bar-woc-shop-close:focus .ab-empty-item {
+#wp-admin-bar-wooopenclose-shop-close,
+#wp-admin-bar-wooopenclose-shop-close:hover,
+#wp-admin-bar-wooopenclose-shop-close:active,
+#wp-admin-bar-wooopenclose-shop-close:focus,
+#wp-admin-bar-wooopenclose-shop-close .ab-empty-item,
+#wp-admin-bar-wooopenclose-shop-close:hover .ab-empty-item,
+#wp-admin-bar-wooopenclose-shop-close:active .ab-empty-item,
+#wp-admin-bar-wooopenclose-shop-close:focus .ab-empty-item {
     background: #ff5722 !important;
     color: #fff !important;
     cursor: pointer;
 }
 
-#wp-admin-bar-woc-shop-open,
-#wp-admin-bar-woc-shop-open:hover,
-#wp-admin-bar-woc-shop-open:active,
-#wp-admin-bar-woc-shop-open:focus,
-#wp-admin-bar-woc-shop-open .ab-empty-item,
-#wp-admin-bar-woc-shop-open:hover .ab-empty-item,
-#wp-admin-bar-woc-shop-open:active .ab-empty-item,
-#wp-admin-bar-woc-shop-open:focus .ab-empty-item {
+#wp-admin-bar-wooopenclose-shop-open,
+#wp-admin-bar-wooopenclose-shop-open:hover,
+#wp-admin-bar-wooopenclose-shop-open:active,
+#wp-admin-bar-wooopenclose-shop-open:focus,
+#wp-admin-bar-wooopenclose-shop-open .ab-empty-item,
+#wp-admin-bar-wooopenclose-shop-open:hover .ab-empty-item,
+#wp-admin-bar-wooopenclose-shop-open:active .ab-empty-item,
+#wp-admin-bar-wooopenclose-shop-open:focus .ab-empty-item {
     background: #1d9085 !important;
     color: #fff !important;
     cursor: pointer;

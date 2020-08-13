@@ -16,7 +16,7 @@ class WocWidgetSchedule extends WP_Widget {
 		
 		parent::__construct(
 			'woc_widget_schedules', __('WooCommerce Open Close - Schedule', 'woc-open-close'),
-			array( 'description' => __( 'Display your store business hours or schedule.', 'woc-open-close' ), ) 
+			array( 'description' => __( 'Display your store business hours or schedule.', 'woc-open-close' ), )
 		);
 	}
 

@@ -453,7 +453,7 @@ Location: /templates/close-popup.php
 */
 
 
-.woc-box-container {
+.wooopenclose-box-container {
     position: relative;
     background: #fff;
     padding: 45px;
@@ -464,7 +464,7 @@ Location: /templates/close-popup.php
     border-radius: 4px;
 }
 
-.woc-box-container .box-message {
+.wooopenclose-box-container .box-message {
     font-size: 18px;
     line-height: 28px;
     margin-bottom: 25px;

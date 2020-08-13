@@ -6,7 +6,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if ( wooopenclose()->get_option( 'woc_bar_where' ) === 'woc-bar-none' ) {
+if ( wooopenclose()->get_option( 'woc_bar_where' ) === 'wooopenclose-bar-none' ) {
 	return;
 }
 

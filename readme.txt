@@ -84,7 +84,7 @@ WooCommerce Open Close is an extension of WooCommerce Plugin which allows you to
 
 
 ###### 🛠 Display frontend schedule manager
-`[woc-manage-schedules]`
+`[wooopenclose-manage-schedules]`
 > Using this shortcode you can add frontend schedules manager in any page. Admin will able to Create | Delete | Update schedules.
 >
 > This shortcode will be available on premium version only.

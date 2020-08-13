@@ -85,7 +85,7 @@ if ( $post->post_status === 'publish' ) :
         ?
     </div>
     <div class='woc_section_inline woc_section_inputs'>
-        <span class='woc-shortcode hint--top' aria-label='<?php _e( 'Click to Copy', 'woc-open-close' ); ?>'><?php printf( '[schedule id="%s"]', $post->ID ); ?></span>
+        <span class='wooopenclose-shortcode hint--top' aria-label='<?php _e( 'Click to Copy', 'woc-open-close' ); ?>'><?php printf( '[schedule id="%s"]', $post->ID ); ?></span>
     </div>
 </div>
 

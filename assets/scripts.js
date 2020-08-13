@@ -16,13 +16,13 @@
     });
 
     $(window).load(function () {
-        $('.woc-loader-wrap').fadeOut('slow');
+        $('.wooopenclose-loader-wrap').fadeOut('slow');
     });
 
-    $(document).on('trigger-woc-loader', function () {
-        $('.woc-loader-wrap').fadeIn();
+    $(document).on('trigger-wooopenclose-loader', function () {
+        $('.wooopenclose-loader-wrap').fadeIn();
         setTimeout(function () {
-            $('.woc-loader-wrap').fadeOut('slow');
+            $('.wooopenclose-loader-wrap').fadeOut('slow');
         }, 3000);
     });
 
