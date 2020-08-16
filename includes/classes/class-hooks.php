@@ -49,7 +49,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			global $current_screen;
 
 			if ( in_array( $current_screen->post_type, array( 'woc_hour' ) ) ) {
-				printf( '<div class="woc-loader-wrap"><div class="woc-loader"></div></div>' );
+				printf( '<div class="wooopenclose-loader-wrap"><div class="wooopenclose-loader"></div></div>' );
 			}
 		}
 
@@ -62,7 +62,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			$shop_status = woc_is_open();
 			$disabled    = woc_pro_available() ? '' : 'disabled';
 
-			printf( '<label class="hint--top-right woc-quick-switch %s" aria-label="%s"><input %s type="checkbox" %s name="woc_instant_force"><span class="woc-quick-switch-bubble"></span></label>',
+			printf( '<label class="hint--top-right wooopenclose-quick-switch %s" aria-label="%s"><input %s type="checkbox" %s name="woc_instant_force"><span class="wooopenclose-quick-switch-bubble"></span></label>',
 				$disabled,
 				sprintf( esc_html__( 'Status: %s, Click here to %s your shop forcefully. It will ignore all other settings', 'woc-open-close' ),
 					$shop_status ? 'Open' : 'Close',
@@ -131,7 +131,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			$text_to_show = woc_is_open() ? woc_get_option( 'woc_timer_text_open' ) : woc_get_option( 'woc_timer_text_close' );
 			$text_to_show = empty( $text_to_show ) ? '' : sprintf( '<p>%s</p> ', $text_to_show );
 
-			printf( '<div class="woc-countdown-wrapper">%s%s</div>', $text_to_show, wooopenclose()->get_countdown_timer( $timer_style ) );
+			printf( '<div class="wooopenclose-countdown-wrapper">%s%s</div>', $text_to_show, wooopenclose()->get_countdown_timer( $timer_style ) );
 		}
 
 
@@ -219,7 +219,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			), $links );
 
 			if ( ! woc_pro_available() ) {
-				$action_links['go-pro'] = sprintf( '<a target="_blank" class="woc-plugin-meta-buy" href="%s">%s</a>', esc_url( WOC_PLUGIN_LINK ), esc_html__( 'Go Pro', 'woc-open-close' ) );
+				$action_links['go-pro'] = sprintf( '<a target="_blank" class="wooopenclose-plugin-meta-buy" href="%s">%s</a>', esc_url( WOC_PLUGIN_LINK ), esc_html__( 'Go Pro', 'woc-open-close' ) );
 			}
 
 			return $action_links;
@@ -265,7 +265,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 				return;
 			}
 
-			$main_node_id = woc_is_open() ? 'woc-shop-open' : 'woc-shop-close';
+			$main_node_id = woc_is_open() ? 'wooopenclose-shop-open' : 'wooopenclose-shop-close';
 
 			$wp_admin_bar->add_node(
 				array(
@@ -295,7 +295,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 
 			$wp_admin_bar->add_node(
 				array(
-					'id'     => 'woc-settings',
+					'id'     => 'wooopenclose-settings',
 					'title'  => __( 'Settings - Options', 'woc-open-close' ),
 					'parent' => $main_node_id,
 					'href'   => esc_url( admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close' ) ),
@@ -304,7 +304,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 
 			$wp_admin_bar->add_node(
 				array(
-					'id'     => 'woc-settings-design',
+					'id'     => 'wooopenclose-settings-design',
 					'title'  => __( 'Settings - Design', 'woc-open-close' ),
 					'parent' => $main_node_id,
 					'href'   => esc_url( admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close&tab=WOC_design' ) ),
@@ -313,7 +313,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 
 			$wp_admin_bar->add_node(
 				array(
-					'id'     => 'woc-settings-support',
+					'id'     => 'wooopenclose-settings-support',
 					'title'  => __( 'Settings - Support', 'woc-open-close' ),
 					'parent' => $main_node_id,
 					'href'   => esc_url( admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close&tab=WOC_support' ) ),
@@ -351,7 +351,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 
 				$buy_notice    = ! woc_pro_available() ? sprintf( ' <a target="_blank" href="https://pluginbazar.com/plugin/woocommerce-open-close/">%s</a>', __( 'Get Pro to Restrict Order while shop Closed', 'woc-open-close' ) ) : '';
 				$status_notice = woc_is_open() ? __( 'Shop is now accepting order from customers', 'woc-open-close' ) : __( 'Shop is currently closed from taking orders', 'woc-open-close' );
-				$status_notice = sprintf( '%s. %s <a href="%s" class="woc-notice-link">%s</a>', $status_notice, $buy_notice,
+				$status_notice = sprintf( '%s. %s <a href="%s" class="wooopenclose-notice-link">%s</a>', $status_notice, $buy_notice,
 					esc_url( admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close#woc_allow_add_cart_on_close' ) ),
 					esc_html__( 'Disable this Notice', 'woc-open-close' )
 				);
@@ -410,8 +410,6 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 		 * @return false|string
 		 */
 		function render_schedule( $atts = array() ) {
-
-			extract( is_array( $atts ) ? $atts : array() );
 
 			ob_start();
 			woc_get_template( 'business-schedules.php', $atts );

@@ -468,9 +468,9 @@ class WOC_Functions {
 							'details' => __( 'Where you want to display the shop status bar? <strong>Default: Footer</strong>', 'woc-open-close' ),
 							'type'    => 'select',
 							'args'    => array(
-								'woc-bar-footer' => __( 'Footer', 'woc-open-close' ),
-								'woc-bar-header' => __( 'Header', 'woc-open-close' ),
-								'woc-bar-none'   => __( 'Disable notice bar', 'woc-open-close' ),
+								'wooopenclose-bar-footer' => __( 'Footer', 'woc-open-close' ),
+								'wooopenclose-bar-header' => __( 'Header', 'woc-open-close' ),
+								'wooopenclose-bar-none'   => __( 'Disable notice bar', 'woc-open-close' ),
 							),
 						),
 						array(

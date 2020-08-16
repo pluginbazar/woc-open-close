@@ -95,20 +95,21 @@ if ( ! class_exists( 'wooCommerceOpenClose' ) ) {
 		function front_scripts() {
 
 			wp_enqueue_script( 'magnific-popup', plugins_url( '/assets/front/js/jquery.magnific-popup.min.js', __FILE__ ), array( 'jquery' ), '', true );
-			wp_enqueue_script( 'woc-front', plugins_url( '/assets/front/js/scripts.js', __FILE__ ), array( 'jquery' ), '', true );
-			wp_localize_script( 'woc-front', 'wooopenclose', $this->localize_scripts() );
+			wp_enqueue_script( 'wooopenclose-front', plugins_url( '/assets/front/js/scripts.js', __FILE__ ), array( 'jquery' ), '', true );
+			wp_localize_script( 'wooopenclose-front', 'wooopenclose', $this->localize_scripts() );
 
+			wp_enqueue_style( 'wooopenclose-core', WOC_PLUGIN_URL . 'assets/front/css/pb-core-styles.css' );
 			wp_enqueue_style( 'magnific-popup', WOC_PLUGIN_URL . 'assets/front/css/magnific-popup.css' );
-			wp_enqueue_style( 'woc-front', WOC_PLUGIN_URL . 'assets/front/css/style.css' );
-			wp_enqueue_style( 'woc-tool-tip', WOC_PLUGIN_URL . 'assets/hint.min.css' );
+			wp_enqueue_style( 'wooopenclose-front', WOC_PLUGIN_URL . 'assets/front/css/style.css' );
+			wp_enqueue_style( 'wooopenclose-tool-tip', WOC_PLUGIN_URL . 'assets/hint.min.css' );
 
 			if ( woc_pro_available() ) {
 				wp_enqueue_script( 'jquery-ui-sortable' );
 				wp_enqueue_script( 'jquery-time-picker', WOC_PLUGIN_URL . '/assets/jquery-timepicker.js', array( 'jquery' ) );
-				wp_enqueue_script( 'woc-global', plugins_url( '/assets/scripts.js', __FILE__ ), array( 'jquery' ), '', true );
-				wp_localize_script( 'woc-global', 'wooopenclose', $this->localize_scripts() );
+				wp_enqueue_script( 'wooopenclose-global', plugins_url( '/assets/scripts.js', __FILE__ ), array( 'jquery' ), '', true );
+				wp_localize_script( 'wooopenclose-global', 'wooopenclose', $this->localize_scripts() );
 
-				wp_enqueue_style( 'woc-schedules', WOC_PLUGIN_URL . 'assets/admin/css/schedule-style.css' );
+				wp_enqueue_style( 'wooopenclose-schedules', WOC_PLUGIN_URL . 'assets/admin/css/schedule-style.css' );
 				wp_enqueue_style( 'jquery-timepicker', WOC_PLUGIN_URL . 'assets/jquery-timepicker.css' );
 			}
 		}
@@ -121,15 +122,15 @@ if ( ! class_exists( 'wooCommerceOpenClose' ) ) {
 
 			wp_enqueue_script( 'jquery-ui-sortable' );
 			wp_enqueue_script( 'jquery-time-picker', WOC_PLUGIN_URL . '/assets/jquery-timepicker.js', array( 'jquery' ) );
-			wp_enqueue_script( 'woc-admin', plugins_url( '/assets/admin/js/scripts.js', __FILE__ ), array( 'jquery' ) );
-			wp_localize_script( 'woc-admin', 'wooopenclose', $this->localize_scripts() );
+			wp_enqueue_script( 'wooopenclose-admin', plugins_url( '/assets/admin/js/scripts.js', __FILE__ ), array( 'jquery' ) );
+			wp_localize_script( 'wooopenclose-admin', 'wooopenclose', $this->localize_scripts() );
 
-			wp_enqueue_script( 'woc-global', plugins_url( '/assets/scripts.js', __FILE__ ), array( 'jquery' ), '', true );
-			wp_localize_script( 'woc-global', 'wooopenclose', $this->localize_scripts() );
+			wp_enqueue_script( 'wooopenclose-global', plugins_url( '/assets/scripts.js', __FILE__ ), array( 'jquery' ), '', true );
+			wp_localize_script( 'wooopenclose-global', 'wooopenclose', $this->localize_scripts() );
 
-			wp_enqueue_style( 'woc-admin', WOC_PLUGIN_URL . 'assets/admin/css/style.css' );
-			wp_enqueue_style( 'woc-schedules', WOC_PLUGIN_URL . 'assets/admin/css/schedule-style.css' );
-			wp_enqueue_style( 'woc-tool-tip', WOC_PLUGIN_URL . 'assets/hint.min.css' );
+			wp_enqueue_style( 'wooopenclose-admin', WOC_PLUGIN_URL . 'assets/admin/css/style.css' );
+			wp_enqueue_style( 'wooopenclose-schedules', WOC_PLUGIN_URL . 'assets/admin/css/schedule-style.css' );
+			wp_enqueue_style( 'wooopenclose-tool-tip', WOC_PLUGIN_URL . 'assets/hint.min.css' );
 			wp_enqueue_style( 'jquery-timepicker', WOC_PLUGIN_URL . 'assets/jquery-timepicker.css' );
 		}
 

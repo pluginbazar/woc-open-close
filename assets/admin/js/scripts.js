@@ -6,12 +6,12 @@
 
     "use strict";
 
-    $(document).on('change', '.woc-quick-switch input[type=checkbox]', function () {
+    $(document).on('change', '.wooopenclose-quick-switch input[type=checkbox]', function () {
 
     });
 
 
-    $(document).on('click', '.woc-shortcode', function () {
+    $(document).on('click', '.wooopenclose-shortcode', function () {
 
         let inputField = document.createElement('input'),
             htmlElement = $(this),

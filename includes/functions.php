@@ -15,7 +15,7 @@ if ( ! function_exists( 'woc_update_global_arguments' ) ) {
 	 */
 	function woc_update_global_arguments( $args_to_add = array() ) {
 
-		if( empty( $args_to_add ) ) {
+		if ( empty( $args_to_add ) ) {
 			return;
 		}
 
@@ -141,8 +141,10 @@ if ( ! function_exists( 'woc_get_template' ) ) {
 	 */
 	function woc_get_template( $template_name, $args = array(), $template_path = '', $default_path = '', $main_template = false ) {
 
+		$args = array_merge( $args, array( 'args' => $args ) );
+
 		if ( ! empty( $args ) && is_array( $args ) ) {
-			extract( $args ); // @codingStandardsIgnoreLine
+			extract( $args );
 		}
 
 		/**
@@ -238,8 +240,8 @@ if ( ! function_exists( 'woc_status_bar_classes' ) ) {
 	function woc_status_bar_classes( $echo = false ) {
 
 		$classes       = array();
-		$woc_bar_where = get_option( 'woc_bar_where', 'woc-bar-footer' );
-		$woc_bar_where = empty( $woc_bar_where ) ? 'woc-bar-footer' : $woc_bar_where;
+		$woc_bar_where = get_option( 'woc_bar_where', 'wooopenclose-bar-footer' );
+		$woc_bar_where = empty( $woc_bar_where ) ? 'wooopenclose-bar-footer' : $woc_bar_where;
 
 		$classes[] = $woc_bar_where;
 

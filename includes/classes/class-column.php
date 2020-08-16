@@ -32,16 +32,16 @@ class class_qa_woc_hour_column {
 	function custom_columns_content( $column, $post_id ) {
 
 		if ( $column === 'shortcode' ) {
-			printf( '<span class="woc-shortcode hint--top" aria-label="%s">[schedule id="%s"]</span>',
+			printf( '<span class="wooopenclose-shortcode hint--top" aria-label="%s">[schedule id="%s"]</span>',
 				esc_html__( 'Click to Copy', 'woc-open-close' ), $post_id
 			);
 		}
 
 		if ( $column === 'is-default' && $post_id == wooopenclose()->get_active_schedule_id() ) {
-			printf( '<div class="woc-schedule-default">%s</div>', esc_html__( 'Default Schedule', 'woc-open-close' ) );
+			printf( '<div class="wooopenclose-schedule-default">%s</div>', esc_html__( 'Default Schedule', 'woc-open-close' ) );
 		}
 
-		if ( $column === 'woc-date' ) {
+		if ( $column === 'wooopenclose-date' ) {
 			printf( esc_html__( 'Created %s ago', 'woc-open-close' ), human_time_diff( get_the_time( 'U', $post_id ), current_time( 'timestamp' ) ) );
 		}
 	}
@@ -58,7 +58,7 @@ class class_qa_woc_hour_column {
 			'title'      => '',
 			'shortcode'  => '',
 			'is-default' => '',
-			'woc-date'   => '',
+			'wooopenclose-date'   => '',
 		);
 	}
 

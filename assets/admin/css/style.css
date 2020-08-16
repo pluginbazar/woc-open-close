@@ -100,32 +100,32 @@ input:checked + .woc_switch_slider:before {
     border-radius: 50%;
 }
 
-a.woc-plugin-meta-buy {
+a.wooopenclose-plugin-meta-buy {
     color: #E91E63 !important;
     font-weight: 700;
 }
 
-#wp-admin-bar-woc-shop-close,
-#wp-admin-bar-woc-shop-close:hover,
-#wp-admin-bar-woc-shop-close:active,
-#wp-admin-bar-woc-shop-close:focus,
-#wp-admin-bar-woc-shop-close .ab-empty-item,
-#wp-admin-bar-woc-shop-close:hover .ab-empty-item,
-#wp-admin-bar-woc-shop-close:active .ab-empty-item,
-#wp-admin-bar-woc-shop-close:focus .ab-empty-item {
+#wp-admin-bar-wooopenclose-shop-close,
+#wp-admin-bar-wooopenclose-shop-close:hover,
+#wp-admin-bar-wooopenclose-shop-close:active,
+#wp-admin-bar-wooopenclose-shop-close:focus,
+#wp-admin-bar-wooopenclose-shop-close .ab-empty-item,
+#wp-admin-bar-wooopenclose-shop-close:hover .ab-empty-item,
+#wp-admin-bar-wooopenclose-shop-close:active .ab-empty-item,
+#wp-admin-bar-wooopenclose-shop-close:focus .ab-empty-item {
     background: #ff5722 !important;
     color: #fff !important;
     cursor: pointer;
 }
 
-#wp-admin-bar-woc-shop-open,
-#wp-admin-bar-woc-shop-open:hover,
-#wp-admin-bar-woc-shop-open:active,
-#wp-admin-bar-woc-shop-open:focus,
-#wp-admin-bar-woc-shop-open .ab-empty-item,
-#wp-admin-bar-woc-shop-open:hover .ab-empty-item,
-#wp-admin-bar-woc-shop-open:active .ab-empty-item,
-#wp-admin-bar-woc-shop-open:focus .ab-empty-item {
+#wp-admin-bar-wooopenclose-shop-open,
+#wp-admin-bar-wooopenclose-shop-open:hover,
+#wp-admin-bar-wooopenclose-shop-open:active,
+#wp-admin-bar-wooopenclose-shop-open:focus,
+#wp-admin-bar-wooopenclose-shop-open .ab-empty-item,
+#wp-admin-bar-wooopenclose-shop-open:hover .ab-empty-item,
+#wp-admin-bar-wooopenclose-shop-open:active .ab-empty-item,
+#wp-admin-bar-wooopenclose-shop-open:focus .ab-empty-item {
     background: #1d9085 !important;
     color: #fff !important;
     cursor: pointer;
@@ -140,16 +140,16 @@ a.woc-plugin-meta-buy {
     position: relative;
 }
 
-.woc-quick-switch {
+.wooopenclose-quick-switch {
     width: 80px;
     height: 34px;
 }
 
-.woc-quick-switch input {
+.wooopenclose-quick-switch input {
     display: none;
 }
 
-.woc-quick-switch-bubble {
+.wooopenclose-quick-switch-bubble {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -162,7 +162,7 @@ a.woc-plugin-meta-buy {
     border-radius: 34px;
 }
 
-.woc-quick-switch-bubble:before {
+.wooopenclose-quick-switch-bubble:before {
     position: absolute;
     content: "";
     height: 26px;
@@ -175,35 +175,35 @@ a.woc-plugin-meta-buy {
     border-radius: 50%;
 }
 
-.woc-quick-switch input:checked + .woc-quick-switch-bubble {
+.wooopenclose-quick-switch input:checked + .wooopenclose-quick-switch-bubble {
     background-color: #1dbf73;
 }
 
-.woc-quick-switch input:focus + .woc-quick-switch-bubble {
+.wooopenclose-quick-switch input:focus + .wooopenclose-quick-switch-bubble {
     box-shadow: 0 0 1px #1dbf73;
 }
 
-.woc-quick-switch.disabled > span {
+.wooopenclose-quick-switch.disabled > span {
     background-color: #9e9e9e !important;
 }
 
-.woc-quick-switch input:checked + .woc-quick-switch-bubble:before {
+.wooopenclose-quick-switch input:checked + .wooopenclose-quick-switch-bubble:before {
     -webkit-transform: translateX(46px);
     -ms-transform: translateX(46px);
     transform: translateX(46px);
 }
 
-.woc-quick-switch:after {
+.wooopenclose-quick-switch:after {
     white-space: pre-wrap !important;
     width: 320px;
     font-size: 16px !important;
     line-height: 26px !important;
 }
 
-a.woc-notice-link,
-a.woc-notice-link:active,
-a.woc-notice-link:focus,
-a.woc-notice-link:visited {
+a.wooopenclose-notice-link,
+a.wooopenclose-notice-link:active,
+a.wooopenclose-notice-link:focus,
+a.wooopenclose-notice-link:visited {
     float: right;
     text-decoration: none;
     background: #E91E63;
@@ -216,7 +216,7 @@ a.woc-notice-link:visited {
     box-shadow: none;
 }
 
-.woc-shortcode {
+.wooopenclose-shortcode {
     background: #f1f1f1;
     border: 1px solid #a2a2a2;
     padding: 5px;
@@ -271,7 +271,7 @@ a.woc-notice-link:visited {
  * Admin Preloader
  */
 
-.woc-loader-wrap {
+.wooopenclose-loader-wrap {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -281,7 +281,7 @@ a.woc-notice-link:visited {
     left: 0;
 }
 
-.woc-loader {
+.wooopenclose-loader {
     background: #f3f3f3;
     border: 5px solid #cacaca;
     border-top: 5px solid #f6405f;
