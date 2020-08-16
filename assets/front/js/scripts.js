@@ -1,6 +1,6 @@
 jQuery(document).ready(function ($) {
 
-    $(document).on('click', '.wooopenclose-layout-1 .wooopenclose-schedules .wooopenclose-schedule .wooopenclose-day-name', function () {
+    $(document).on('click', '.wooopenclose-layout-1 .wooopenclose-schedules .wooopenclose-schedule .wooopenclose-day-name, .wooopenclose-layout-5 .wooopenclose-schedules .wooopenclose-schedule .wooopenclose-day-name', function () {
 
         is_self = false;
         if ($(this).parent().hasClass('opened')) is_self = true;

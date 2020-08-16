@@ -882,9 +882,9 @@
 }
 
 .wooopenclose-layout-5 .wooopenclose-schedules-style-1 .wooopenclose-day-name {
+    cursor: pointer;
     font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 6px;
+    font-size: 16px;
     position: relative;
 }
 
@@ -916,6 +916,7 @@
 }
 
 .wooopenclose-layout-5 .wooopenclose-day-schedules {
+    font-size: 13px;
     display: none;
 }
 
