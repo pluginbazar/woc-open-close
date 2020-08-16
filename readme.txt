@@ -1,11 +1,11 @@
 === Woocommerce Open Close - Best Business Schedules Manager ===
 	Contributors: jaedm97,pluginbazar
 	Donate link: https://www.pluginbazar.com/contact/
-	Tags: business hours, Opening Hours, Open Close, Store closing, Schedules manager
+	Tags: business hours, Opening Hours, Open Close, Schedules manager
 	Requires at least: 4.6
-	Tested up to: 5.4.2
-	Tested up to WooCommerce: 4.3.0
-	Stable tag: 4.1.5
+	Tested up to: 5.5
+	Tested up to WooCommerce: 4.3.3
+	Stable tag: 4.1.6
 	Requires PHP: 5.6
 	Requires WooCommerce: 3.0
 	Text Domain: woc-open-close
