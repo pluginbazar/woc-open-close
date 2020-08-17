@@ -5,7 +5,7 @@
 .wooopenclose-schedules-layout .wooopenclose-schedules-title {
     position: relative;
     z-index: 99;
-    margin-bottom: 40px;
+    margin-bottom: 12px;
 }
 
 /* -------------------------------------------
@@ -1347,6 +1347,78 @@
     background: #ff8822;
 }
 
+/**
+* Style 4
+*/
+
+.wooopenclose-layout-8 .wooopenclose-schedules-style-4 {
+    max-width: 490px;
+}
+
+.wooopenclose-layout-8 .wooopenclose-schedules-style-4 .wooopenclose-schedules-title {
+    margin-bottom: 20px;
+    background-image: url(../../images/layouts/layout-8-style-4.jpg);
+    background-size: cover;
+    padding: 30px 25px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+}
+
+.wooopenclose-layout-8 .wooopenclose-schedules-style-4 .wooopenclose-schedules-title svg {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -37px;
+}
+
+.wooopenclose-layout-8 .wooopenclose-schedules-style-4 .wooopenclose-schedule {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    font-size: 17px;
+    margin-bottom: 18px;
+    padding: 20px 30px;
+    border-radius: 5px;
+    box-shadow: 10px 5px 23px rgba(39, 1, 1, 0.1);
+}
+
+.wooopenclose-layout-8 .wooopenclose-schedules-style-4 .wooopenclose-schedule:last-child {
+    margin-bottom: 0;
+}
+
+.wooopenclose-layout-8 .wooopenclose-schedules-style-4 .wooopenclose-day-name {
+    font-weight: bold;
+}
+
+.wooopenclose-layout-8 .wooopenclose-schedules-style-4 .current.shop-open {
+    color: #339e18;
+}
+
+.wooopenclose-layout-8 .wooopenclose-schedules-style-4 .current.shop-close {
+    color: #f44336;
+}
+
+.wooopenclose-layout-8 .wooopenclose-schedules-style-4 + .wooopenclose-schedules-note {
+    position: relative;
+    z-index: 9;
+    margin: 40px 0 0 0;
+    padding-left: 30px;
+}
+
+.wooopenclose-layout-8 .wooopenclose-schedules-style-4 + .wooopenclose-schedules-note:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #ff8822;
+}
 
 
 /* ---------------------------------
@@ -1502,7 +1574,7 @@
 .wooopenclose-layout-10 .wooopenclose-schedules-style-1 {
     max-width: 490px;
     position: relative;
-    background-image: url("../../images/layouts/layout10-style-1.jpg");
+    background-image: url("../../images/layouts/layout-10-style-1.jpg");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -1584,6 +1656,142 @@
 .wooopenclose-layout-10 .wooopenclose-schedules-style-1 .wooopenclose-schedules-contact-btn:hover {
     background-color: #232323;
 }
+
+/* ---------------------------------
+    Layout 11 Start Here
+---------------------------------- */
+
+.wooopenclose-layout-11 .wooopenclose-schedules-style-1 {
+    max-width: 560px;
+    background-color: #fff;
+    box-shadow: 5px 3px 19px rgba(0, 0, 0, 0.16);
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.wooopenclose-layout-11 .wooopenclose-schedules-style-1 .wooopenclose-schedules-header {
+    position: relative;
+    background-color: #1A3455;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 38px;
+    background-image: linear-gradient(180deg, #1A3455, #17123B);
+}
+
+.wooopenclose-layout-11 .wooopenclose-schedules-style-1 .wooopenclose-schedules-header h3 {
+    color: #fff;
+    font-size: 31px;
+    margin: 0 0 5px;
+}
+
+.wooopenclose-layout-11 .wooopenclose-schedules-style-1 .wooopenclose-schedules-header span {
+    font-size: 18px;
+    color: #fff;
+}
+
+.wooopenclose-layout-11 .wooopenclose-schedules-style-1 .wooopenclose-schedules {
+    padding: 40px;
+}
+
+.wooopenclose-layout-11 .wooopenclose-schedules-style-1 .wooopenclose-schedule {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    font-size: 17px;
+    border-bottom: 1px dashed rgba(8, 0, 255, 0.14);
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+}
+
+.wooopenclose-layout-11 .wooopenclose-schedules-style-1 .wooopenclose-schedule:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.wooopenclose-layout-11 .wooopenclose-schedules-style-1 .wooopenclose-day-name {
+    font-weight: bold;
+}
+
+.wooopenclose-layout-11 .wooopenclose-schedules-style-1 .current.shop-open {
+    color: #339e18;
+}
+
+.wooopenclose-layout-11 .wooopenclose-schedules-style-1 .current.shop-close {
+    color: #f44336;
+}
+
+.wooopenclose-layout-11 .wooopenclose-schedules-style-1 + .wooopenclose-schedules-note {
+    position: relative;
+    z-index: 9;
+    margin: 40px 0 0 0;
+    padding-left: 30px;
+}
+
+.wooopenclose-layout-11 .wooopenclose-schedules-style-1 + .wooopenclose-schedules-note:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #ff8822;
+}
+
+
+/* ---------------------------------
+    Layout 12 Start Here
+---------------------------------- */
+
+.wooopenclose-layout-12 .wooopenclose-schedules-style-1 {
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.wooopenclose-layout-12 .wooopenclose-schedules-style-1 .wooopenclose-schedules-note span {
+    color: #f44336;
+    font-weight: bold;
+}
+
+.wooopenclose-layout-12 .wooopenclose-schedules-style-1 .wooopenclose-schedules {
+    background-color: #fff;
+    box-shadow: 11px 5px 26px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    padding: 25px 25px 30px;
+}
+
+.wooopenclose-layout-12 .wooopenclose-schedules-style-1 .wooopenclose-schedule {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    font-size: 17px;
+    padding: 8px 13px;
+}
+
+.wooopenclose-layout-12 .wooopenclose-schedules-style-1 .wooopenclose-schedule:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.wooopenclose-layout-12 .wooopenclose-schedules-style-1 .wooopenclose-day-name {
+    font-weight: bold;
+}
+
+.wooopenclose-layout-12 .wooopenclose-schedules-style-1 .current.shop-open {
+    color: #339e18;
+    background-color: #e9f1e7;
+}
+
+.wooopenclose-layout-12 .wooopenclose-schedules-style-1 .current.shop-close {
+    color: #f44336;
+    background-color: #FFF9EE;
+}
+
+
 
 /**
 * Countdown Timer

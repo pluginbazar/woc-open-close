@@ -725,8 +725,6 @@ class WOC_Functions {
 			}
 		}
 
-		ksort( $woc_hours_meta );
-
 		return apply_filters( 'woc_all_schedules', $woc_hours_meta );
 	}
 

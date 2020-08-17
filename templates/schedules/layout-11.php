@@ -14,8 +14,8 @@ $set_id = ( isset( $set ) || ! empty( $set ) ) ? $set : wooopenclose()->get_acti
 <div class="wooopenclose-schedules-wrap wooopenclose-schedules-style-<?php echo esc_attr( $style ); ?> <?php echo ( woc_is_open() ) ? 'wooopenclose-shop-schedules-open' : 'wooopenclose-shop-schedules-close'; ?>">
 
     <div class="wooopenclose-schedules-header">
-        <?php printf( '<h3>%s</h3>', current_time('G') ); ?>
-        <?php printf( '<span>%s</span>', get_the_date('jS M Y' ) ); ?>
+        <?php printf( '<h3>%s</h3>', date( 'h:i:s A' ) ); ?>
+        <?php printf( '<span>%s</span>', date('jS M Y' ) ); ?>
     </div>
 
     <div class="wooopenclose-schedules">
