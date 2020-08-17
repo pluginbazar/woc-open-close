@@ -481,9 +481,14 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 
 			wooopenclose()->PB_Settings()->register_shortcode( 'woc_open_close', array( $this, 'render_schedule' ) );
 			wooopenclose()->PB_Settings()->register_shortcode( 'schedule', array( $this, 'render_schedule' ) );
+			wooopenclose()->PB_Settings()->register_shortcode( 'schedule_compact', array( $this, 'schedule_compact' ) );
 			wooopenclose()->PB_Settings()->register_shortcode( 'woc_countdown_timer', array( $this, 'render_countdown_timer' ) );
 
 			$this->display_countdown_timer_dynamically();
+		}
+
+		function schedule_compact() {
+			woc_get_template('schedule-compact.php');
 		}
 
 		/**

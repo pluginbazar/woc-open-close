@@ -38,6 +38,7 @@ class WOC_Functions {
 		$this->active_set_id = $this->get_option( 'woc_active_set' );
 	}
 
+
 	/**
 	 * Return Whether shop is open or not
 	 *
@@ -66,6 +67,7 @@ class WOC_Functions {
 
 		return apply_filters( 'woc_is_open', $woc_is_open );
 	}
+
 
 	/**
 	 * Return TimeZone String
@@ -153,22 +155,23 @@ class WOC_Functions {
 	function get_current_day_id() {
 
 		switch ( strtolower( date( 'D' ) ) ) {
-
 			case 'mon' :
-				return 10003;
-			case 'tue' :
-				return 10004;
-			case 'wed' :
-				return 10005;
-			case 'thu' :
-				return 10006;
-			case 'fri' :
-				return 10007;
-			case 'sat' :
 				return 10001;
-			case 'sun' :
+			case 'tue' :
 				return 10002;
+			case 'wed' :
+				return 10003;
+			case 'thu' :
+				return 10004;
+			case 'fri' :
+				return 10005;
+			case 'sat' :
+				return 10006;
+			case 'sun' :
+				return 10007;
 		}
+
+		return 10001;
 	}
 
 
@@ -236,6 +239,36 @@ class WOC_Functions {
 							),
 						),
 						array(
+							'id'      => 'start_of_week',
+							'title'   => esc_html__( 'Week Starts On	', 'woc-open-close' ),
+							'details' => esc_html__( 'Select from which day your week starts on.', 'woc-open-close' ),
+							'type'    => 'select',
+							'args'    => array(
+								1 => esc_html( 'Monday' ),
+								2 => esc_html( 'Tuesday' ),
+								3 => esc_html( 'Wednesday' ),
+								4 => esc_html( 'Thursday' ),
+								5 => esc_html( 'Friday' ),
+								6 => esc_html( 'Saturday' ),
+								0 => esc_html( 'Sunday' ),
+							),
+						),
+						array(
+							'id'    => 'show_admin_status',
+							'title' => esc_html__( 'Shop Status Notice', 'woc-open-close' ),
+							'type'  => 'checkbox',
+							'args'  => array(
+								'no' => esc_html__( 'Disable shop status notice inside WP-Admin', 'woc-open-close' ),
+							),
+						),
+					)
+				),
+
+				array(
+					'title'       => esc_html__( 'Pro Settings', 'woc-open-close' ),
+					'description' => esc_html__( 'These setting options are available only in pro version, please purchase the pro version to unlock some awesome features!', 'woc-open-close' ),
+					'options'     => array(
+						array(
 							'id'       => 'woc_empty_cart_on_close',
 							'title'    => esc_html__( 'Empty cart when close', 'woc-open-close' ),
 							'details'  => esc_html__( 'Pro: Empty cart as soon as shop is closed, so that no more order if customer added before shop was closed', 'woc-open-close' ),
@@ -256,14 +289,6 @@ class WOC_Functions {
 								'no'  => esc_html__( 'No', 'woc-open-close' ),
 							),
 							'disabled' => woc_pro_available() ? false : true,
-						),
-						array(
-							'id'    => 'show_admin_status',
-							'title' => esc_html__( 'Shop Status Notice', 'woc-open-close' ),
-							'type'  => 'checkbox',
-							'args'  => array(
-								'no' => esc_html__( 'Disable shop status notice inside WP-Admin', 'woc-open-close' ),
-							),
 						),
 					)
 				),
@@ -639,39 +664,45 @@ class WOC_Functions {
 	 */
 	public function get_days() {
 
-		$days_array = array(
-
-			'10001' => array(
-				'name'  => esc_html( 'Saturday' ),
-				'label' => __( 'Saturday', 'woc-open-close' ),
-			),
-			'10002' => array(
+		$start_of_week = get_option( 'start_of_week' );
+		$days_array    = array(
+			'10000' => array(
 				'name'  => esc_html( 'Sunday' ),
 				'label' => __( 'Sunday', 'woc-open-close' ),
 			),
-			'10003' => array(
+			'10001' => array(
 				'name'  => esc_html( 'Monday' ),
 				'label' => __( 'Monday', 'woc-open-close' ),
 			),
-			'10004' => array(
+			'10002' => array(
 				'name'  => esc_html( 'Tuesday' ),
 				'label' => __( 'Tuesday', 'woc-open-close' ),
 			),
-			'10005' => array(
+			'10003' => array(
 				'name'  => esc_html( 'Wednesday' ),
 				'label' => __( 'Wednesday', 'woc-open-close' ),
 			),
-			'10006' => array(
+			'10004' => array(
 				'name'  => esc_html( 'Thursday' ),
 				'label' => __( 'Thursday', 'woc-open-close' ),
 			),
-			'10007' => array(
+			'10005' => array(
 				'name'  => esc_html( 'Friday' ),
 				'label' => __( 'Friday', 'woc-open-close' ),
 			),
+			'10006' => array(
+				'name'  => esc_html( 'Saturday' ),
+				'label' => __( 'Saturday', 'woc-open-close' ),
+			),
 		);
+		$sorted_days   = array();
 
-		return apply_filters( 'woc_filters_days_array', $days_array );
+		for ( $index = $start_of_week; $index < ( $start_of_week + 7 ); $index ++ ) {
+			$day_id                 = 10000 + $index % 7;
+			$sorted_days[ $day_id ] = $days_array[ $day_id ];
+		}
+
+		return apply_filters( 'woc_filters_days_array', $sorted_days );
 	}
 
 	/**
