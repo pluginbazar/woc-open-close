@@ -717,17 +717,21 @@ class WOC_Functions {
 		$set_to_display      = empty( $set_id ) ? $this->get_active_schedule_id() : $set_id;
 		$woc_hours_meta      = get_post_meta( $set_to_display, 'woc_hours_meta', true );
 		$woc_hours_meta      = empty( $woc_hours_meta ) ? array() : $woc_hours_meta;
-		$woc_hours_meta_keys = array_keys( $woc_hours_meta );
+		$all_schedules       = array();
 
 		foreach ( $this->get_days() as $day_key => $label ) {
-			if ( ! in_array( $day_key, $woc_hours_meta_keys ) ) {
-				$woc_hours_meta[ $day_key ] = array();
+//			if ( $day_key === 10000 ) {
+//				$all_schedules[ $day_key ] = $woc_hours_meta[10007];
+//				continue;
+//			}
+
+			if ( isset( $woc_hours_meta[ $day_key ] ) ) {
+				$all_schedules[ $day_key ] = $woc_hours_meta[ $day_key ];
 			}
+
 		}
 
-		ksort( $woc_hours_meta );
-
-		return apply_filters( 'woc_all_schedules', $woc_hours_meta );
+		return apply_filters( 'woc_all_schedules', $all_schedules );
 	}
 
 	/**

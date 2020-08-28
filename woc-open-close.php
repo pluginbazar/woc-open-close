@@ -64,14 +64,14 @@ if ( ! class_exists( 'wooCommerceOpenClose' ) ) {
 		 */
 		function define_classes_functions() {
 
-			require_once( WOC_PLUGIN_DIR . 'includes/classes/class-pb-settings-3.2.php' );
-			require_once( WOC_PLUGIN_DIR . 'includes/classes/class-functions.php' );
-			require_once( WOC_PLUGIN_DIR . 'includes/classes/class-hooks.php' );
-			require_once( WOC_PLUGIN_DIR . 'includes/classes/class-post-meta.php' );
-			require_once( WOC_PLUGIN_DIR . 'includes/classes/class-column.php' );
-			require_once( WOC_PLUGIN_DIR . 'includes/classes/class-widget-schedule.php' );
+			require_once WOC_PLUGIN_DIR . 'includes/classes/class-pb-settings-3.2.php';
+			require_once WOC_PLUGIN_DIR . 'includes/classes/class-functions.php';
+			require_once WOC_PLUGIN_DIR . 'includes/classes/class-hooks.php';
+			require_once WOC_PLUGIN_DIR . 'includes/classes/class-post-meta.php';
+			require_once WOC_PLUGIN_DIR . 'includes/classes/class-column.php';
+			require_once WOC_PLUGIN_DIR . 'includes/classes/class-widget-schedule.php';
 
-			require_once( WOC_PLUGIN_DIR . 'includes/functions.php' );
+			require_once WOC_PLUGIN_DIR . 'includes/functions.php';
 		}
 
 
