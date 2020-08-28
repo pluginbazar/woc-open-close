@@ -728,7 +728,6 @@ class WOC_Functions {
 			if ( isset( $woc_hours_meta[ $day_key ] ) ) {
 				$all_schedules[ $day_key ] = $woc_hours_meta[ $day_key ];
 			}
-
 		}
 
 		return apply_filters( 'woc_all_schedules', $all_schedules );
