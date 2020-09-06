@@ -714,17 +714,12 @@ class WOC_Functions {
 	 */
 	function get_all_schedules( $set_id = '' ) {
 
-		$set_to_display      = empty( $set_id ) ? $this->get_active_schedule_id() : $set_id;
-		$woc_hours_meta      = get_post_meta( $set_to_display, 'woc_hours_meta', true );
-		$woc_hours_meta      = empty( $woc_hours_meta ) ? array() : $woc_hours_meta;
-		$all_schedules       = array();
+		$set_to_display = empty( $set_id ) ? $this->get_active_schedule_id() : $set_id;
+		$woc_hours_meta = get_post_meta( $set_to_display, 'woc_hours_meta', true );
+		$woc_hours_meta = empty( $woc_hours_meta ) ? array() : $woc_hours_meta;
+		$all_schedules  = array();
 
 		foreach ( $this->get_days() as $day_key => $label ) {
-//			if ( $day_key === 10000 ) {
-//				$all_schedules[ $day_key ] = $woc_hours_meta[10007];
-//				continue;
-//			}
-
 			if ( isset( $woc_hours_meta[ $day_key ] ) ) {
 				$all_schedules[ $day_key ] = $woc_hours_meta[ $day_key ];
 			}
@@ -922,7 +917,8 @@ class WOC_Functions {
 		global $wooopenclose_args;
 
 		$args    = empty( $args ) ? $wooopenclose_args : $args;
-		$default = empty( $default ) ? '' : $default;
+		$default = empty( $default ) && ! is_array( $default ) ? '' : $default;
+		$default = empty( $default ) && is_array( $default ) ? array() : $default;
 		$key     = empty( $key ) ? '' : $key;
 
 		if ( isset( $args[ $key ] ) && ! empty( $args[ $key ] ) ) {

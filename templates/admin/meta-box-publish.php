@@ -6,6 +6,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+global $post;
+
 if ( $post->post_status === 'publish' ) :
 	?>
     <div class='woc_section woc_section_mini'>
