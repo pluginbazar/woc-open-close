@@ -329,19 +329,28 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 
 			// Check any Schedule available or not
 			if ( count( get_posts( 'post_type=woc_hour' ) ) == 0 ) {
-				wooopenclose()->print_notice( sprintf(
-					__( 'No Schedules Found for this WooCommerce Shop. <a href="%s">Create Schedule</a> or <a href="%s">Import</a>', 'woc-open-close' ),
-					admin_url( 'post-new.php?post_type=woc_hour' ),
-					admin_url( 'import.php?import=wordpress' ) ), 'warning' );
+
+				wooopenclose()->print_notice(
+					sprintf( '%s. <a href="%s" class="button-primary">%s</a>',
+						esc_html__( 'No schedules found for this store', 'woc-open-close' ),
+						admin_url( 'post-new.php?post_type=woc_hour' ),
+						esc_html__( 'Create Schedule', 'woc-open-close' )
+					)
+				);
 
 				return;
 			}
 
 			// Check Active Schedule
 			if ( empty( wooopenclose()->get_active_schedule_id() ) ) {
-				wooopenclose()->print_notice( sprintf(
-					__( 'No Active Schedule found <a href="%s">Make a Schedule Active</a>', 'woc-open-close' ),
-					admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close' ) ), 'warning' );
+
+				wooopenclose()->print_notice(
+					sprintf( '%s. <a href="%s" class="button-primary">%s</a>',
+						esc_html__( 'No active schedule found!', 'woc-open-close' ),
+						admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close' ),
+						esc_html__( 'Select schedule', 'woc-open-close' )
+					), 'warning'
+				);
 
 				return;
 			}
@@ -349,10 +358,10 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			// Check is_open()
 			if ( ! in_array( 'no', woc_get_option( 'show_admin_status', array( 'yes' ) ) ) ) {
 
-				$buy_notice    = ! woc_pro_available() ? sprintf( ' <a target="_blank" href="https://pluginbazar.com/plugin/woocommerce-open-close/">%s</a>', __( 'Get Pro to Restrict Order while shop Closed', 'woc-open-close' ) ) : '';
+				$buy_notice    = ! woc_pro_available() ? sprintf( ' <a target="_blank" class="button-primary" href="https://pluginbazar.com/plugin/woocommerce-open-close/">%s</a>', __( 'Get Pro to Restrict Order while shop Closed', 'woc-open-close' ) ) : '';
 				$status_notice = woc_is_open() ? __( 'Shop is now accepting order from customers', 'woc-open-close' ) : __( 'Shop is currently closed from taking orders', 'woc-open-close' );
 				$status_notice = sprintf( '%s. %s <a href="%s" class="wooopenclose-notice-link">%s</a>', $status_notice, $buy_notice,
-					esc_url( admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close#woc_allow_add_cart_on_close' ) ),
+					esc_url( admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close#start_of_week' ) ),
 					esc_html__( 'Disable this Notice', 'woc-open-close' )
 				);
 
@@ -437,7 +446,6 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 		}
 
 
-
 		/**
 		 * Register Post Types and Settings
 		 */
@@ -473,7 +481,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 				'pages'            => wooopenclose()->get_settings_pages(),
 				'plugin_name'      => esc_html( 'WooCommerce Open Close' ),
 				'plugin_slug'      => 'woc-open-close',
-				'enable_feedback'  => true,
+				'enable_feedback'  => false,
 				'required_plugins' => array(
 					'woocommerce' => esc_html( 'WooCommerce' ),
 				),
@@ -482,13 +490,16 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			wooopenclose()->PB_Settings()->register_shortcode( 'woc_open_close', array( $this, 'render_schedule' ) );
 			wooopenclose()->PB_Settings()->register_shortcode( 'schedule', array( $this, 'render_schedule' ) );
 			wooopenclose()->PB_Settings()->register_shortcode( 'schedule_compact', array( $this, 'schedule_compact' ) );
-			wooopenclose()->PB_Settings()->register_shortcode( 'woc_countdown_timer', array( $this, 'render_countdown_timer' ) );
+			wooopenclose()->PB_Settings()->register_shortcode( 'woc_countdown_timer', array(
+				$this,
+				'render_countdown_timer'
+			) );
 
 			$this->display_countdown_timer_dynamically();
 		}
 
 		function schedule_compact() {
-			woc_get_template('schedule-compact.php');
+			woc_get_template( 'schedule-compact.php' );
 		}
 
 		/**

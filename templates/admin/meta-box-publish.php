@@ -106,30 +106,12 @@ if ( $post->post_status === 'publish' ) :
         justify-content: space-between;
     }
 
-    #delete-action a,
-    #delete-action a:focus,
-    #delete-action a:active,
-    input#publish,
-    input#publish:focus,
-    input#publish:active {
-        color: #fff !important;
-        text-decoration: none;
-        border-radius: 4px;
-        padding: 12px;
-        font-size: 15px;
-        line-height: 18px;
-        outline: none;
-        box-shadow: none;
-        text-shadow: none !important;
-        user-select: none;
-        border: none;
-    }
-
-    #delete-action a {
-        background: #E91E63;
+    #major-publishing-actions .clear {
+        display: none;
     }
 
     input#publish {
-        background: #4f7d79;
+        background: #1dbf73;
+        border: none;
     }
 </style>

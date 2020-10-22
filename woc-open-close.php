@@ -3,7 +3,7 @@
 	Plugin Name: WooCommerce Open Close
 	Plugin URI: https://pluginbazar.com/plugin/woocommerce-open-close/
 	Description: Maintain Business hour for your WooCommerce Shop. Let your customers know about business schedules and restrict them from placing new orders while Store is Closed.
-	Version: 4.1.6
+	Version: 4.1.7
 	Text Domain: woc-open-close
 	Author: Pluginbazar
 	Author URI: https://pluginbazar.com/
@@ -64,6 +64,7 @@ if ( ! class_exists( 'wooCommerceOpenClose' ) ) {
 		 */
 		function define_classes_functions() {
 
+//			require_once WOC_PLUGIN_DIR . 'includes/appsero/Client.php';
 			require_once WOC_PLUGIN_DIR . 'includes/classes/class-pb-settings-3.2.php';
 			require_once WOC_PLUGIN_DIR . 'includes/classes/class-functions.php';
 			require_once WOC_PLUGIN_DIR . 'includes/classes/class-hooks.php';
@@ -148,3 +149,27 @@ if ( ! class_exists( 'wooCommerceOpenClose' ) ) {
 
 	new wooCommerceOpenClose();
 }
+
+
+
+
+
+/**
+ * Initialize the plugin tracker
+ *
+ * @return void
+ */
+function appsero_init_tracker_woc_open_close() {
+
+	if ( ! class_exists( 'Appsero\Client' ) ) {
+		require_once __DIR__ . '/includes/appsero/Client.php';
+	}
+
+	$client = new Appsero\Client( '0a7e7a1e-83f4-418e-bb1e-dc94ffa9532c', 'Woocommerce Open Close &#8211; Best Business Schedules Manager', __FILE__ );
+
+	// Active insights
+	$client->insights()->init();
+
+}
+
+appsero_init_tracker_woc_open_close();

@@ -3,9 +3,9 @@
 	Donate link: https://www.pluginbazar.com/contact/
 	Tags: business hours, Opening Hours, Open Close, Schedules manager
 	Requires at least: 4.6
-	Tested up to: 5.5
-	Tested up to WooCommerce: 4.3.3
-	Stable tag: 4.1.6
+	Tested up to: 5.5.1
+	Tested up to WooCommerce: 4.6.1
+	Stable tag: 4.1.7
 	Requires PHP: 5.6
 	Requires WooCommerce: 3.0
 	Text Domain: woc-open-close
@@ -88,6 +88,18 @@ WooCommerce Open Close is an extension of WooCommerce Plugin which allows you to
 > Using this shortcode you can add frontend schedules manager in any page. Admin will able to Create | Delete | Update schedules.
 >
 > This shortcode will be available on premium version only.
+
+
+
+## Privacy Policy
+Woocommerce Open Close &#8211; Best Business Schedules Manager uses [Appsero](https://appsero.com) SDK to collect some telemetry data upon user's confirmation. This helps us to troubleshoot problems faster & make product improvements.
+
+Appsero SDK **does not gather any data by default.** The SDK only starts gathering basic telemetry data **when a user allows it via the admin notice**. We collect the data to ensure a great user experience for all our users.
+
+Integrating Appsero SDK **DOES NOT IMMEDIATELY** start gathering data, **without confirmation from users in any case.**
+
+Learn more about how [Appsero collects and uses this data](https://appsero.com/privacy-policy/).
+
 
 
 == Frequently Asked Questions ==
