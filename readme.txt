@@ -3,9 +3,9 @@
 	Donate link: https://www.pluginbazar.com/contact/
 	Tags: business hours, Opening Hours, Open Close, Schedules manager
 	Requires at least: 4.6
-	Tested up to: 5.5.1
-	Tested up to WooCommerce: 4.6.1
-	Stable tag: 4.1.7
+	Tested up to: 5.5.3
+	Tested up to WooCommerce: 4.6.2
+	Stable tag: 4.1.8
 	Requires PHP: 5.6
 	Requires WooCommerce: 3.0
 	Text Domain: woc-open-close
@@ -233,6 +233,9 @@ We are working on the translation to be available for your language too. This is
 
     = 4.1.5 =
     * Admin UI Update
+
+    = 4.1.8 =
+    * A serious bug has been fixed
 
 == Upgrade Notice ==
 

@@ -20,14 +20,13 @@ jQuery(document).ready(function ($) {
         let disAllowMessage = $(this).data('disallowmessage'),
             wocPopupBox = $('#wooopenclose-box-container').find('.wooopenclose-box');
 
-        if ( typeof disAllowMessage !== "undefined" && disAllowMessage.length && disAllowMessage.length > 0) {
+        if (typeof disAllowMessage !== "undefined" && disAllowMessage.length && disAllowMessage.length > 0) {
             wocPopupBox.html(disAllowMessage);
         }
     });
 
     // Inline popups
     $('.wooopenclose-add-to-cart').magnificPopup({
-        // delegate: 'a',
         removalDelay: 500,
         callbacks: {
             beforeOpen: function () {
@@ -35,6 +34,7 @@ jQuery(document).ready(function ($) {
             }
         },
         midClick: true,
+        type:'inline',
     });
 
 });
