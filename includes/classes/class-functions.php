@@ -4,9 +4,7 @@
 * Copyright: 	2015 pluginbazar
 */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}  // if direct access
+defined( 'ABSPATH' ) || exit;
 
 class WOC_Functions {
 
@@ -239,18 +237,18 @@ class WOC_Functions {
 							),
 						),
 						array(
-							'id'      => 'start_of_week',
-							'title'   => esc_html__( 'Week Starts On	', 'woc-open-close' ),
-							'details' => esc_html__( 'Select from which day your week starts on.', 'woc-open-close' ),
+							'id'      => 'woc_start_of_week',
+							'title'   => esc_html__( 'Week Starts On', 'woc-open-close' ),
+							'details' => esc_html__( 'Set from which day your week starts on.', 'woc-open-close' ),
 							'type'    => 'select',
 							'args'    => array(
-								1 => esc_html( 'Monday' ),
-								2 => esc_html( 'Tuesday' ),
-								3 => esc_html( 'Wednesday' ),
-								4 => esc_html( 'Thursday' ),
-								5 => esc_html( 'Friday' ),
-								6 => esc_html( 'Saturday' ),
-								0 => esc_html( 'Sunday' ),
+								3 => esc_html( 'Monday' ),
+								4 => esc_html( 'Tuesday' ),
+								5 => esc_html( 'Wednesday' ),
+								6 => esc_html( 'Thursday' ),
+								7 => esc_html( 'Friday' ),
+								1 => esc_html( 'Saturday' ),
+								2 => esc_html( 'Sunday' ),
 							),
 						),
 						array(
@@ -258,7 +256,7 @@ class WOC_Functions {
 							'title' => esc_html__( 'Shop Status Notice', 'woc-open-close' ),
 							'type'  => 'checkbox',
 							'args'  => array(
-								'no' => esc_html__( 'Disable shop status notice inside WP-Admin', 'woc-open-close' ),
+								'yes' => esc_html__( 'Enable shop status notice inside WP-Admin', 'woc-open-close' ),
 							),
 						),
 					)
@@ -553,6 +551,7 @@ class WOC_Functions {
 		return apply_filters( 'woc_filters_settings_pages', $pages );
 	}
 
+
 	/**
 	 * Return Image URL dynamically
 	 *
@@ -571,6 +570,7 @@ class WOC_Functions {
 
 		return apply_filters( 'woc_filters_status_image', $image_url, $image_for, $image_id );
 	}
+
 
 	/**
 	 * Return Next Opening Time
@@ -634,6 +634,7 @@ class WOC_Functions {
 		return apply_filters( 'woc_filters_calculate_times', $__times, $__time_for, $__day_name );
 	}
 
+
 	/**
 	 * Return Current Day Name
 	 *
@@ -664,46 +665,47 @@ class WOC_Functions {
 	 */
 	public function get_days() {
 
-		$start_of_week = get_option( 'start_of_week' );
-		$days_array    = array(
-			'10000' => array(
-				'name'  => esc_html( 'Sunday' ),
-				'label' => __( 'Sunday', 'woc-open-close' ),
-			),
+		$woc_start_of_week = get_option( 'woc_start_of_week' );
+		$days_array        = array(
 			'10001' => array(
-				'name'  => esc_html( 'Monday' ),
-				'label' => __( 'Monday', 'woc-open-close' ),
-			),
-			'10002' => array(
-				'name'  => esc_html( 'Tuesday' ),
-				'label' => __( 'Tuesday', 'woc-open-close' ),
-			),
-			'10003' => array(
-				'name'  => esc_html( 'Wednesday' ),
-				'label' => __( 'Wednesday', 'woc-open-close' ),
-			),
-			'10004' => array(
-				'name'  => esc_html( 'Thursday' ),
-				'label' => __( 'Thursday', 'woc-open-close' ),
-			),
-			'10005' => array(
-				'name'  => esc_html( 'Friday' ),
-				'label' => __( 'Friday', 'woc-open-close' ),
-			),
-			'10006' => array(
 				'name'  => esc_html( 'Saturday' ),
 				'label' => __( 'Saturday', 'woc-open-close' ),
 			),
+			'10002' => array(
+				'name'  => esc_html( 'Sunday' ),
+				'label' => __( 'Sunday', 'woc-open-close' ),
+			),
+			'10003' => array(
+				'name'  => esc_html( 'Monday' ),
+				'label' => __( 'Monday', 'woc-open-close' ),
+			),
+			'10004' => array(
+				'name'  => esc_html( 'Tuesday' ),
+				'label' => __( 'Tuesday', 'woc-open-close' ),
+			),
+			'10005' => array(
+				'name'  => esc_html( 'Wednesday' ),
+				'label' => __( 'Wednesday', 'woc-open-close' ),
+			),
+			'10006' => array(
+				'name'  => esc_html( 'Thursday' ),
+				'label' => __( 'Thursday', 'woc-open-close' ),
+			),
+			'10007' => array(
+				'name'  => esc_html( 'Friday' ),
+				'label' => __( 'Friday', 'woc-open-close' ),
+			),
 		);
-		$sorted_days   = array();
+		$sorted_days       = array();
 
-		for ( $index = $start_of_week; $index < ( $start_of_week + 7 ); $index ++ ) {
-			$day_id                 = 10000 + $index % 7;
+		for ( $index = $woc_start_of_week; $index < ( $woc_start_of_week + 7 ); $index ++ ) {
+			$day_id                 = ( $index % 7 === 0 ? 7 : $index % 7 ) + 10000;
 			$sorted_days[ $day_id ] = $days_array[ $day_id ];
 		}
 
 		return apply_filters( 'woc_filters_days_array', $sorted_days );
 	}
+
 
 	/**
 	 * Return all Schedules
@@ -728,6 +730,7 @@ class WOC_Functions {
 		return apply_filters( 'woc_all_schedules', $all_schedules );
 	}
 
+
 	/**
 	 * Return Plugin Path
 	 *
@@ -736,6 +739,7 @@ class WOC_Functions {
 	function plugin_path() {
 		return apply_filters( 'woc_filters_plugin_path', untrailingslashit( WOC_PLUGIN_DIR ) );
 	}
+
 
 	/**
 	 * PB_Settings Class
@@ -748,6 +752,7 @@ class WOC_Functions {
 
 		return new PB_Settings( $args );
 	}
+
 
 	/**
 	 * Return Message if Shop is Closed
@@ -782,6 +787,7 @@ class WOC_Functions {
 		return apply_filters( 'woc_filters_shop_close_message', $woc_message );
 	}
 
+
 	/**
 	 * Return countdown timer code
 	 *
@@ -798,6 +804,7 @@ class WOC_Functions {
 		return ob_get_clean();
 	}
 
+
 	/**
 	 * Return Button Text on Bar
 	 *
@@ -807,6 +814,7 @@ class WOC_Functions {
 
 		return apply_filters( 'woc_filters_bar_btn_text', woc_get_option( 'woc_bar_hide_text', __( 'Hide Message', 'woc-open-close' ) ) );
 	}
+
 
 	/**
 	 * Return Whether Bar button to display or not
@@ -821,6 +829,7 @@ class WOC_Functions {
 			return false;
 		}
 	}
+
 
 	/**
 	 * Print notice to the admin bar
@@ -839,8 +848,9 @@ class WOC_Functions {
 			$is_success = $is_success ? 'success' : 'error';
 		}
 
-		printf( '<div class="notice notice-%s %s"><p>%s</p></div>', $is_success, $is_dismissible ? 'is-dismissible' : '', $message );
+		printf( '<div class="notice notice-%s %s">%s</div>', $is_success, $is_dismissible ? 'is-dismissible' : '', $message );
 	}
+
 
 	/**
 	 * Generate and return HTML for Schedule
@@ -858,6 +868,7 @@ class WOC_Functions {
 
 		return ob_get_clean();
 	}
+
 
 	/**
 	 * Return current URL with HTTP parameters
@@ -881,6 +892,7 @@ class WOC_Functions {
 		return apply_filters( 'woc_filters_current_url', $current_url );
 	}
 
+
 	/**
 	 * Return Post Meta Value
 	 *
@@ -902,6 +914,7 @@ class WOC_Functions {
 
 		return apply_filters( 'woc_filters_get_meta', $meta_value, $meta_key, $post_id, $default );
 	}
+
 
 	/**
 	 * Return Arguments Value

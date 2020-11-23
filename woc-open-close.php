@@ -3,7 +3,7 @@
 	Plugin Name: WooCommerce Open Close
 	Plugin URI: https://pluginbazar.com/plugin/woocommerce-open-close/
 	Description: Maintain Business hour for your WooCommerce Shop. Let your customers know about business schedules and restrict them from placing new orders while Store is Closed.
-	Version: 4.1.8
+	Version: 4.1.9
 	Text Domain: woc-open-close
 	Author: Pluginbazar
 	Author URI: https://pluginbazar.com/
@@ -12,16 +12,15 @@
 */
 
 defined( 'ABSPATH' ) || exit;
-
-define( 'WOC_PLUGIN_URL', WP_PLUGIN_URL . '/' . plugin_basename( dirname( __FILE__ ) ) . '/' );
-define( 'WOC_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'WOC_PLUGIN_FILE', plugin_basename( __FILE__ ) );
-define( 'WOC_LICENSE_KEY', 'https://pluginbazar.com/my-account/license/' );
-define( 'WOC_TICKET_URL', 'https://pluginbazar.com/my-account/tickets/?action=new' );
-define( 'WOC_PLUGIN_LINK', 'https://pluginbazar.com/plugin/woocommerce-open-close/?add-to-cart=3395' );
-define( 'WOC_DOCS_URL', 'https://pluginbazar.com/docs/woocommerce-open-close/' );
-define( 'WOC_CONTACT_URL', 'https://pluginbazar.com/contact/' );
-define( 'WOC_WP_REVIEW_URL', 'https://wordpress.org/support/plugin/woc-open-close/reviews/' );
+defined( 'WOC_PLUGIN_URL' ) || define( 'WOC_PLUGIN_URL', WP_PLUGIN_URL . '/' . plugin_basename( dirname( __FILE__ ) ) . '/' );
+defined( 'WOC_PLUGIN_DIR' ) || define( 'WOC_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+defined( 'WOC_PLUGIN_FILE' ) || define( 'WOC_PLUGIN_FILE', plugin_basename( __FILE__ ) );
+defined( 'WOC_LICENSE_KEY' ) || define( 'WOC_LICENSE_KEY', 'https://pluginbazar.com/my-account/license/' );
+defined( 'WOC_TICKET_URL' ) || define( 'WOC_TICKET_URL', 'https://pluginbazar.com/my-account/tickets/?action=new' );
+defined( 'WOC_PLUGIN_LINK' ) || define( 'WOC_PLUGIN_LINK', 'https://pluginbazar.com/plugin/woocommerce-open-close/?add-to-cart=3395' );
+defined( 'WOC_DOCS_URL' ) || define( 'WOC_DOCS_URL', 'https://pluginbazar.com/docs/woocommerce-open-close/' );
+defined( 'WOC_CONTACT_URL' ) || define( 'WOC_CONTACT_URL', 'https://pluginbazar.com/contact/' );
+defined( 'WOC_WP_REVIEW_URL' ) || define( 'WOC_WP_REVIEW_URL', 'https://wordpress.org/support/plugin/woc-open-close/reviews/' );
 
 if ( ! class_exists( 'wooCommerceOpenClose' ) ) {
 	/**
@@ -64,7 +63,6 @@ if ( ! class_exists( 'wooCommerceOpenClose' ) ) {
 		 */
 		function define_classes_functions() {
 
-//			require_once WOC_PLUGIN_DIR . 'includes/appsero/Client.php';
 			require_once WOC_PLUGIN_DIR . 'includes/classes/class-pb-settings-3.2.php';
 			require_once WOC_PLUGIN_DIR . 'includes/classes/class-functions.php';
 			require_once WOC_PLUGIN_DIR . 'includes/classes/class-hooks.php';
@@ -151,9 +149,6 @@ if ( ! class_exists( 'wooCommerceOpenClose' ) ) {
 }
 
 
-
-
-
 /**
  * Initialize the plugin tracker
  *
@@ -169,7 +164,6 @@ function appsero_init_tracker_woc_open_close() {
 
 	// Active insights
 	$client->insights()->init();
-
 }
 
 appsero_init_tracker_woc_open_close();

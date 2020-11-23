@@ -4,8 +4,8 @@
 	Tags: business hours, Opening Hours, Open Close, Schedules manager
 	Requires at least: 4.6
 	Tested up to: 5.5.3
-	Tested up to WooCommerce: 4.6.2
-	Stable tag: 4.1.8
+	Tested up to WooCommerce: 4.7.0
+	Stable tag: 4.1.9
 	Requires PHP: 5.6
 	Requires WooCommerce: 3.0
 	Text Domain: woc-open-close
@@ -36,7 +36,7 @@ WooCommerce Open Close is an extension of WooCommerce Plugin which allows you to
 * Works on local timezone
 * Notice bar to display store closing message
 * Different popup effect, popup will come when customer try to order and store are closed
-* Transalation ready
+* Translation ready
 * And many more....
 
 
@@ -236,6 +236,9 @@ We are working on the translation to be available for your language too. This is
 
     = 4.1.8 =
     * A serious bug has been fixed
+
+    = 4.1.9 =
+    * Sunday store closing issue fixed
 
 == Upgrade Notice ==
 

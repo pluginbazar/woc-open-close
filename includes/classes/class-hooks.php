@@ -331,7 +331,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			if ( count( get_posts( 'post_type=woc_hour' ) ) == 0 ) {
 
 				wooopenclose()->print_notice(
-					sprintf( '%s. <a href="%s" class="button-primary">%s</a>',
+					sprintf( '<p>%s. <a href="%s" class="button-primary">%s</a></p>',
 						esc_html__( 'No schedules found for this store', 'woc-open-close' ),
 						admin_url( 'post-new.php?post_type=woc_hour' ),
 						esc_html__( 'Create Schedule', 'woc-open-close' )
@@ -345,7 +345,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			if ( empty( wooopenclose()->get_active_schedule_id() ) ) {
 
 				wooopenclose()->print_notice(
-					sprintf( '%s. <a href="%s" class="button-primary">%s</a>',
+					sprintf( '<p>%s. <a href="%s" class="button-primary">%s</a></p>',
 						esc_html__( 'No active schedule found!', 'woc-open-close' ),
 						admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close' ),
 						esc_html__( 'Select schedule', 'woc-open-close' )
@@ -356,12 +356,12 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			}
 
 			// Check is_open()
-			if ( ! in_array( 'no', woc_get_option( 'show_admin_status', array( 'yes' ) ) ) ) {
+			if ( in_array( 'yes', woc_get_option( 'show_admin_status', array( 'no' ) ) ) ) {
 
 				$buy_notice    = ! woc_pro_available() ? sprintf( ' <a target="_blank" class="button-primary" href="https://pluginbazar.com/plugin/woocommerce-open-close/">%s</a>', __( 'Get Pro to Restrict Order while shop Closed', 'woc-open-close' ) ) : '';
 				$status_notice = woc_is_open() ? __( 'Shop is now accepting order from customers', 'woc-open-close' ) : __( 'Shop is currently closed from taking orders', 'woc-open-close' );
-				$status_notice = sprintf( '%s. %s <a href="%s" class="wooopenclose-notice-link">%s</a>', $status_notice, $buy_notice,
-					esc_url( admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close#start_of_week' ) ),
+				$status_notice = sprintf( '<p>%s. %s <a href="%s" class="wooopenclose-notice-link">%s</a></p>', $status_notice, $buy_notice,
+					esc_url( admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close#woc_start_of_week' ) ),
 					esc_html__( 'Disable this Notice', 'woc-open-close' )
 				);
 
