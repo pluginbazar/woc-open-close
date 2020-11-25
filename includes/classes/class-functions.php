@@ -665,7 +665,7 @@ class WOC_Functions {
 	 */
 	public function get_days() {
 
-		$woc_start_of_week = get_option( 'woc_start_of_week' );
+		$woc_start_of_week = wooopenclose()->get_option( 'woc_start_of_week', 2 );
 		$days_array        = array(
 			'10001' => array(
 				'name'  => esc_html( 'Saturday' ),

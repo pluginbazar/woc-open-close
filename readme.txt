@@ -5,7 +5,7 @@
 	Requires at least: 4.6
 	Tested up to: 5.5.3
 	Tested up to WooCommerce: 4.7.0
-	Stable tag: 4.1.9
+	Stable tag: 4.2.0
 	Requires PHP: 5.6
 	Requires WooCommerce: 3.0
 	Text Domain: woc-open-close
@@ -23,7 +23,7 @@ WooCommerce Open Close is an extension of WooCommerce Plugin which allows you to
 [TRY DEMO](https://demo.pluginbazar.com/woc-open-close/try-demo/) | [BUY PRO](https://pluginbazar.com/?add-to-cart=3395) | [SUPPORT](https://pluginbazar.com/my-account/tickets/?action=new) | [DOCUMENTATION](https://pluginbazar.com/docs/woc-open-close/)
 
 ### Plugin Overview
-[youtube https://www.youtube.com/watch?v=I8WwJZU8RC4]
+[youtube https://www.youtube.com/watch?v=hTB_4wxJVV4]
 
 
 ### Features
