@@ -153,19 +153,19 @@ class WOC_Functions {
 	function get_current_day_id() {
 
 		switch ( strtolower( date( 'D' ) ) ) {
-			case 'mon' :
-				return 10001;
-			case 'tue' :
-				return 10002;
-			case 'wed' :
-				return 10003;
-			case 'thu' :
-				return 10004;
-			case 'fri' :
-				return 10005;
 			case 'sat' :
-				return 10006;
+				return 10001;
 			case 'sun' :
+				return 10002;
+			case 'mon' :
+				return 10003;
+			case 'tue' :
+				return 10004;
+			case 'wed' :
+				return 10005;
+			case 'thu' :
+				return 10006;
+			case 'fri' :
 				return 10007;
 		}
 
@@ -181,6 +181,7 @@ class WOC_Functions {
 	public function get_active_schedule_id() {
 		return apply_filters( 'woc_filters_get_active_schedule_id', $this->active_set_id );
 	}
+
 
 	/**
 	 * Return User Meta Value
@@ -203,6 +204,7 @@ class WOC_Functions {
 
 		return apply_filters( 'woc_filters_get_user_meta', $meta_value, $meta_key, $user_id, $default );
 	}
+
 
 	/**
 	 * Return settings page as Array
@@ -599,6 +601,7 @@ class WOC_Functions {
 
 		return apply_filters( 'woc_filters_next_time', date( $format, $next_time ), $next_time, $format );
 	}
+
 
 	/**
 	 * Calculate times
