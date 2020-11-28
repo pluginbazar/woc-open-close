@@ -38,6 +38,51 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			add_action( 'wp_ajax_woc_switch_active', array( $this, 'ajax_switch_active' ) );
 			add_action( 'pb_settings_before_woc_instant_force', array( $this, 'display_instant_controller' ) );
 			add_action( 'in_admin_header', array( $this, 'render_admin_loader' ), 0 );
+
+			add_action( 'pre_set_site_transient_update_plugins', array( $this, 'transient_update_plugins' ), 21, 1 );
+		}
+
+
+		/**
+		 * Manage pro version update in earlier plugin
+		 *
+		 * @param $transient
+		 *
+		 * @return mixed
+		 */
+		function transient_update_plugins( $transient ) {
+
+			if ( class_exists( 'wooCommerceOpenClosePro' ) && ! defined( 'WOCP_PLUGIN_NAME' ) ) {
+
+				$plugin_obj                = new stdClass();
+				$plugin_obj->id            = 'pluginbazar.com/woc-open-close-pro';
+				$plugin_obj->slug          = 'woc-open-close-pro';
+				$plugin_obj->plugin        = 'woc-open-close-pro/woc-open-close-pro.php';
+				$plugin_obj->new_version   = '1.1.2';
+				$plugin_obj->url           = 'https://pluginbazar.com/plugins/woc-open-close';
+				$plugin_obj->package       = 'https://connect.pluginbazar.com/download/5/';
+				$plugin_obj->icons         = array(
+					'2x' => 'https://ps.w.org/woc-open-close/assets/icon-256x256.png?rev=2086322',
+					'1x' => 'https://ps.w.org/woc-open-close/assets/icon-128x128.png?rev=2086322',
+				);
+				$plugin_obj->banners       = array(
+					'2x' => 'https://ps.w.org/woc-open-close/assets/banner-1544x500.png?rev=2086322',
+					'1x' => 'https://ps.w.org/woc-open-close/assets/banner-772x250.png?rev=2086322',
+				);
+				$plugin_obj->banners_rtl   = array();
+				$plugin_obj->tested        = '5.5.3';
+				$plugin_obj->requires_php  = array();
+				$plugin_obj->compatibility = new stdClass();
+
+				$transient->response[ WOCP_PLUGIN_FILE ] = $plugin_obj;
+			}
+
+			if ( class_exists( 'wooCommerceOpenClosePro' ) && defined( 'WOCP_PLUGIN_NAME' ) ) {
+				unset( $transient->response['woc-open-close-pro/includes/class-hooks.php'] );
+				unset( $transient->response[ WOCP_PLUGIN_FILE ] );
+			}
+
+			return $transient;
 		}
 
 

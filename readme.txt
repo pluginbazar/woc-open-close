@@ -1,11 +1,11 @@
 === Woocommerce Open Close - Best Business Schedules Manager ===
 	Contributors: jaedm97,pluginbazar
 	Donate link: https://www.pluginbazar.com/contact/
-	Tags: business hours, Opening Hours, Open Close, Schedules manager
+	Tags: business hours, Opening Hours, Open Close, Schedules manager, Sales Manager
 	Requires at least: 4.6
 	Tested up to: 5.5.3
 	Tested up to WooCommerce: 4.7.0
-	Stable tag: 4.2.1
+	Stable tag: 4.2.4
 	Requires PHP: 5.6
 	Requires WooCommerce: 3.0
 	Text Domain: woc-open-close
@@ -17,7 +17,6 @@
 == Description ==
 
 WooCommerce Open Close is an extension of WooCommerce Plugin which allows you to manage your business schedules easily and automatically. You just need to specify when you are open and when you don't. This plugin will do the rest, like a real shop your web store will be opened and/or closed following the schedules you created from admin. Thus your customer will able to know your business schedules, Besides they will not able to place order at the time your store is closed.
-
 
 
 [TRY DEMO](https://demo.pluginbazar.com/woc-open-close/try-demo/) | [BUY PRO](https://pluginbazar.com/?add-to-cart=3395) | [SUPPORT](https://pluginbazar.com/my-account/tickets/?action=new) | [DOCUMENTATION](https://pluginbazar.com/docs/woc-open-close/)

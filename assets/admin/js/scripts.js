@@ -6,8 +6,11 @@
 
     "use strict";
 
-    $(document).on('change', '.wooopenclose-quick-switch input[type=checkbox]', function () {
+    $(window).on('load', function () {
+        let updateContainer = $('#woc-open-close-pro-update'),
+            detailsButton = updateContainer.find('.thickbox.open-plugin-details-modal');
 
+        detailsButton.removeClass('thickbox').attr('target', '_blank').attr('href', pluginObject.tempProDownload).html(pluginObject.tempProDownloadTxt);
     });
 
 
