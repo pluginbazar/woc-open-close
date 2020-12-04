@@ -5,7 +5,7 @@
  * Quick settings page generator for WordPress
  *
  * @package PB_Settings
- * @version 3.2
+ * @version 3.3.2
  * @author Pluginbazar
  * @copyright 2019 Pluginbazar.com
  * @see https://github.com/jaedm97/PB-Settings
@@ -39,293 +39,8 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 
 			add_action( 'admin_init', array( $this, 'display_fields' ), 12 );
 			add_action( 'admin_notices', array( $this, 'required_plugin_check' ) );
-			add_action( 'after_plugin_row', array( $this, 'deactivation_feedback' ), 10, 2 );
-			add_action( 'wp_ajax_pbfb_feedback_new', array( $this, 'pbfb_feedback_new' ) );
 
 			add_filter( 'whitelist_options', array( $this, 'whitelist_options' ), 99, 1 );
-		}
-
-
-		/**
-		 * Handle Ajax submission of feedback form
-		 */
-		function pbfb_feedback_new() {
-
-			$curl = curl_init();
-			curl_setopt_array( $curl, array(
-				CURLOPT_URL            => "https://pluginbazar.com/feedback_new",
-				CURLOPT_RETURNTRANSFER => true,
-				CURLOPT_ENCODING       => "",
-				CURLOPT_MAXREDIRS      => 10,
-				CURLOPT_TIMEOUT        => 0,
-				CURLOPT_FOLLOWLOCATION => true,
-				CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
-				CURLOPT_CUSTOMREQUEST  => "POST",
-				CURLOPT_POSTFIELDS     => $_POST,
-				CURLOPT_HTTPHEADER     => array(
-					"Cookie: pb_offer_time=Apr%2018%202020%200%3A38%3A54"
-				),
-			) );
-			$response = curl_exec( $curl );
-			curl_close( $curl );
-
-			wp_send_json_success( $response );
-		}
-
-
-		/**
-		 * Render quick feedback form
-		 *
-		 * @param $plugin_file
-		 * @param $plugin_data
-		 */
-		function deactivation_feedback( $plugin_file, $plugin_data ) {
-
-			$plugin_slug = $this->get_data( 'plugin_slug' );
-			$this_plugin = sprintf( '%1$s/%1$s.php', $plugin_slug );
-			$plugin_name = $this->get_data( 'Title', '', $plugin_data );
-
-			if ( $plugin_file !== $this_plugin || ! $this->get_data( 'enable_feedback', false ) ) {
-				return;
-			}
-
-			?>
-            <div class="pbfb-container">
-                <div class="pbfb-box">
-                    <div class="pbfb-header"><?php esc_html_e( 'quick feedback', 'pb-settings' ); ?></div>
-                    <div class="pbfb-content">
-                        <p><?php printf( esc_html__( 'If you have a moment, please share why you are deactivating %s', 'pb-settings' ), $plugin_name ); ?></p>
-                        <div class="pbfb-reasons">
-                            <div>
-                                <input id="no_longer_needed" type="radio" name="reason_key" value="no_longer_needed">
-                                <label for="no_longer_needed"><?php esc_html_e( 'I no longer need the plugin', 'pb-settings' ); ?></label>
-                            </div>
-                            <div>
-                                <input id="found_a_better_plugin" type="radio" name="reason_key"
-                                       value="found_a_better_plugin">
-                                <label for="found_a_better_plugin"><?php esc_html_e( 'I found a better plugin', 'pb-settings' ); ?></label>
-                                <div class="pbfb-extra-text">
-                                    <input type="text" name="reason_better_plugin"
-                                           placeholder="Please share which plugin">
-                                </div>
-                            </div>
-                            <div>
-                                <input id="couldnt_get_the_plugin_to_work" type="radio" name="reason_key"
-                                       value="couldnt_get_the_plugin_to_work">
-                                <label for="couldnt_get_the_plugin_to_work"><?php esc_html_e( 'I couldn\'t get the plugin to work', 'pb-settings' ); ?></label>
-                            </div>
-                            <div>
-                                <input id="temporary_deactivation" type="radio" name="reason_key"
-                                       value="temporary_deactivation">
-                                <label for="temporary_deactivation"><?php esc_html_e( 'It\'s a temporary deactivation', 'pb-settings' ); ?></label>
-                            </div>
-                            <div>
-                                <input id="using_pro" type="radio" name="reason_key" value="using_pro">
-                                <label for="using_pro"><?php esc_html_e( 'I have the Pro Version', 'pb-settings' ); ?></label>
-                                <div class="pbfb-extra-text">
-									<?php printf( esc_html__( 'Wait! Dont deactivate %s. You have to activate both Free and Pro version in order for the plugin to work.', 'pb-settings' ), $plugin_name ); ?>
-                                </div>
-                            </div>
-                            <div>
-                                <input id="other" type="radio" name="reason_key" value="other">
-                                <label for="other"><?php esc_html_e( 'Other', 'pb-settings' ); ?></label>
-                                <div class="pbfb-extra-text">
-                                    <input type="text" name="reason_other"
-                                           placeholder="Please share the reason">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pbfb-buttons">
-                            <div class="pbfb-button-submit"
-                                 data-loading_text="<?php esc_attr_e( 'Sending...', 'pb-settings' ); ?>"
-                                 data-ajax_url="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>"
-                                 data-plugin_slug="<?php echo esc_attr( $plugin_slug ); ?>"
-                                 data-website="<?php echo esc_url( get_bloginfo( 'url' ) ); ?>"
-                                 data-admin_email="<?php echo esc_attr( get_bloginfo( 'admin_email' ) ); ?>">
-								<?php esc_html_e( 'Submit & Deactivate', 'pb-settings' ); ?>
-                            </div>
-                            <a class="pbfb-button-skip" href="#"><?php esc_html_e( 'Skip & Deactivate', 'pb-settings' ); ?></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script>
-                (function ($, window, document) {
-
-                    $(document).on('click', '.pbfb-button-submit', function () {
-
-                        let submitButton = $(this),
-                            reasonKey = $('input[name="reason_key"]:checked'),
-                            reasonBetterPlugin = $('input[name="reason_better_plugin"]'),
-                            reasonOther = $('input[name="reason_other"]');
-
-                        submitButton.html(submitButton.data('loading_text'));
-
-                        $.ajax({
-                            type: 'POST',
-                            url: submitButton.data('ajax_url'),
-                            context: this,
-                            data: {
-                                'action': 'pbfb_feedback_new',
-                                'plugin_slug': submitButton.data('plugin_slug'),
-                                'reason_key': reasonKey.val(),
-                                'reason_better_plugin': reasonBetterPlugin.val(),
-                                'reason_other': reasonOther.val(),
-                                'website': submitButton.data('website'),
-                                'admin_email': submitButton.data('admin_email'),
-                            },
-                            success: function (response) {
-                                if (response.success) {
-                                    window.location.href = $('.pbfb-button-skip').attr('href');
-                                }
-                            }
-                        });
-                    });
-
-                    $(document).on('change', '.pbfb-container input[name="reason_key"]', function () {
-
-                        let allExtraTexts = $('.pbfb-extra-text'),
-                            submitButton = $('.pbfb-button-submit'),
-                            checkBox = $(this),
-                            checkBoxValue = checkBox.val(),
-                            thisReason = checkBox.parent();
-
-                        allExtraTexts.slideUp();
-
-                        if (checkBoxValue === 'found_a_better_plugin' || checkBoxValue === 'using_pro' || checkBoxValue === 'other') {
-                            thisReason.find('.pbfb-extra-text').slideDown();
-                        }
-
-                        checkBoxValue === 'using_pro' ? submitButton.addClass('disabled') : submitButton.removeClass('disabled');
-                    });
-
-                    $(document).on('click', '.wp-list-table.plugins .row-actions .deactivate > a', function () {
-
-                        let deactivateButton = $(this),
-                            deactivateURL = deactivateButton.attr('href'),
-                            pluginTR = deactivateButton.parent().parent().parent().parent(),
-                            pbfbContainer = $('.pbfb-container'),
-                            pluginSlug = pluginTR.data('slug');
-
-                        if (pluginSlug === '<?php echo esc_attr( $plugin_slug ); ?>') {
-                            pbfbContainer.find('.pbfb-button-skip').attr('href', deactivateURL);
-                            pbfbContainer.fadeIn();
-                            return false;
-                        }
-
-                        return true;
-                    });
-
-                    $(document).mouseup(function (e) {
-                        let container = $('.pbfb-container .pbfb-box');
-                        if (!container.is(e.target) && container.has(e.target).length === 0) {
-                            container.parent().fadeOut();
-                        }
-                    });
-
-                })(jQuery, window, document);
-            </script>
-            <style>
-                .pbfb-container {
-                    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);
-                    display: none;
-                    height: 100%;
-                    left: 0;
-                    position: fixed;
-                    top: 0;
-                    width: 100%;
-                    z-index: 9999999;
-                }
-
-                .pbfb-container .pbfb-box {
-                    background: none repeat scroll 0 0 rgb(255, 255, 255);
-                    height: auto;
-                    margin: 0 auto;
-                    position: relative;
-                    top: 15%;
-                    max-width: 520px;
-                    border-radius: 3px;
-                    box-shadow: 0 10px 8px rgba(100, 100, 100, 0.9);
-                    max-height: 550px;
-                    overflow-y: auto;
-                    user-select: none;
-                }
-
-                .pbfb-container .pbfb-header {
-                    padding: 25px 30px;
-                    text-transform: uppercase;
-                    font-size: 18px;
-                    letter-spacing: 1px;
-                    font-weight: 600;
-                    box-shadow: 0 5px 30px 2px rgba(0, 0, 0, 0.17);
-                    overflow: hidden;
-                }
-
-                .pbfb-container .pbfb-content {
-                    padding: 15px 30px 25px;
-                }
-
-                .pbfb-container .pbfb-content p {
-                    font-size: 16px;
-                    font-weight: 500;
-                }
-
-                .pbfb-container .pbfb-reasons label {
-                    font-size: 16px;
-                    line-height: 35px;
-                    vertical-align: baseline;
-                }
-
-                .pbfb-container .pbfb-reasons .pbfb-extra-text {
-                    display: none;
-                    margin-left: 23px;
-                    width: calc(100% - 20px);
-                    line-height: 1.7;
-                    color: #ab073e;
-                }
-
-                .pbfb-container .pbfb-reasons .pbfb-extra-text > input,
-                .pbfb-container .pbfb-reasons .pbfb-extra-text > input:focus {
-                    min-height: 40px;
-                    width: 100%;
-                    outline: none;
-                    box-shadow: none;
-                    border: 1px solid #ddd;
-                }
-
-
-                .pbfb-container .pbfb-buttons {
-                    margin-top: 30px;
-                }
-
-                .pbfb-container .pbfb-buttons > *,
-                .pbfb-container .pbfb-buttons > *:active,
-                .pbfb-container .pbfb-buttons > *:focus {
-                    cursor: pointer;
-                    display: inline-block;
-                    font-weight: 600;
-                    letter-spacing: 0.8px;
-                    text-decoration: none;
-                    color: #4e4e4e;
-                    outline: none;
-                    box-shadow: none;
-                }
-
-                .pbfb-container .pbfb-button-submit {
-                    background: #E91E63;
-                    color: #fff !important;
-                    padding: 10px 12px;
-                    border-radius: 3px;
-                    margin-right: 10px;
-                    text-transform: uppercase;
-                }
-
-                .pbfb-container .pbfb-button-submit.disabled {
-                    pointer-events: none;
-                    background: #c7c7c7;
-                }
-            </style>
-			<?php
 		}
 
 
@@ -581,6 +296,8 @@ if ( ! class_exists( 'PB_Settings' ) ) {
 
 						if ( $option_id == 'post_title' ) {
 							$option['value'] = $post->post_title != 'Auto Draft' ? $post->post_title : '';
+						} else if ( $option_id == 'post_name' ) {
+							$option['value'] = $post->post_name;
 						} else if ( $option_id == 'content' ) {
 							$option['value'] = $post->post_content;
 						} else {
@@ -1371,7 +1088,7 @@ if ( ! class_exists( 'PB_Settings' ) ) {
                 <style>
                     .image-select > label {
                         display: inline-block;
-                        width: 120px;
+                        width: 48px;
                         margin: 0 15px 15px 0;
                         position: relative;
                         border: 1px solid #d1d1d1;
@@ -1381,15 +1098,16 @@ if ( ! class_exists( 'PB_Settings' ) ) {
                     .image-select > label.checked:after {
                         content: '✔';
                         position: absolute;
-                        width: 30px;
-                        height: 30px;
+                        width: 18px;
+                        height: 18px;
                         background: #4CAF50;
                         color: #fff;
                         top: -10px;
                         right: -10px;
                         border-radius: 50%;
                         text-align: center;
-                        line-height: 30px;
+                        line-height: 18px;
+                        font-size: 10px;
                     }
 
                     .image-select > label > input[type="radio"],

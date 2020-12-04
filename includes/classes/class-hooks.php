@@ -6,6 +6,8 @@
  */
 
 
+use LiteSpeed\Purge;
+
 if ( ! class_exists( 'WOC_Hooks' ) ) {
 	/**
 	 * Class WOC_Hooks
@@ -541,11 +543,35 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			) );
 
 			$this->display_countdown_timer_dynamically();
+
+
+			// Controlling action when store status changed
+			$transient_status = get_transient( 'wooopenclose_status' );
+			$current_status   = wooopenclose()->is_open() ? 'open' : 'close';
+
+			if ( empty( $transient_status ) ) {
+				set_transient( 'wooopenclose_status', $current_status, 86400 );
+			}
+
+			if ( ( $transient_status === 'open' && $current_status === 'close' ) || ( $transient_status === 'close' && $current_status === 'open' ) ) {
+
+				// Clear litespeed cache
+				if ( defined( 'LSCWP_V' ) ) {
+					Purge::purge_all();
+				}
+
+				set_transient( 'wooopenclose_status', $current_status, 86400 );
+			}
 		}
 
+
+		/**
+		 * Schedule Contact
+		 */
 		function schedule_compact() {
 			woc_get_template( 'schedule-compact.php' );
 		}
+
 
 		/**
 		 * Return Buffered Content
