@@ -3,7 +3,7 @@
 	Plugin Name: WooCommerce Open Close
 	Plugin URI: https://pluginbazar.com/plugin/woocommerce-open-close/
 	Description: Maintain Business hour for your WooCommerce Shop. Let your customers know about business schedules and restrict them from placing new orders while Store is Closed.
-	Version: 4.2.5
+	Version: 4.2.6
 	Text Domain: woc-open-close
 	Author: Pluginbazar
 	Author URI: https://pluginbazar.com/
@@ -12,25 +12,25 @@
 */
 
 defined( 'ABSPATH' ) || exit;
-defined( 'WOC_PLUGIN_URL' ) || define( 'WOC_PLUGIN_URL', WP_PLUGIN_URL . '/' . plugin_basename( dirname( __FILE__ ) ) . '/' );
-defined( 'WOC_PLUGIN_DIR' ) || define( 'WOC_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-defined( 'WOC_PLUGIN_FILE' ) || define( 'WOC_PLUGIN_FILE', plugin_basename( __FILE__ ) );
-defined( 'WOC_LICENSE_KEY' ) || define( 'WOC_LICENSE_KEY', 'https://pluginbazar.com/my-account/license/' );
-defined( 'WOC_TICKET_URL' ) || define( 'WOC_TICKET_URL', 'https://pluginbazar.com/my-account/tickets/?action=new' );
-defined( 'WOC_PLUGIN_LINK' ) || define( 'WOC_PLUGIN_LINK', 'https://pluginbazar.com/plugin/woocommerce-open-close/?add-to-cart=3395' );
-defined( 'WOC_DOCS_URL' ) || define( 'WOC_DOCS_URL', 'https://pluginbazar.com/docs/woocommerce-open-close/' );
-defined( 'WOC_CONTACT_URL' ) || define( 'WOC_CONTACT_URL', 'https://pluginbazar.com/contact/' );
-defined( 'WOC_WP_REVIEW_URL' ) || define( 'WOC_WP_REVIEW_URL', 'https://wordpress.org/support/plugin/woc-open-close/reviews/' );
+defined( 'WOOOPENCLOSE_PLUGIN_URL' ) || define( 'WOOOPENCLOSE_PLUGIN_URL', WP_PLUGIN_URL . '/' . plugin_basename( dirname( __FILE__ ) ) . '/' );
+defined( 'WOOOPENCLOSE_PLUGIN_DIR' ) || define( 'WOOOPENCLOSE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+defined( 'WOOOPENCLOSE_PLUGIN_FILE' ) || define( 'WOOOPENCLOSE_PLUGIN_FILE', plugin_basename( __FILE__ ) );
+defined( 'WOOOPENCLOSE_TICKET_URL' ) || define( 'WOOOPENCLOSE_TICKET_URL', 'https://pluginbazar.com/my-account/tickets/?action=new' );
+defined( 'WOOOPENCLOSE_PLUGIN_LINK' ) || define( 'WOOOPENCLOSE_PLUGIN_LINK', 'https://pluginbazar.com/plugin/woocommerce-open-close/?add-to-cart=3395' );
+defined( 'WOOOPENCLOSE_DOCS_URL' ) || define( 'WOOOPENCLOSE_DOCS_URL', 'https://pluginbazar.com/docs/woocommerce-open-close/' );
+defined( 'WOOOPENCLOSE_CONTACT_URL' ) || define( 'WOOOPENCLOSE_CONTACT_URL', 'https://pluginbazar.com/contact/' );
+defined( 'WOOOPENCLOSE_WP_REVIEW_URL' ) || define( 'WOOOPENCLOSE_WP_REVIEW_URL', 'https://wordpress.org/support/plugin/woc-open-close/reviews/' );
 
-if ( ! class_exists( 'wooCommerceOpenClose' ) ) {
+if ( ! class_exists( 'WOOOPENCLOSE_Plugin' ) ) {
 	/**
-	 * Class wooOpenClose
+	 * Class WOOOPENCLOSE_Plugin
 	 */
-	class wooCommerceOpenClose {
+	class WOOOPENCLOSE_Plugin {
 
+		protected static $_instance = null;
 
 		/**
-		 * wooOpenClose constructor.
+		 * WOOOPENCLOSE_Plugin constructor.
 		 */
 		function __construct() {
 
@@ -40,6 +40,18 @@ if ( ! class_exists( 'wooCommerceOpenClose' ) ) {
 			add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		}
+
+		/**
+		 * @return \WooOpenCloseProMain|null
+		 */
+		public static function instance() {
+			if ( is_null( self::$_instance ) ) {
+				self::$_instance = new self();
+			}
+
+			return self::$_instance;
+		}
+
 
 
 		/**
@@ -63,14 +75,14 @@ if ( ! class_exists( 'wooCommerceOpenClose' ) ) {
 		 */
 		function define_classes_functions() {
 
-			require_once WOC_PLUGIN_DIR . 'includes/classes/class-pb-settings.php';
-			require_once WOC_PLUGIN_DIR . 'includes/classes/class-functions.php';
-			require_once WOC_PLUGIN_DIR . 'includes/classes/class-hooks.php';
-			require_once WOC_PLUGIN_DIR . 'includes/classes/class-post-meta.php';
-			require_once WOC_PLUGIN_DIR . 'includes/classes/class-column.php';
-			require_once WOC_PLUGIN_DIR . 'includes/classes/class-widget-schedule.php';
+			require_once WOOOPENCLOSE_PLUGIN_DIR . 'includes/classes/class-pb-settings.php';
+			require_once WOOOPENCLOSE_PLUGIN_DIR . 'includes/classes/class-functions.php';
+			require_once WOOOPENCLOSE_PLUGIN_DIR . 'includes/classes/class-hooks.php';
+			require_once WOOOPENCLOSE_PLUGIN_DIR . 'includes/classes/class-post-meta.php';
+			require_once WOOOPENCLOSE_PLUGIN_DIR . 'includes/classes/class-column.php';
+			require_once WOOOPENCLOSE_PLUGIN_DIR . 'includes/classes/class-widget-schedule.php';
 
-			require_once WOC_PLUGIN_DIR . 'includes/functions.php';
+			require_once WOOOPENCLOSE_PLUGIN_DIR . 'includes/functions.php';
 		}
 
 
@@ -100,19 +112,19 @@ if ( ! class_exists( 'wooCommerceOpenClose' ) ) {
 			wp_localize_script( 'wooopenclose-front', 'wooopenclose', $this->localize_scripts() );
 
 			wp_enqueue_style( 'dashicons' );
-			wp_enqueue_style( 'wooopenclose-core', WOC_PLUGIN_URL . 'assets/front/css/pb-core-styles.css' );
-			wp_enqueue_style( 'magnific-popup', WOC_PLUGIN_URL . 'assets/front/css/magnific-popup.css' );
-			wp_enqueue_style( 'wooopenclose-front', WOC_PLUGIN_URL . 'assets/front/css/style.css' );
-			wp_enqueue_style( 'wooopenclose-tool-tip', WOC_PLUGIN_URL . 'assets/hint.min.css' );
+			wp_enqueue_style( 'wooopenclose-core', WOOOPENCLOSE_PLUGIN_URL . 'assets/front/css/pb-core-styles.css' );
+			wp_enqueue_style( 'magnific-popup', WOOOPENCLOSE_PLUGIN_URL . 'assets/front/css/magnific-popup.css' );
+			wp_enqueue_style( 'wooopenclose-front', WOOOPENCLOSE_PLUGIN_URL . 'assets/front/css/style.css' );
+			wp_enqueue_style( 'wooopenclose-tool-tip', WOOOPENCLOSE_PLUGIN_URL . 'assets/hint.min.css' );
 
 			if ( woc_pro_available() ) {
 				wp_enqueue_script( 'jquery-ui-sortable' );
-				wp_enqueue_script( 'jquery-time-picker', WOC_PLUGIN_URL . '/assets/jquery-timepicker.js', array( 'jquery' ) );
+				wp_enqueue_script( 'jquery-time-picker', WOOOPENCLOSE_PLUGIN_URL . '/assets/jquery-timepicker.js', array( 'jquery' ) );
 				wp_enqueue_script( 'wooopenclose-global', plugins_url( '/assets/scripts.js', __FILE__ ), array( 'jquery' ), '', true );
 				wp_localize_script( 'wooopenclose-global', 'wooopenclose', $this->localize_scripts() );
 
-				wp_enqueue_style( 'wooopenclose-schedules', WOC_PLUGIN_URL . 'assets/admin/css/schedule-style.css' );
-				wp_enqueue_style( 'jquery-timepicker', WOC_PLUGIN_URL . 'assets/jquery-timepicker.css' );
+				wp_enqueue_style( 'wooopenclose-schedules', WOOOPENCLOSE_PLUGIN_URL . 'assets/admin/css/schedule-style.css' );
+				wp_enqueue_style( 'jquery-timepicker', WOOOPENCLOSE_PLUGIN_URL . 'assets/jquery-timepicker.css' );
 			}
 		}
 
@@ -123,17 +135,17 @@ if ( ! class_exists( 'wooCommerceOpenClose' ) ) {
 		function admin_scripts() {
 
 			wp_enqueue_script( 'jquery-ui-sortable' );
-			wp_enqueue_script( 'jquery-time-picker', WOC_PLUGIN_URL . '/assets/jquery-timepicker.js', array( 'jquery' ) );
+			wp_enqueue_script( 'jquery-time-picker', WOOOPENCLOSE_PLUGIN_URL . '/assets/jquery-timepicker.js', array( 'jquery' ) );
 			wp_enqueue_script( 'wooopenclose-admin', plugins_url( '/assets/admin/js/scripts.js', __FILE__ ), array( 'jquery' ) );
 			wp_localize_script( 'wooopenclose-admin', 'wooopenclose', $this->localize_scripts() );
 
 			wp_enqueue_script( 'wooopenclose-global', plugins_url( '/assets/scripts.js', __FILE__ ), array( 'jquery' ), '', true );
 			wp_localize_script( 'wooopenclose-global', 'wooopenclose', $this->localize_scripts() );
 
-			wp_enqueue_style( 'wooopenclose-admin', WOC_PLUGIN_URL . 'assets/admin/css/style.css' );
-			wp_enqueue_style( 'wooopenclose-schedules', WOC_PLUGIN_URL . 'assets/admin/css/schedule-style.css' );
-			wp_enqueue_style( 'wooopenclose-tool-tip', WOC_PLUGIN_URL . 'assets/hint.min.css' );
-			wp_enqueue_style( 'jquery-timepicker', WOC_PLUGIN_URL . 'assets/jquery-timepicker.css' );
+			wp_enqueue_style( 'wooopenclose-admin', WOOOPENCLOSE_PLUGIN_URL . 'assets/admin/css/style.css' );
+			wp_enqueue_style( 'wooopenclose-schedules', WOOOPENCLOSE_PLUGIN_URL . 'assets/admin/css/schedule-style.css' );
+			wp_enqueue_style( 'wooopenclose-tool-tip', WOOOPENCLOSE_PLUGIN_URL . 'assets/hint.min.css' );
+			wp_enqueue_style( 'jquery-timepicker', WOOOPENCLOSE_PLUGIN_URL . 'assets/jquery-timepicker.css' );
 		}
 
 
@@ -141,31 +153,12 @@ if ( ! class_exists( 'wooCommerceOpenClose' ) ) {
 		 * Load Scripts
 		 */
 		function define_scripts() {
-
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'front_scripts' ) );
 		}
 	}
-
-	new wooCommerceOpenClose();
 }
 
+WOOOPENCLOSE_Plugin::instance();
 
-/**
- * Initialize the plugin tracker
- *
- * @return void
- */
-function appsero_init_tracker_woc_open_close() {
 
-	if ( ! class_exists( 'Appsero\Client' ) ) {
-		require_once __DIR__ . '/includes/appsero/Client.php';
-	}
-
-	$client = new Appsero\Client( '0a7e7a1e-83f4-418e-bb1e-dc94ffa9532c', 'Woocommerce Open Close &#8211; Best Business Schedules Manager', __FILE__ );
-
-	// Active insights
-	$client->insights()->init();
-}
-
-appsero_init_tracker_woc_open_close();

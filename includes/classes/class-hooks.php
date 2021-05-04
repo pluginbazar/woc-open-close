@@ -8,15 +8,15 @@
 
 use LiteSpeed\Purge;
 
-if ( ! class_exists( 'WOC_Hooks' ) ) {
+if ( ! class_exists( 'WOOOPENCLOSE_Hooks' ) ) {
 	/**
-	 * Class WOC_Hooks
+	 * Class WOOOPENCLOSE_Hooks
 	 */
-	class WOC_Hooks {
+	class WOOOPENCLOSE_Hooks {
 
 
 		/**
-		 * WOC_Hooks constructor.
+		 * WOOOPENCLOSE_Hooks constructor.
 		 */
 		function __construct() {
 
@@ -33,58 +33,13 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 
 			add_filter( 'widget_text', 'do_shortcode', 11 );
 			add_filter( 'plugin_row_meta', array( $this, 'add_plugin_meta' ), 10, 2 );
-			add_filter( 'plugin_action_links_' . WOC_PLUGIN_FILE, array( $this, 'add_plugin_actions' ), 10, 2 );
+			add_filter( 'plugin_action_links_' . WOOOPENCLOSE_PLUGIN_FILE, array( $this, 'add_plugin_actions' ), 10, 2 );
 			add_filter( 'post_updated_messages', array( $this, 'filter_update_messages' ), 10, 1 );
 
 			add_action( 'wp_ajax_woc_add_schedule', array( $this, 'ajax_add_schedule' ) );
 			add_action( 'wp_ajax_woc_switch_active', array( $this, 'ajax_switch_active' ) );
 			add_action( 'pb_settings_before_woc_instant_force', array( $this, 'display_instant_controller' ) );
 			add_action( 'in_admin_header', array( $this, 'render_admin_loader' ), 0 );
-
-			add_action( 'pre_set_site_transient_update_plugins', array( $this, 'transient_update_plugins' ), 21, 1 );
-		}
-
-
-		/**
-		 * Manage pro version update in earlier plugin
-		 *
-		 * @param $transient
-		 *
-		 * @return mixed
-		 */
-		function transient_update_plugins( $transient ) {
-
-			if ( class_exists( 'wooCommerceOpenClosePro' ) && ! defined( 'WOCP_PLUGIN_NAME' ) ) {
-
-				$plugin_obj                = new stdClass();
-				$plugin_obj->id            = 'pluginbazar.com/woc-open-close-pro';
-				$plugin_obj->slug          = 'woc-open-close-pro';
-				$plugin_obj->plugin        = 'woc-open-close-pro/woc-open-close-pro.php';
-				$plugin_obj->new_version   = '1.1.2';
-				$plugin_obj->url           = 'https://pluginbazar.com/plugins/woc-open-close';
-				$plugin_obj->package       = 'https://connect.pluginbazar.com/download/5/';
-				$plugin_obj->icons         = array(
-					'2x' => 'https://ps.w.org/woc-open-close/assets/icon-256x256.png?rev=2086322',
-					'1x' => 'https://ps.w.org/woc-open-close/assets/icon-128x128.png?rev=2086322',
-				);
-				$plugin_obj->banners       = array(
-					'2x' => 'https://ps.w.org/woc-open-close/assets/banner-1544x500.png?rev=2086322',
-					'1x' => 'https://ps.w.org/woc-open-close/assets/banner-772x250.png?rev=2086322',
-				);
-				$plugin_obj->banners_rtl   = array();
-				$plugin_obj->tested        = '5.5.3';
-				$plugin_obj->requires_php  = array();
-				$plugin_obj->compatibility = new stdClass();
-
-				$transient->response[ WOCP_PLUGIN_FILE ] = $plugin_obj;
-			}
-
-			if ( class_exists( 'wooCommerceOpenClosePro' ) && defined( 'WOCP_PLUGIN_NAME' ) ) {
-				unset( $transient->response['woc-open-close-pro/includes/class-hooks.php'] );
-				unset( $transient->response[ WOCP_PLUGIN_FILE ] );
-			}
-
-			return $transient;
 		}
 
 
@@ -266,7 +221,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 			), $links );
 
 			if ( ! woc_pro_available() ) {
-				$action_links['go-pro'] = sprintf( '<a target="_blank" class="wooopenclose-plugin-meta-buy" href="%s">%s</a>', esc_url( WOC_PLUGIN_LINK ), esc_html__( 'Go Pro', 'woc-open-close' ) );
+				$action_links['go-pro'] = sprintf( '<a target="_blank" class="wooopenclose-plugin-meta-buy" href="%s">%s</a>', esc_url( WOOOPENCLOSE_PLUGIN_LINK ), esc_html__( 'Go Pro', 'woc-open-close' ) );
 			}
 
 			return $action_links;
@@ -283,11 +238,11 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 		 */
 		function add_plugin_meta( $links, $file ) {
 
-			if ( WOC_PLUGIN_FILE === $file ) {
+			if ( WOOOPENCLOSE_PLUGIN_FILE === $file ) {
 
 				$row_meta = array(
-					'documentation' => sprintf( '<a target="_blank" href="%s">%s</a>', esc_url( WOC_DOCS_URL ), esc_html__( 'Documentation', 'woc-open-close' ) ),
-					'support'       => sprintf( '<a target="_blank" href="%s">%s</a>', esc_url( WOC_TICKET_URL ), esc_html__( 'Create Ticket', 'woc-open-close' ) ),
+					'documentation' => sprintf( '<a target="_blank" href="%s">%s</a>', esc_url( WOOOPENCLOSE_DOCS_URL ), esc_html__( 'Documentation', 'woc-open-close' ) ),
+					'support'       => sprintf( '<a target="_blank" href="%s">%s</a>', esc_url( WOOOPENCLOSE_TICKET_URL ), esc_html__( 'Create Ticket', 'woc-open-close' ) ),
 				);
 
 				return array_merge( $links, $row_meta );
@@ -354,7 +309,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 					'id'     => 'wooopenclose-settings-design',
 					'title'  => __( 'Settings - Design', 'woc-open-close' ),
 					'parent' => $main_node_id,
-					'href'   => esc_url( admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close&tab=WOC_design' ) ),
+					'href'   => esc_url( admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close&tab=WOOOPENCLOSE_design' ) ),
 				)
 			);
 
@@ -363,7 +318,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 					'id'     => 'wooopenclose-settings-support',
 					'title'  => __( 'Settings - Support', 'woc-open-close' ),
 					'parent' => $main_node_id,
-					'href'   => esc_url( admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close&tab=WOC_support' ) ),
+					'href'   => esc_url( admin_url( 'edit.php?post_type=woc_hour&page=woc-open-close&tab=WOOOPENCLOSE_support' ) ),
 				)
 			);
 		}
@@ -524,7 +479,7 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 				'capability'       => 'manage_options',
 				'menu_slug'        => 'woc-open-close',
 				'parent_slug'      => 'edit.php?post_type=woc_hour',
-				'disabled_notice'  => sprintf( esc_html__( 'This feature is locked.', 'woc-open-close' ) . ' <a href="%s">%s</a>', WOC_PLUGIN_LINK, esc_html__( 'Get pro', 'woc-open-close' ) ),
+				'disabled_notice'  => sprintf( esc_html__( 'This feature is locked.', 'woc-open-close' ) . ' <a href="%s">%s</a>', WOOOPENCLOSE_PLUGIN_LINK, esc_html__( 'Get pro', 'woc-open-close' ) ),
 				'pages'            => wooopenclose()->get_settings_pages(),
 				'plugin_name'      => esc_html( 'WooCommerce Open Close' ),
 				'plugin_slug'      => 'woc-open-close',
@@ -603,5 +558,5 @@ if ( ! class_exists( 'WOC_Hooks' ) ) {
 		}
 	}
 
-	new WOC_Hooks();
+	new WOOOPENCLOSE_Hooks();
 }

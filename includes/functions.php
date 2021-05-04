@@ -66,7 +66,7 @@ if ( ! function_exists( 'woc_get_template_part' ) ) {
 	function woc_get_template_part( $slug, $name = '', $args = array(), $main_template = false ) {
 
 		$template   = '';
-		$plugin_dir = WOC_PLUGIN_DIR;
+		$plugin_dir = WOOOPENCLOSE_PLUGIN_DIR;
 
 		/**
 		 * Locate template
@@ -88,7 +88,7 @@ if ( ! function_exists( 'woc_get_template_part' ) ) {
 
 		// Search in WOC Pro
 		if ( strpos( $backtrace_file, 'woc-open-close-pro' ) !== false && defined( 'WOCP_PLUGIN_DIR' ) ) {
-			$plugin_dir = $main_template ? WOC_PLUGIN_DIR : WOCP_PLUGIN_DIR;
+			$plugin_dir = $main_template ? WOOOPENCLOSE_PLUGIN_DIR : WOCP_PLUGIN_DIR;
 		}
 
 
@@ -187,7 +187,7 @@ if ( ! function_exists( 'woc_locate_template' ) ) {
 	 */
 	function woc_locate_template( $template_name, $template_path = '', $default_path = '', $backtrace_file = '', $main_template = false ) {
 
-		$plugin_dir = WOC_PLUGIN_DIR;
+		$plugin_dir = WOOOPENCLOSE_PLUGIN_DIR;
 
 		/**
 		 * Template path in Theme
@@ -198,7 +198,7 @@ if ( ! function_exists( 'woc_locate_template' ) ) {
 
 		// Check for WOC Pro
 		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'woc-open-close-pro' ) !== false && defined( 'WOCP_PLUGIN_DIR' ) ) {
-			$plugin_dir = $main_template ? WOC_PLUGIN_DIR : WOCP_PLUGIN_DIR;
+			$plugin_dir = $main_template ? WOOOPENCLOSE_PLUGIN_DIR : WOCP_PLUGIN_DIR;
 		}
 
 
@@ -290,7 +290,7 @@ if ( ! function_exists( 'wooopenclose' ) ) {
 		global $wooopenclose;
 
 		if ( empty( $wooopenclose ) ) {
-			$wooopenclose = new WOC_Functions();
+			$wooopenclose = new WOOOPENCLOSE_Functions();
 		}
 
 		return $wooopenclose;
@@ -300,11 +300,6 @@ if ( ! function_exists( 'wooopenclose' ) ) {
 
 if ( ! function_exists( 'woc_pro_available' ) ) {
 	function woc_pro_available() {
-
-		if ( defined( 'WOCP_PLUGIN_FILE' ) ) {
-			return true;
-		}
-
-		return false;
+		return apply_filters( 'woc_filters_is_pro', class_exists( 'WooOpenCloseProMain' ) );
 	}
 }

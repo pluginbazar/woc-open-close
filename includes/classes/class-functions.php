@@ -6,7 +6,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WOC_Functions {
+class WOOOPENCLOSE_Functions {
 
 	/**
 	 * Default Active Set ID
@@ -30,7 +30,7 @@ class WOC_Functions {
 	public function __construct() {
 
 		if ( ! function_exists( 'woc_is_open' ) ) {
-			require_once( WOC_PLUGIN_DIR . 'includes/functions.php' );
+			require_once( WOOOPENCLOSE_PLUGIN_DIR . 'includes/functions.php' );
 		}
 
 		$this->active_set_id = $this->get_option( 'woc_active_set' );
@@ -530,19 +530,19 @@ class WOC_Functions {
 						array(
 							'id'      => '__1',
 							'title'   => esc_html__( 'Support Ticket', 'woc-open-close' ),
-							'details' => sprintf( '%1$s<br>' . __( '<a href="%1$s" target="_blank">Create Support Ticket</a>', 'woc-open-close' ), WOC_TICKET_URL ),
+							'details' => sprintf( '%1$s<br>' . __( '<a href="%1$s" target="_blank">Create Support Ticket</a>', 'woc-open-close' ), WOOOPENCLOSE_TICKET_URL ),
 						),
 
 						array(
 							'id'      => '__2',
 							'title'   => esc_html__( 'Can\'t Login..?', 'woc-open-close' ),
-							'details' => sprintf( __( '<span>Unable to login <strong>Pluginbazar.com</strong></span><br><a href="%1$s" target="_blank">Get Immediate Solution</a>', 'woc-open-close' ), WOC_CONTACT_URL ),
+							'details' => sprintf( __( '<span>Unable to login <strong>Pluginbazar.com</strong></span><br><a href="%1$s" target="_blank">Get Immediate Solution</a>', 'woc-open-close' ), WOOOPENCLOSE_CONTACT_URL ),
 						),
 
 						array(
 							'id'      => '__3',
 							'title'   => esc_html__( 'Like this Plugin?', 'woc-open-close' ),
-							'details' => sprintf( __( '<span>To share feedback about this plugin Please </span><br><a href="%1$s" target="_blank">Rate now</a>', 'woc-open-close' ), WOC_WP_REVIEW_URL ),
+							'details' => sprintf( __( '<span>To share feedback about this plugin Please </span><br><a href="%1$s" target="_blank">Rate now</a>', 'woc-open-close' ), WOOOPENCLOSE_WP_REVIEW_URL ),
 						),
 
 					)
@@ -740,7 +740,7 @@ class WOC_Functions {
 	 * @return mixed|void
 	 */
 	function plugin_path() {
-		return apply_filters( 'woc_filters_plugin_path', untrailingslashit( WOC_PLUGIN_DIR ) );
+		return apply_filters( 'woc_filters_plugin_path', untrailingslashit( WOOOPENCLOSE_PLUGIN_DIR ) );
 	}
 
 
@@ -946,4 +946,4 @@ class WOC_Functions {
 }
 
 global $wooopenclose;
-$wooopenclose = new WOC_Functions();
+$wooopenclose = new WOOOPENCLOSE_Functions();

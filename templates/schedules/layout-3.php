@@ -58,7 +58,7 @@ $set_id = ( isset( $set ) || ! empty( $set ) ) ? $set : wooopenclose()->get_acti
         </div>
         <div class="pb-col-md-6">
             <div class="wooopenclose-image-wrap">
-                <img src="<?php echo WOC_PLUGIN_URL . 'assets/images/layouts/layout-3-style-1.jpg'; ?>" alt="<?php esc_attr_e( 'Layout 3 Business Man', 'woc-open-close' ); ?>">
+                <img src="<?php echo WOOOPENCLOSE_PLUGIN_URL . 'assets/images/layouts/layout-3-style-1.jpg'; ?>" alt="<?php esc_attr_e( 'Layout 3 Business Man', 'woc-open-close' ); ?>">
             </div>
         </div>
     </div>

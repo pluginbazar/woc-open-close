@@ -6,11 +6,11 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'WOC_Post_meta' ) ) {
+if ( ! class_exists( 'WOOOPENCLOSE_Post_meta' ) ) {
 	/**
-	 * Class WOC_Post_meta
+	 * Class WOOOPENCLOSE_Post_meta
 	 */
-	class WOC_Post_meta {
+	class WOOOPENCLOSE_Post_meta {
 
 		/**
 		 * Post types that this work in
@@ -21,7 +21,7 @@ if ( ! class_exists( 'WOC_Post_meta' ) ) {
 
 
 		/**
-		 * WOC_Post_meta constructor.
+		 * WOOOPENCLOSE_Post_meta constructor.
 		 */
 		function __construct() {
 
@@ -87,5 +87,5 @@ if ( ! class_exists( 'WOC_Post_meta' ) ) {
 		}
 	}
 
-	new WOC_Post_meta();
+	new WOOOPENCLOSE_Post_meta();
 }
