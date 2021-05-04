@@ -4,7 +4,7 @@
 	Tags: business hours, Opening Hours, Open Close, Schedules manager, Sales Manager
 	Requires at least: 4.6
 	Tested up to: 5.7.1
-	Tested up to WooCommerce: 4.7.1
+	Tested up to WooCommerce: 5.2.2
 	Stable tag: 4.2.6
 	Requires PHP: 5.6
 	Requires WooCommerce: 3.0
@@ -242,7 +242,7 @@ We are working on the translation to be available for your language too. This is
     = 4.2.5 =
     * Litespeed Cache support enabled
 
-    = 4.2.5 =
+    = 4.2.6 =
     * 05/05/2021 Pluginbazar SDK added
 
 == Upgrade Notice ==
@@ -253,5 +253,5 @@ We are working on the translation to be available for your language too. This is
     = 4.0.0 =
     This is a major update separating premium version from free version and changing internal strategy.
 
-    = 4.2.5 =
-    In this update, the Pluginbazar SDK added to the main plugin.
+    = 4.2.6 =
+    This is a major update! In this update, the Pluginbazar SDK added to the main plugin.
