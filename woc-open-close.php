@@ -42,7 +42,7 @@ if ( ! class_exists( 'WOOOPENCLOSE_Plugin' ) ) {
 		}
 
 		/**
-		 * @return \WooOpenCloseProMain|null
+		 * @return WOOOPENCLOSE_Plugin
 		 */
 		public static function instance() {
 			if ( is_null( self::$_instance ) ) {
@@ -169,8 +169,7 @@ function pb_sdk_init_woc_open_close() {
 
 	global $wooopenclose_sdk;
 
-	$wooopenclose_sdk = Pluginbazar\Client::instance();
-	$wooopenclose_sdk::init( esc_html( 'WooCommerce Open Close' ), 'woc-open-close', 15, '4.2.7' );
+	$wooopenclose_sdk = new Pluginbazar\Client( esc_html( 'WooCommerce Open Close' ), 'woc-open-close', 15, '4.2.7' );
 }
 
 /**
