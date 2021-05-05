@@ -5,7 +5,7 @@
 	Requires at least: 4.6
 	Tested up to: 5.7.1
 	Tested up to WooCommerce: 5.2.2
-	Stable tag: 4.2.7
+	Stable tag: 4.2.8
 	Requires PHP: 5.6
 	Requires WooCommerce: 3.0
 	Text Domain: woc-open-close
