@@ -1,11 +1,11 @@
 === Woocommerce Open Close - Best Business Schedules Manager ===
-	Contributors: jaedm97,pluginbazar
+	Contributors: pluginbazar,jaedm97
 	Donate link: https://www.pluginbazar.com/contact/
 	Tags: business hours, Opening Hours, Open Close, Schedules manager, Sales Manager
 	Requires at least: 4.6
-	Tested up to: 5.7.1
-	Tested up to WooCommerce: 5.2.2
-	Stable tag: 4.2.8
+	Tested up to: 5.7.2
+	Tested up to WooCommerce: 5.3.0
+	Stable tag: 4.2.9
 	Requires PHP: 5.6
 	Requires WooCommerce: 3.0
 	Text Domain: woc-open-close
@@ -234,6 +234,9 @@ We are working on the translation to be available for your language too. This is
 
     = 4.2.6 =
     * 05/05/2021 Pluginbazar SDK added
+
+    = 4.2.9 =
+    * 24/05/2021 Bug fixed
 
 == Upgrade Notice ==
 

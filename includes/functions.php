@@ -38,6 +38,7 @@ if ( ! function_exists( 'woc_product_can_order' ) ) {
 	 */
 	function woc_product_can_order( $product_id = false ) {
 
+		$product_id          = ! $product_id ? get_the_ID() : $product_id;
 		$allowed_products    = wooopenclose()->get_option( 'woc_allowed_products', array() );
 		$disallowed_products = wooopenclose()->get_option( 'woc_disallowed_products', array() );
 
