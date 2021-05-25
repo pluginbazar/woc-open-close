@@ -5,7 +5,7 @@
 	Requires at least: 4.6
 	Tested up to: 5.7.2
 	Tested up to WooCommerce: 5.3.0
-	Stable tag: 4.2.9
+	Stable tag: 4.2.10
 	Requires PHP: 5.6
 	Requires WooCommerce: 3.0
 	Text Domain: woc-open-close
@@ -40,6 +40,7 @@ WooCommerce Open Close is an extension of WooCommerce Plugin which allows you to
 
 
 ### PRO Features
+* Preorder specific or all products when the store is closed
 * Customers will not able to place order when store is closed
 * Instantly control opening and closing of WooCommerce store
 * Empty cart when the shop become close automatically.
@@ -237,6 +238,9 @@ We are working on the translation to be available for your language too. This is
 
     = 4.2.9 =
     * 24/05/2021 Bug fixed
+
+    = 4.2.10 =
+    * 26/05/2021 - New - Preorder feature added
 
 == Upgrade Notice ==
 

@@ -213,7 +213,7 @@ class WOOOPENCLOSE_Functions {
 	 */
 	function get_settings_pages() {
 
-		$pages['woc_options'] = array(
+		$pages['woc_options']  = array(
 
 			'page_nav'      => esc_html__( 'Options', 'woc-open-close' ),
 			'page_settings' => array(
@@ -348,7 +348,7 @@ class WOOOPENCLOSE_Functions {
 				),
 			),
 		);
-		$pages['woc_force']   = array(
+		$pages['woc_force']    = array(
 			'page_nav'      => esc_html__( 'Force Rules', 'woc-open-close' ),
 			'page_settings' => array(
 				array(
@@ -420,7 +420,80 @@ class WOOOPENCLOSE_Functions {
 				),
 			)
 		);
-		$pages['woc_design']  = array(
+		$pages['woc_preorder'] = array(
+			'page_nav'      => esc_html__( 'Preorder', 'woc-open-close' ),
+			'page_settings' => array(
+				array(
+					'title'       => esc_html__( 'Preorder Settings', 'woc-open-close' ),
+					'description' => esc_html__( 'Manage settings for all products or some specific products.', 'woc-open-close' ),
+					'options'     => array(
+						array(
+							'id'       => 'woc_enable_preorder',
+							'title'    => esc_html__( 'Enable Preorder Feature', 'woc-open-close' ),
+							'type'     => 'checkbox',
+							'args'     => array(
+								'yes' => esc_html__( 'Enable or Disable preorder feature.', 'woc-open-close' ),
+							),
+							'disabled' => ! woc_pro_available(),
+						),
+						array(
+							'id'       => 'woc_preorder_for',
+							'title'    => esc_html__( 'Preorder for', 'woc-open-close' ),
+							'type'     => 'radio',
+							'args'     => array(
+								'all'      => esc_html__( 'All products', 'woc-open-close' ),
+								'specific' => esc_html__( 'Specific products', 'woc-open-close' ),
+							),
+							'disabled' => ! woc_pro_available(),
+						),
+						array(
+							'id'            => 'woc_preorder_products',
+							'title'         => esc_html__( 'Preorder products', 'woc-open-close' ),
+							'type'          => 'select2',
+							'multiple'      => true,
+							'args'          => 'POSTS_%product%',
+							'field_options' => array(
+								'placeholder' => esc_html__( 'Select products', 'woc-open-close' ),
+							),
+							'disabled'      => ! woc_pro_available(),
+						),
+					)
+				),
+				array(
+					'title'       => esc_html__( 'Preorder Button', 'woc-open-close' ),
+					'description' => esc_html__( 'This button will be visible in the single product page.', 'woc-open-close' ),
+					'options'     => array(
+						array(
+							'id'          => 'woc_preorder_button_text',
+							'title'       => esc_html__( 'Button Text', 'woc-open-close' ),
+							'details'     => esc_html__( 'Set preorder button text here.', 'woc-open-close' ),
+							'placeholder' => esc_html__( 'Preorder', 'woc-open-close' ),
+							'type'        => 'text',
+							'disabled'    => ! woc_pro_available(),
+						),
+					)
+				),
+				array(
+					'title'       => esc_html__( 'When Closed', 'woc-open-close' ),
+					'description' => esc_html__( 'These rules will apply when the shop is closed from taking orders.', 'woc-open-close' ),
+					'options'     => array(
+						array(
+							'id'            => 'woc_allowed_products',
+							'title'         => esc_html__( 'Allow Products', 'woc-open-close' ),
+							'details'       => esc_html__( 'Customers will able to purchase these products even your shop is closed.', 'woc-open-close' ),
+							'type'          => 'select2',
+							'multiple'      => true,
+							'args'          => 'POSTS_%product%',
+							'field_options' => array(
+								'placeholder' => esc_html__( 'Select products', 'woc-open-close' ),
+							),
+							'disabled'      => woc_pro_available() ? false : true,
+						),
+					)
+				),
+			)
+		);
+		$pages['woc_design']   = array(
 
 			'page_nav'      => esc_html__( 'Design', 'woc-open-close' ),
 			'page_settings' => array(
@@ -520,7 +593,7 @@ class WOOOPENCLOSE_Functions {
 
 			),
 		);
-		$pages['woc_support'] = array(
+		$pages['woc_support']  = array(
 			'page_nav'      => esc_html__( 'Support', 'woc-open-close' ),
 			'show_submit'   => false,
 			'page_settings' => array(
@@ -588,7 +661,6 @@ class WOOOPENCLOSE_Functions {
 		$times       = $this->calculate_times( $this->get_todays_schedule(), $time_for );
 
 		if ( empty( $times ) ) {
-
 			foreach ( $this->get_all_schedules() as $day_id => $schedules ) {
 				if ( $current_day >= $day_id || ! empty( $times ) ) {
 					continue;
@@ -841,7 +913,7 @@ class WOOOPENCLOSE_Functions {
 	 * @param bool $is_success
 	 * @param bool $is_dismissible
 	 */
-	function print_notice( $message = '', $is_success = true, $is_dismissible = true ) {
+	function print_notice( $message = '', $is_success = true, $is_dismissible = true, $is_frontend = false ) {
 
 		if ( empty ( $message ) ) {
 			return;
@@ -849,6 +921,13 @@ class WOOOPENCLOSE_Functions {
 
 		if ( is_bool( $is_success ) ) {
 			$is_success = $is_success ? 'success' : 'error';
+		}
+
+
+		if ( $is_frontend ) {
+			printf( '<div class="woocommerce-notices-wrapper"><div class="woocommerce-message %s" role="alert">%s</div></div>', $is_success, $message );
+
+			return;
 		}
 
 		printf( '<div class="notice notice-%s %s">%s</div>', $is_success, $is_dismissible ? 'is-dismissible' : '', $message );

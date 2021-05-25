@@ -28,6 +28,33 @@ if ( ! function_exists( 'woc_update_global_arguments' ) ) {
 }
 
 
+if ( ! function_exists( 'woc_product_can_preorder' ) ) {
+	/**
+	 * Return if a product can preorder
+	 *
+	 * @param false $product_id
+	 *
+	 * @return bool
+	 */
+	function woc_product_can_preorder( $product_id = false ) {
+
+		$product_id        = ! $product_id ? get_the_ID() : $product_id;
+		$preorder_for      = wooopenclose()->get_option( 'woc_preorder_for', array( 'specific' ) );
+		$preorder_products = wooopenclose()->get_option( 'woc_preorder_products', array() );
+
+		if ( is_array( $preorder_for ) && in_array( 'all', $preorder_for ) ) {
+			return true;
+		}
+
+		if ( is_array( $preorder_for ) && in_array( 'specific', $preorder_for ) && is_array( $preorder_products ) && in_array( $product_id, $preorder_products ) ) {
+			return true;
+		}
+
+		return false;
+	}
+}
+
+
 if ( ! function_exists( 'woc_product_can_order' ) ) {
 	/**
 	 * Check if a product is ready to order or not
@@ -41,6 +68,7 @@ if ( ! function_exists( 'woc_product_can_order' ) ) {
 		$product_id          = ! $product_id ? get_the_ID() : $product_id;
 		$allowed_products    = wooopenclose()->get_option( 'woc_allowed_products', array() );
 		$disallowed_products = wooopenclose()->get_option( 'woc_disallowed_products', array() );
+		$enable_preorder     = wooopenclose()->get_option( 'woc_enable_preorder', array() );
 
 		if ( in_array( $product_id, $allowed_products ) ) {
 			return true;
@@ -48,6 +76,10 @@ if ( ! function_exists( 'woc_product_can_order' ) ) {
 
 		if ( in_array( $product_id, $disallowed_products ) ) {
 			return false;
+		}
+
+		if ( is_array( $enable_preorder ) && in_array( 'yes', $enable_preorder ) ) {
+			return woc_product_can_preorder();
 		}
 
 		return woc_is_open();
@@ -140,7 +172,7 @@ if ( ! function_exists( 'woc_get_template' ) ) {
 	 *
 	 * @return WP_Error
 	 */
-	function woc_get_template( $template_name, $args = array(), $template_path = '', $default_path = '', $main_template = false ) {
+	function woc_get_template( $template_name, array $args = array(), $template_path = '', $default_path = '', $main_template = false ) {
 
 		$args = array_merge( $args, array( 'args' => $args ) );
 

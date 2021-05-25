@@ -303,3 +303,15 @@ a.wooopenclose-notice-link:visited {
         transform: rotate(360deg);
     }
 }
+
+.woc-preorder-item {
+    display: inline-block;
+    background: #5f9025;
+    padding: 8px;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-drag: none;
+    position: relative;
+}
