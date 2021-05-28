@@ -109,7 +109,6 @@
 .woc_section .woc_days .woc_day .woc_day_content .woc_add_schedule {
     font-size: 16px;
     margin-top: 10px;
-    background: #fff;
 }
 
 .woc_section .woc_day_content .woc_repeat {
@@ -120,6 +119,7 @@
     animation: animateElement linear .3s;
     animation-iteration-count: 1;
 }
+
 
 @keyframes animateElement {
     0% {
@@ -210,4 +210,8 @@
     border-radius: 3px;
     margin-top: 15px;
     cursor: help;
+}
+
+.woc-schedules-manager .woc_section .woc_repeat_copy {
+    display: none;
 }

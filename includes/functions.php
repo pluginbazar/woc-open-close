@@ -120,8 +120,8 @@ if ( ! function_exists( 'woc_get_template_part' ) ) {
 		$backtrace_file = isset( $backtrace['file'] ) ? $backtrace['file'] : '';
 
 		// Search in WOC Pro
-		if ( strpos( $backtrace_file, 'woc-open-close-pro' ) !== false && defined( 'WOCP_PLUGIN_DIR' ) ) {
-			$plugin_dir = $main_template ? WOOOPENCLOSE_PLUGIN_DIR : WOCP_PLUGIN_DIR;
+		if ( strpos( $backtrace_file, 'woc-open-close-pro' ) !== false && defined( 'WOOOPENCLOSE_PRO_PLUGIN_DIR' ) ) {
+			$plugin_dir = $main_template ? WOOOPENCLOSE_PLUGIN_DIR : WOOOPENCLOSE_PRO_PLUGIN_DIR;
 		}
 
 
@@ -190,7 +190,6 @@ if ( ! function_exists( 'woc_get_template' ) ) {
 
 		$located = woc_locate_template( $template_name, $template_path, $default_path, $backtrace_file, $main_template );
 
-
 		if ( ! file_exists( $located ) ) {
 			return new WP_Error( 'invalid_data', __( '%s does not exist.', 'woc-open-close' ), '<code>' . $located . '</code>' );
 		}
@@ -230,8 +229,8 @@ if ( ! function_exists( 'woc_locate_template' ) ) {
 		}
 
 		// Check for WOC Pro
-		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'woc-open-close-pro' ) !== false && defined( 'WOCP_PLUGIN_DIR' ) ) {
-			$plugin_dir = $main_template ? WOOOPENCLOSE_PLUGIN_DIR : WOCP_PLUGIN_DIR;
+		if ( ! empty( $backtrace_file ) && strpos( $backtrace_file, 'woc-open-close-pro' ) !== false && defined( 'WOOOPENCLOSE_PRO_PLUGIN_DIR' ) ) {
+			$plugin_dir = $main_template ? WOOOPENCLOSE_PLUGIN_DIR : WOOOPENCLOSE_PRO_PLUGIN_DIR;
 		}
 
 
