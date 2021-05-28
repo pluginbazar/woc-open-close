@@ -242,6 +242,9 @@ We are working on the translation to be available for your language too. This is
     = 4.2.10 =
     * 26/05/2021 - New - Preorder feature added
 
+    = 4.2.11 =
+    * 28/05/2021 - Bug fixed
+
 == Upgrade Notice ==
 
     = 3.2.0 =
